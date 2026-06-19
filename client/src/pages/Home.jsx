@@ -217,6 +217,7 @@ transition={{ duration: 1 }}
 
 {/* Solar Journey Section */}
 
+
 <section style={styles.journeySection}>
   <motion.h2
     style={styles.journeyHeading}
@@ -250,6 +251,7 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/solar-panels")}
 >
   <div>
     <h3 style={styles.cardTitle}>1. Free Consultation</h3>
@@ -266,6 +268,7 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/site-survey")}
 >
   <div>
     <h3 style={styles.cardTitle}>2. Site Survey</h3>
@@ -282,11 +285,12 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/custom")}
 >
   <div>
     <h3 style={styles.cardTitle}>3. Custom Solar Design</h3>
     <p style={styles.cardText}>
-      Customized solar system tailored to your requirements.
+     Customized solar system tailored to your requirements.
     </p>
   </div>
 </motion.div>
@@ -298,14 +302,16 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/quotation")}
 >
   <div>
     <h3 style={styles.cardTitle}>4. Quotation & Approval</h3>
     <p style={styles.cardText}>
-      Receive a transparent quotation and project approval.
+     Receive a transparent quotation and project approval.
     </p>
   </div>
 </motion.div>
+
 
 <motion.div
   style={styles.stepCard}
@@ -314,6 +320,7 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/installation")}
 >
   <div>
     <h3 style={styles.cardTitle}>5. Installation</h3>

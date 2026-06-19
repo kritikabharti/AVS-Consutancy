@@ -43,17 +43,17 @@ padding: "14px",
 style={{
 width: "100%",
 maxWidth: "300px",
-background: "#f5f5f5",
+background: "transparent",
 borderRadius: "20px",
 padding: "50px 60px",
-boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+ boxShadow: '0 8px 24px white',
 }}
 >
 <h1
 style={{
 textAlign: "center",
-color: "#0b57d0",
-marginBottom: "10px",
+color: "white",
+marginBottom: "50px",
 }}
 >
 AVS SOLAR </h1>
@@ -61,7 +61,7 @@ AVS SOLAR </h1>
     <h2
       style={{
         textAlign: "center",
-        color: "#555",
+        color: "white",
         marginBottom: "40px",
         fontWeight: "normal",
       }}

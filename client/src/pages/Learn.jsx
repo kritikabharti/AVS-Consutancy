@@ -83,7 +83,7 @@ whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: true }}
 transition={{
 duration: 0.6,
-delay: index * 0.15,
+delay: 0,
 }}
 whileHover={{
 scale: 1.05,

@@ -12,6 +12,11 @@ import Team from "./pages/Team";
 import Store from "./pages/Store";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import SolarPanels from "./pages/SolarPanels";
+import Sitesurvey from "./pages/Sitesurvey";
+import Custom from "./pages/Custom";
+import Quotation from "./pages/Quotation";
+import Installation from "./pages/installation";
 
 function App() {
   const [token, setToken] = useState(
@@ -48,6 +53,16 @@ function App() {
 
             {/* Store */}
         <Route path="/store" element={<Store />} />
+
+        <Route path="/solar-panels" element={<SolarPanels />} />
+
+        <Route path="/site-survey" element={<Sitesurvey />} />
+
+        <Route path="/custom" element={<Custom />} />
+
+        <Route path="/quotation" element={<Quotation />} />
+
+         <Route path="/installation" element={<Installation />} />
 
         {/* Forgot Password */}
         <Route

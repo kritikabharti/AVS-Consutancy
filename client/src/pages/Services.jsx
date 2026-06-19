@@ -98,7 +98,7 @@ Our Comprehensive Solar System
       viewport={{ once: true }}
       transition={{
         duration: 0.6,
-        delay: index * 0.1,
+        delay: 0,
       }}
       whileHover={{
         y: -12,

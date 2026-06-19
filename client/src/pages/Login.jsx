@@ -120,6 +120,7 @@ export default function Login({ setToken }) {
             }
             autoComplete="off"
             required
+            className="login-input"
             style={styles.input}
           />
         )}
@@ -134,6 +135,7 @@ export default function Login({ setToken }) {
           autoComplete="off"
           name="email"
           required
+          className="login-input"
           style={styles.input}
         />
 
@@ -147,6 +149,7 @@ export default function Login({ setToken }) {
           autoComplete="off"
           name="password"
           required
+          className="login-input"
           style={styles.input}
         />
 
@@ -156,7 +159,7 @@ export default function Login({ setToken }) {
             <Link
               to="/forgot-password"
               style={{
-                color: '#0052cc',
+                color: 'white',
                 textDecoration: 'none',
                 fontSize: '14px',
               }}
@@ -207,22 +210,23 @@ const styles = {
   },
 
   card: {
-    background: '#fff',
+  
+    background: 'transparent',
     padding: '40px',
     borderRadius: '12px',
-    boxShadow: '0 8px 24px rgba(243, 221, 221, 0.2)',
+    boxShadow: '0 8px 24px white',
     width: '100%',
     maxWidth: '380px',
     textAlign: 'center',
   },
 
   title: {
-    color: '#0052cc',
+    color: 'white',
     margin: '0 0 5px 0',
   },
 
   subtitle: {
-    color: '#666',
+    color: 'white',
     marginBottom: '25px',
   },
 
@@ -231,8 +235,10 @@ const styles = {
     padding: '12px',
     marginBottom: '15px',
     borderRadius: '6px',
-    border: '1px solid #ccc',
+    border: '1px solid #f9dcdc',
     boxSizing: 'border-box',
+    color: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
   },
 
   button: {
@@ -259,11 +265,11 @@ const styles = {
 
   toggleText: {
     fontSize: '14px',
-    color: '#555',
+    color: 'yellow',
   },
 
   toggleLink: {
-    color: '#0052cc',
+    color: 'white',
     cursor: 'pointer',
     fontWeight: 'bold',
     textDecoration: 'underline',
