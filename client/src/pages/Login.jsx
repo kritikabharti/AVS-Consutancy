@@ -230,16 +230,16 @@ const styles = {
     marginBottom: '25px',
   },
 
-  input: {
-    width: '100%',
-    padding: '12px',
-    marginBottom: '15px',
-    borderRadius: '6px',
-    border: '1px solid #f9dcdc',
-    boxSizing: 'border-box',
-    color: 'white',
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-  },
+ input: {
+  width: '100%',
+  padding: '12px',
+  marginBottom: '15px',
+  borderRadius: '6px',
+  border: '1px solid #f9dcdc',
+  boxSizing: 'border-box',
+  color: 'white',    
+  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+},
 
   button: {
     width: '100%',

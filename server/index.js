@@ -14,6 +14,7 @@ app.use(express.json());
 // Routes
 app.use("/api/user", userRouter);
 
+
 // MongoDB Link
 const MONGO_URI = process.env.MONGO_URI; 
 

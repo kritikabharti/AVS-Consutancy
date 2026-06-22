@@ -56,4 +56,57 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+//orders
+const orders = [];
+
+app.post("/api/orders/place-order", (req, res) => {
+try {
+const {
+name,
+email,
+phone,
+address,
+productName,
+price,
+} = req.body;
+
+const newOrder = {
+  id: Date.now(),
+  name,
+  email,
+  phone,
+  address,
+  productName,
+  price,
+  orderDate: new Date(),
+  status: "Pending",
+};
+
+orders.push(newOrder);
+
+res.status(201).json({
+  success: true,
+  message: "Order placed successfully",
+  order: newOrder,
+});
+
+} catch (error) {
+res.status(500).json({
+success: false,
+message: "Server Error",
+});
+}
+});
+
+app.get("/api/orders", (req, res) => {
+res.json({
+success: true,
+orders,
+});
+});
+
+
 app.listen(5000, () => console.log('Backend running on port 5000'));
+
+
+

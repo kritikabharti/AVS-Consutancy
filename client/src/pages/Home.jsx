@@ -251,13 +251,20 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
-  onClick={() => navigate("/solar-panels")}
 >
   <div>
     <h3 style={styles.cardTitle}>1. Free Consultation</h3>
+
     <p style={styles.cardText}>
       We understand your energy needs and provide expert advice.
     </p>
+
+    <button
+      style={styles.exploreBtn}
+      onClick={() => navigate("/solar-panels")}
+    >
+      Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -268,13 +275,18 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
-  onClick={() => navigate("/site-survey")}
 >
   <div>
     <h3 style={styles.cardTitle}>2. Site Survey</h3>
     <p style={styles.cardText}>
       Our team visits your location and evaluates the site.
     </p>
+    <button
+      style={styles.exploreBtn}
+      onClick={() => navigate("/site-survey")}
+    >
+      Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -285,13 +297,17 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
-  onClick={() => navigate("/custom")}
 >
   <div>
     <h3 style={styles.cardTitle}>3. Custom Solar Design</h3>
     <p style={styles.cardText}>
      Customized solar system tailored to your requirements.
     </p>
+    <button
+      style={styles.exploreBtn}
+      onClick={() => navigate("/custom")}
+    >Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -302,13 +318,17 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
-  onClick={() => navigate("/quotation")}
 >
   <div>
     <h3 style={styles.cardTitle}>4. Quotation & Approval</h3>
     <p style={styles.cardText}>
      Receive a transparent quotation and project approval.
     </p>
+    <button
+      style={styles.exploreBtn}
+    onClick={() => navigate("/quotation")}
+    >Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -320,13 +340,17 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
-  onClick={() => navigate("/installation")}
 >
   <div>
     <h3 style={styles.cardTitle}>5. Installation</h3>
     <p style={styles.cardText}>
       Professional installation by certified experts.
     </p>
+    <button
+      style={styles.exploreBtn}
+     onClick={() => navigate("/installation")}
+    >Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -337,12 +361,18 @@ viewport={{ once: true }}
     y: -12,
     scale: 1.03,
   }}
+  onClick={() => navigate("/netmetering")}
 >
   <div>
     <h3 style={styles.cardTitle}>6. Net Metering</h3>
     <p style={styles.cardText}>
       Assistance with net metering and electricity savings.
     </p>
+     <button
+      style={styles.exploreBtn}
+    onClick={() => navigate("/netmetering")}
+    >Explore More →
+    </button>
   </div>
 </motion.div>
 
@@ -359,14 +389,17 @@ viewport={{ once: true }}
     <p style={styles.cardText}>
       Ongoing maintenance and support for long-term performance.
     </p>
+    <button
+      style={styles.exploreBtn}
+   onClick={() => navigate("/after-support")}
+    >Explore More →
+    </button>
   </div>
 </motion.div>
 
 </motion.div>
 
 </section>
-
-
       <Footer />
     </div>
   );
@@ -573,6 +606,19 @@ cardText: {
 fontSize: "18px",
 lineHeight: "1.7",
 color: "#dbeafe",
+},
+
+exploreBtn: {
+  marginTop: "15px",
+  padding: "10px 20px",
+  border: "none",
+  borderRadius: "25px",
+  background: "#ff9800",
+  color: "#fff",
+  fontSize: "14px",
+  fontWeight: "600",
+  cursor: "pointer",
+  transition: "0.3s",
 },
 
 };

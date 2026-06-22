@@ -17,6 +17,10 @@ import Sitesurvey from "./pages/Sitesurvey";
 import Custom from "./pages/Custom";
 import Quotation from "./pages/Quotation";
 import Installation from "./pages/installation";
+import NetMetering from "./pages/Net";
+import After from "./pages/After";
+import SolarPanelProduct from "./pages/SolarPanelProduct";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const [token, setToken] = useState(
@@ -51,7 +55,7 @@ function App() {
              {/* Team */}
         <Route path="/team" element={<Team />} />
 
-            {/* Store */}
+            Store
         <Route path="/store" element={<Store />} />
 
         <Route path="/solar-panels" element={<SolarPanels />} />
@@ -63,6 +67,15 @@ function App() {
         <Route path="/quotation" element={<Quotation />} />
 
          <Route path="/installation" element={<Installation />} />
+
+         <Route path="/netmetering" element={<NetMetering />} />
+
+         <Route path="/after-support" element={<After />} />
+
+          <Route path="/solar-panel-product" element={<SolarPanelProduct />}/>
+
+          <Route path="/checkout" element={<Checkout />} />
+          
 
         {/* Forgot Password */}
         <Route
