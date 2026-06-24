@@ -1,180 +1,265 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import Footer from "../components/Footer";
+import learnVideo from "../assets/learnvideo.mp4";
+import logoFile from "../assets/logo.png";
 
-function Learn() {
-const navigate = useNavigate();
+export default function Learn({ token, logout }) {
+  const navigate = useNavigate();
+  const isLoggedIn = !!token;
 
-const courses = [
-{
-title: "WHY GO SOLAR?",
-description:
-"Reduce electricity bills by up to 90% and Increase your Property value Energy independence from grid Government subsidies available Low maintenence costs"
-},
-{
-title: "BENEFITS OF SOLAR ENERGY",
-description:
-"Switching to solar power offers numerous advantages for homeowners, business, and industries across India. From substantial cost savings to environmental benefits, solar energy is the smart choice for a sustainable future.  "
-},
-{
-title: "FINANCIAL BENEFITS",
-description:
-"Solar energy provides significant cost saving with minimal ongoing expenses. Enjoy predictable energy costs and protection from rising electricity rates"
-},
-{
-title: "Environment Impsct",
-description:
-"Join the clean energy revolution. Reduce your carbon footprint and contribute to a sustainable future for India"
-}
-];
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
-return ( <div style={styles.container}> <div style={styles.hero}> <motion.h1
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
->
-  Learn About Solar Energy
-</motion.h1>
+  const courses = [
+    {
+      title: "WHY GO SOLAR?",
+      description:
+        "Going solar drastically cuts your monthly electricity bills and shields you from rising utility rates while significantly boosting your property value. By transitioning to clean, renewable sun energy, you actively reduce your carbon footprint and combat climate change. Government incentives, tax credits, and subsidies make the initial investment highly affordable, allowing systems to pay for themselves quickly. Ultimately, it offers long-term financial independence and a reliable, low-maintenance power source for decades to come.",
+    },
+    {
+      title: "BENEFITS OF SOLAR ENERGY",
+      description:
+        "Going solar offers exceptional financial and environmental advantages by instantly slashing your monthly electricity bills and protecting you from rising utility tariff hikes. This smart investment significantly increases your property value and delivers a rapid return on investment, which is further accelerated by lucrative government subsidy schemes like the PM Surya Ghar Yojana. On an environmental level, switching to clean sun energy drastically shrinks your carbon footprint, reduces greenhouse gases, and conserves vital natural resources without producing air pollution. Furthermore, solar systems are highly durable, requiring minimal maintenance while providing reliable, long-term energy independence for twenty-five years or more.",
+    },
+    {
+      title: "FINANCIAL BENEFITS",
+      description:
+        "Switching to solar energy delivers an immediate financial turnaround by drastically slashing monthly electricity bills and locking in free power for decades. This strategic investment protects property owners from unpredictable utility price hikes while significantly boosting the overall market value of the building. With lucrative government subsidies like the PM Surya Ghar Yojana lowering upfront installation costs, the system quickly pays for itself, paving the way for a high return on investment and long-term financial independence.",
+    },
+    {
+      title: "ENVIRONMENT IMPACT",
+      description:
+        "Every solar panel installed represents a powerful stand against environmental degradation, actively replacing toxic coal energy with pure, infinite sunlight. By making the switch, you immediately cut down on the smog and particulate matter that trigger respiratory illnesses, creating localized pockets of cleaner, safer air. Solar arrays also prevent the destructive land mining and cross-country fuel transport that devastate wildlife habitats and trigger ecological crises. Choosing this silent, pollution-free power source acts as a continuous, daily investment in restoring the earth's natural climate balance.",
+    },
+  ];
 
-<motion.p
-  style={styles.subtitle}
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.3 }}
->
-  Explore renewable energy solutions and gain knowledge about
-  sustainable solar technologies.
-</motion.p>
+  return (
+    <div style={styles.landingPage}>
+      {/* VIDEO BACKGROUND */}
+      <video autoPlay muted loop playsInline style={styles.videoBg}>
+        <source src={learnVideo} type="video/mp4" />
+      </video>
 
-    <motion.button
-style={styles.button}
-onClick={() => navigate("/")}
-whileHover={{
-scale: 1.08,
-y: -3,
-}}
-whileTap={{
-scale: 0.95,
-}}
+      {/* NAVBAR */}
+      <nav style={styles.navbar}>
+        <div style={styles.logo}>
+          <img src={logoFile} alt="logo" style={styles.logoImage} />
+          <span style={styles.logoText}>AVS SOLAR CONSULTANCY</span>
+        </div>
 
->
+        <div style={styles.navLinks}>
+          <motion.button onClick={() => navigate("/")} style={styles.link}>
+            HOME
+          </motion.button>
 
-← Back to Home
-</motion.button>
-  </div>
+          <motion.button onClick={() => navigate("/about")} style={styles.link}>
+            About
+          </motion.button>
 
- <motion.div
-style={styles.cardContainer}
-initial={{ opacity: 0 }}
-whileInView={{ opacity: 1 }}
-viewport={{ once: true }}
-transition={{ duration: 0.5 }}
+          <motion.button onClick={() => navigate("/services")} style={styles.link}>
+            Services
+          </motion.button>
 
->
+          <motion.button onClick={() => navigate("/team")} style={styles.link}>
+            Our Team
+          </motion.button>
 
-{courses.map((course, index) => (
-<motion.div
-key={index}
-style={styles.card}
-initial={{ opacity: 0, y: 60 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{
-duration: 0.6,
-delay: 0,
-}}
-whileHover={{
-scale: 1.05,
-y: -12,
-boxShadow: "0 15px 35px rgba(0,0,0,0.4)",
-}}
->
-<h3
-style={{
-color: "#ffb703",
-marginBottom: "15px",
-fontSize: "22px",
-}}
->
-{course.title} </h3>
+          <motion.button onClick={() => navigate("/store")} style={styles.link}>
+            Store
+          </motion.button>
+        </div>
 
-  <p
-    style={{
-      color: "#f1f1f1",
-      lineHeight: "1.8",
-    }}
-  >
-    {course.description}
-  </p>
-</motion.div>
+        {isLoggedIn ? (
+          <button onClick={handleLogout} style={styles.logoutBtn}>
+            Log Out
+          </button>
+        ) : (
+          <button onClick={() => navigate("/login")} style={styles.logInBtn}>
+            Log In
+          </button>
+        )}
+      </nav>
 
-))}
-</motion.div>
+      {/* MAIN */}
+      <div style={styles.container}>
+        <div style={styles.cardContainer}>
+          {courses.map((course, index) => (
+            <motion.div
+              key={index}
+              style={styles.card}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.05,
+                y: -10,
+                boxShadow: "0 15px 35px rgba(0,0,0,0.4)",
+              }}
+            >
+              <h3 style={styles.cardTitle}>{course.title}</h3>
+              <p style={styles.cardText}>{course.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
-  <Footer />
-</div>
-
-);
+      <Footer />
+    </div>
+  );
 }
 
+
+
+/* STYLES */
 const styles = {
-container: {
-minHeight: "100vh",
-background:
-"linear-gradient(135deg, #071A2D 0%, #123456 100%)",
-padding: "60px 30px",
-color: "white",
+  landingPage: {
+    minHeight: "100vh",
+    color: "white",
+    position: "relative",
+    overflow: "hidden",
+  },
+
+  videoBg: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
+    filter: "brightness(40%)",
+  },
+
+
+  logo: { display: "flex", alignItems: "center" },
+
+  logoImage: {
+    height: "50px",
+    objectFit: "contain",
+  },
+
+  logoText: {
+    marginLeft: "12px",
+    fontSize: "18px",
+    fontWeight: "bold",
+  },
+
+navLinks: {
+    display: "flex",
+    gap: "20px",
+  },
+
+  link: {
+    background: "transparent",
+    border: "none",
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: "600",
+  },
+
+  container: {
+    minHeight: "100vh",
+    padding: "100px 30px 60px",
+    position: "relative",
+    zIndex: 1,
+  },
+
+  hero: {
+    textAlign: "center",
+    marginBottom: "60px",
+  },
+
+  heading: {
+    fontSize: "52px",
+    fontWeight: "700",
+    color:"yellow",
+  },
+
+  subtitle: {
+    maxWidth: "800px",
+    margin: "20px auto",
+    fontSize: "18px",
+    color: "#dcdcdc",
+  },
+
+  button: {
+    marginTop: "20px",
+    padding: "14px 30px",
+    border: "none",
+    borderRadius: "30px",
+    background: "linear-gradient(135deg,#ffb703,#fb8500)",
+    color: "white",
+    cursor: "pointer",
+  },
+
+  cardContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "25px",
+  },
+
+  card: {
+    width: "1500px",
+    backgroundColor: "rgba(255,255,255,0.1)",
+    backdropFilter: "blur(10px)",
+    padding: "25px",
+    borderRadius: "15px",
+  },
+
+
+  cardTitle: {
+    color: "#efc24f",
+    marginBottom: "8px",
+  },
+
+  cardText: {
+  color: "#f1f1f1",
+  lineHeight: "1.5",
+  fontSize: "11px",
 },
 
-hero: {
-textAlign: "center",
-marginBottom: "60px",
+  
+  logInBtn: {
+  background: "rgba(255,255,255,0.08)",
+  color: "#fff",
+  border: "1px solid rgba(255,255,255,0.15)",
+  padding: "10px 24px",
+  borderRadius: "30px",
+  backdropFilter: "blur(10px)",
+  cursor: "pointer",
 },
 
-heading: {
-fontSize: "52px",
-fontWeight: "700",
-marginBottom: "20px",
+logoutBtn: {
+  background: "rgba(255,255,255,0.08)",
+  color: "#fff",
+  border: "1px solid rgba(255,255,255,0.15)",
+  padding: "10px 24px",
+  borderRadius: "30px",
+  backdropFilter: "blur(10px)",
+  cursor: "pointer",
 },
 
-subtitle: {
-maxWidth: "800px",
-margin: "0 auto",
-fontSize: "18px",
-lineHeight: "1.8",
-color: "#dcdcdc",
-},
+  navbar: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "5px 20px",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 1000,
 
-button: {
-marginTop: "30px",
-padding: "14px 30px",
-border: "none",
-borderRadius: "30px",
-background: "linear-gradient(135deg,#ffb703,#fb8500)",
-color: "white",
-fontSize: "16px",
-fontWeight: "600",
-cursor: "pointer",
-},
+  background: "rgba(0, 0, 0, 0.65)", // black transparent
+  backdropFilter: "blur(15px)",
+  WebkitBackdropFilter: "blur(15px)",
 
-cardContainer: {
-display: "flex",
-justifyContent: "center",
-flexWrap: "wrap",
-gap: "25px",
-},
-
-card: {
-width: "300px",
-backgroundColor: "rgba(255,255,255,0.1)",
-backdropFilter: "blur(10px)",
-padding: "25px",
-borderRadius: "15px",
-boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
-transition: "0.3s",
+  borderBottom: "1px solid rgba(255,255,255,0.1)",
+  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
 },
 };
-
-export default Learn;

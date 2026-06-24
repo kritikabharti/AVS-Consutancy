@@ -44,13 +44,37 @@ function App() {
           element={<Login setToken={setToken} />}
         />
         {/* About */}
-        <Route path="/about" element={<About />} />
+       <Route
+  path="/about"
+  element={
+    <About
+      token={token}
+      logout={logout}
+    />
+  }
+/>
         
         {/* Services */}
-        <Route path="/services" element={<Services />} />
-
+        <Route
+  path="/services"
+  element={
+    <Services
+      token={token}
+      logout={logout}
+    />
+  }
+/>
+    
         {/* Learn */}
-        <Route path="/learn" element={<Learn />} />
+       <Route
+  path="/learn"
+  element={
+    <Learn
+      token={token}
+      logout={logout}
+    />
+  }
+/>
     
              {/* Team */}
         <Route path="/team" element={<Team />} />

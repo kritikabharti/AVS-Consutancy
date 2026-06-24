@@ -1,10 +1,17 @@
 import React from "react";
-import backgroundImageFile from "../assets/image.jpg";
+import heroVideo from "../assets/solar-video.mp4";
 import logoFile from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-
+import imagess from "../assets/free.jpg";
+import siteimg from "../assets/survey.jpg";
+import customimg from "../assets/custom.jpg";
+import quoimg from '../assets/quoimage.jpg';
+import insimg from "../assets/insimage.jpg";
+import netimage from "../assets/netimg.jpg";
+import afterimg from "../assets/images (4).jpg";
+import jourvideo from "../assets/journeyvid.mp4";
 
 const containerVariants = {
 hidden: {},
@@ -31,11 +38,6 @@ export default function Home({ token, logout }) {
   const navigate = useNavigate();
   const isLoggedIn = !!token;
 
-  
-  const dynamicHeroStyle = {
-    ...styles.heroSection,
-    backgroundImage: `url(${backgroundImageFile})`,
-  };
 
   const handleLogout = () => {
     logout();
@@ -167,16 +169,26 @@ Store
 
      {/* Hero Section */}
 
-<div style={dynamicHeroStyle}>
+<div style={styles.heroSection}>
+  
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    style={styles.videoBackground}
+  >
+    <source src={heroVideo} type="video/mp4" />
+  </video>
+
   <div style={styles.overlay}></div>
 
-<motion.div
-style={styles.heroContent}
-initial={{ opacity: 0, y: 50 }}
-animate={{ opacity: 1, y: 0 }}
-transition={{ duration: 1 }}
-
->
+  <motion.div
+    style={styles.heroContent}
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+  >
 
 
 <h1 style={styles.mainTitle}>
@@ -218,33 +230,44 @@ transition={{ duration: 1 }}
 {/* Solar Journey Section */}
 
 
-<section style={styles.journeySection}>
+{/* Journey Hero */}
+<section style={styles.journeyHero}>
   <motion.h2
     style={styles.journeyHeading}
     initial={{ opacity: 0, y: -50 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 0.8 }}
   >
-    Our Solar Solution Journey
+    <i>Our Solar Solution Journey</i>
   </motion.h2>
 
   <div style={styles.headingLine}></div>
 
   <p style={styles.journeySubHeading}>
-    A Simple 7-Step Process Towards Clean & Green Energy
+   Transitioning to green energy is made simple through a seamless 7-step process managed entirely by AVS Solar Consultancy. The journey begins with a precise energy audit and custom roof layout design tailored specifically to your property's monthly consumption needs. Next, their team handles all complex government subsidy applications and legal permits while sourcing premium, top-tier equipment. Professional engineers then execute a safe installation and coordinate with local authorities for regulatory testing and final net-metering connection. Once activated, the system delivers immediate financial savings, backed by AVS Solar Consultancy's continuous monitoring and long-term support.
   </p>
+</section>
 
-<motion.div
-style={styles.stepContainer}
-variants={containerVariants}
-initial="hidden"
-whileInView="visible"
-viewport={{ once: true }}
 
+<section style={styles.cardsSection}>
+  <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={styles.cardsVideoBg}
 >
+  <source src={jourvideo} type="video/mp4" />
+</video>
 
-<motion.div
+  <motion.div
+    style={styles.stepContainer}
+    variants={containerVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
+  <motion.div
   style={styles.stepCard}
   variants={cardVariants}
   whileHover={{
@@ -252,15 +275,23 @@ viewport={{ once: true }}
     scale: 1.03,
   }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>1. Free Consultation</h3>
+  <img
+    src={imagess}
+    alt="Free Consultation"
+    style={styles.cardImage}
+  />
 
-    <p style={styles.cardText}>
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      1. Free Consultation
+    </h3>
+
+    <p style={styles.overlayText}>
       We understand your energy needs and provide expert advice.
     </p>
 
     <button
-      style={styles.exploreBtn}
+      style={styles.overlayBtn}
       onClick={() => navigate("/solar-panels")}
     >
       Explore More →
@@ -268,6 +299,10 @@ viewport={{ once: true }}
   </div>
 </motion.div>
 
+
+
+
+
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
@@ -276,20 +311,32 @@ viewport={{ once: true }}
     scale: 1.03,
   }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>2. Site Survey</h3>
-    <p style={styles.cardText}>
+  <img
+    src={siteimg}
+    alt="Free Consultation"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+    2. Site Survey
+    </h3>
+
+    <p style={styles.overlayText}>
       Our team visits your location and evaluates the site.
     </p>
+
     <button
-      style={styles.exploreBtn}
-      onClick={() => navigate("/site-survey")}
+      style={styles.overlayBtn}
+       onClick={() => navigate("/site-survey")}
     >
       Explore More →
     </button>
   </div>
 </motion.div>
 
+
+
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
@@ -298,108 +345,162 @@ viewport={{ once: true }}
     scale: 1.03,
   }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>3. Custom Solar Design</h3>
-    <p style={styles.cardText}>
-     Customized solar system tailored to your requirements.
+  <img
+     src={customimg}
+    alt="Custom Solar Design"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      3. Custom Solar Design
+    </h3>
+
+    <p style={styles.overlayText}>
+      Customized solar system tailored to your requirements.
     </p>
+
     <button
-      style={styles.exploreBtn}
+      style={styles.overlayBtn}
       onClick={() => navigate("/custom")}
-    >Explore More →
+    >
+      Explore More →
     </button>
   </div>
 </motion.div>
 
+
+
+
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
+  whileHover={{ y: -12, scale: 1.03 }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>4. Quotation & Approval</h3>
-    <p style={styles.cardText}>
-     Receive a transparent quotation and project approval.
+  <img
+     src={quoimg}
+    alt="Quotation & Approval"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      4. Quotation & Approval
+    </h3>
+
+    <p style={styles.overlayText}>
+      Receive a transparent quotation and project approval.
     </p>
+
     <button
-      style={styles.exploreBtn}
-    onClick={() => navigate("/quotation")}
-    >Explore More →
+      style={styles.overlayBtn}
+      onClick={() => navigate("/quotation")}
+    >
+      Explore More →
     </button>
   </div>
 </motion.div>
 
 
+
+
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
+  whileHover={{ y: -12, scale: 1.03 }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>5. Installation</h3>
-    <p style={styles.cardText}>
+  <img
+    src={insimg}
+    alt="Installation"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      5. Installation
+    </h3>
+
+    <p style={styles.overlayText}>
       Professional installation by certified experts.
     </p>
+
     <button
-      style={styles.exploreBtn}
-     onClick={() => navigate("/installation")}
-    >Explore More →
+      style={styles.overlayBtn}
+      onClick={() => navigate("/installation")}
+    >
+      Explore More →
     </button>
   </div>
 </motion.div>
 
+
+
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
-  onClick={() => navigate("/netmetering")}
+  whileHover={{ y: -12, scale: 1.03 }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>6. Net Metering</h3>
-    <p style={styles.cardText}>
+  <img
+    src={netimage}
+    alt="Net Metering"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      6. Net Metering
+    </h3>
+
+    <p style={styles.overlayText}>
       Assistance with net metering and electricity savings.
     </p>
-     <button
-      style={styles.exploreBtn}
-    onClick={() => navigate("/netmetering")}
-    >Explore More →
+
+    <button
+      style={styles.overlayBtn}
+      onClick={() => navigate("/netmetering")}
+    >
+      Explore More →
     </button>
   </div>
 </motion.div>
+
+
+
+
 
 <motion.div
   style={styles.stepCard}
   variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
+  whileHover={{ y: -12, scale: 1.03 }}
 >
-  <div>
-    <h3 style={styles.cardTitle}>7. After-Sales Support</h3>
-    <p style={styles.cardText}>
+  <img
+    src={afterimg}
+    alt="After Sales Support"
+    style={styles.cardImage}
+  />
+
+  <div style={styles.cardOverlay}>
+    <h3 style={styles.overlayTitle}>
+      7. After-Sales Support
+    </h3>
+
+    <p style={styles.overlayText}>
       Ongoing maintenance and support for long-term performance.
     </p>
+
     <button
-      style={styles.exploreBtn}
-   onClick={() => navigate("/after-support")}
-    >Explore More →
+      style={styles.overlayBtn}
+      onClick={() => navigate("/after-support")}
+    >
+      Explore More →
     </button>
   </div>
 </motion.div>
-
-</motion.div>
-
+  </motion.div>
 </section>
+
+
+
       <Footer />
     </div>
   );
@@ -446,7 +547,7 @@ logoText: {
 
   navLinks: {
     display: "flex",
-    gap: "30px",
+    gap: "20px",
   },
 
   link: {
@@ -461,50 +562,46 @@ transition: "all 0.3s ease",
 
 
   logInBtn: {
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
-    color: "white",
-    border: "1px solid rgba(255, 255, 255, 0.4)",
-    padding: "8px 20px",
-    borderRadius: "20px",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: "500",
-  },
+  background: "rgba(255,255,255,0.08)",
+  color: "#fff",
+  border: "1px solid rgba(255,255,255,0.15)",
+  padding: "10px 24px",
+  borderRadius: "30px",
+  backdropFilter: "blur(10px)",
+  cursor: "pointer",
+},
 
-  logoutBtn: {
-     backgroundColor: "rgba(255, 255, 255, 0.15)",
-    color: "white",
-    border: "1px solid rgba(255, 255, 255, 0.4)",
-    padding: "8px 20px",
-    borderRadius: "20px",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: "500",
-  },
+logoutBtn: {
+  background: "rgba(255,255,255,0.08)",
+  color: "#fff",
+  border: "1px solid rgba(255,255,255,0.15)",
+  padding: "10px 24px",
+  borderRadius: "30px",
+  backdropFilter: "blur(10px)",
+  cursor: "pointer",
+},
 
   heroSection: {
-     backgroundColor: '#0a192f',
-    position: "relative",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  },
+  position: "relative",
+  height: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  overflow: "hidden",
+  backgroundColor: "#000",
+},
 
   overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background:
-      "linear-gradient(rgba(10, 40, 80, 0.6), rgba(10, 25, 47, 0.85))",
-    zIndex: 1,
-  },
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background:
+    "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65))",
+  zIndex: 1,
+},
 
   heroContent: {
     position: "relative",
@@ -541,7 +638,42 @@ fontWeight: "700",
     boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
   },
 
+  videoBackground: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  zIndex: 0,
+},
+
   
+
+cardImage: {
+  width: "100%",
+  height: "260px",
+  objectFit: "cover",
+},
+
+cardContent: {
+  padding: "25px",
+  textAlign: "center",
+},
+
+cardTitle: {
+  fontSize: "30px",
+  fontWeight: "700",
+  color: "#7CFC00",
+  marginBottom: "15px",
+},
+
+cardText: {
+  color: "#e5e7eb",
+  fontSize: "18px",
+  lineHeight: "1.7",
+  minHeight: "80px",
+},
 
 
 journeySection: {
@@ -567,44 +699,83 @@ borderRadius: "10px",
 },
 
 journeySubHeading: {
-fontSize: "22px",
+fontSize: "15px",
 color: "#dbeafe",
 marginBottom: "60px",
 },
 
 stepContainer: {
-display: "grid",
-gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-gap: "30px",
-maxWidth: "1400px",
-margin: "0 auto",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+  gap: "30px",
+  maxWidth: "1400px",
+  margin: "0 auto",
 },
 
 stepCard: {
-backgroundColor: "rgba(255,255,255,0.1)",
-backdropFilter: "blur(12px)",
-border: "1px solid rgba(255,255,255,0.2)",
-borderRadius: "25px",
-padding: "30px",
-minHeight: "180px",
-display: "flex",
-justifyContent: "space-between",
-alignItems: "center",
-textAlign: "left",
-color: "#ffffff",
-boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+  position: "relative",
+  overflow: "hidden",
+  borderRadius: "25px",
+  height: "500px",
+  cursor: "pointer",
+},
+
+cardImage: {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+},
+
+cardOverlay: {
+  position: "absolute",
+  inset: 0,
+  background:
+    "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2))",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "30px",
+},
+
+overlayTitle: {
+  color: "#a3e635",
+  fontSize: "20px",
+  fontWeight: "700",
+  marginBottom: "15px",
+},
+
+overlayText: {
+  color: "#fff",
+  fontSize: "20px",
+  lineHeight: "1.7",
+  marginBottom: "25px",
+  maxWidth: "90%",
+},
+
+overlayBtn: {
+  background: "#ff9800",
+  color: "#fff",
+  border: "none",
+  borderRadius: "30px",
+  padding: "14px 35px",
+  fontSize: "16px",
+  fontWeight: "600",
+  cursor: "pointer",
 },
 
 cardTitle: {
 fontSize: "28px",
-fontWeight: "600",
+fontWeight: "500",
 color: "#ffb703",
 marginBottom: "15px",
 },
 
 cardText: {
 fontSize: "18px",
-lineHeight: "1.7",
+lineHeight: "1.5",
 color: "#dbeafe",
 },
 
@@ -619,6 +790,61 @@ exploreBtn: {
   fontWeight: "600",
   cursor: "pointer",
   transition: "0.3s",
+},
+cardsSection: {
+  position: "relative",
+  overflow: "hidden",
+  padding: "40px 60px 100px",
+  background: "#02162b",
+},
+
+cardsVideoBg: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  zIndex: 0,
+},
+cardsOverlay: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background:
+    "linear-gradient(rgba(2,22,43,0.85), rgba(2,22,43,0.92))",
+  zIndex: 1,
+},
+
+stepContainer: {
+  position: "relative",
+  zIndex: 2,
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+  gap: "30px",
+  maxWidth: "1400px",
+  margin: "0 auto",
+},
+
+navbar: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "2px 20px",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 1000,
+
+  background: "rgba(0, 0, 0, 0.65)", // black transparent
+  backdropFilter: "blur(15px)",
+  WebkitBackdropFilter: "blur(15px)",
+
+  borderBottom: "1px solid rgba(255,255,255,0.1)",
+  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
 },
 
 };

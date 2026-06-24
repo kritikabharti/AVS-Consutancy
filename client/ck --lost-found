@@ -1,0 +1,17 @@
+[33mcommit dcc9ba6d0a513d7f94977ec69c4cb7055316833b[m
+Author: kritikabharti <kritikabharti577@gmail.com>
+Date:   Sat Jun 20 14:25:56 2026 +0530
+
+    Today's changes
+
+index.html
+src/App.css
+src/App.jsx
+src/assets/netmetering.jpg
+src/assets/support.jpg
+src/pages/After.jsx
+src/pages/Checkout.jsx
+src/pages/Home.jsx
+src/pages/Net.jsx
+src/pages/SolarPanelProduct.jsx
+src/pages/Store.jsx
