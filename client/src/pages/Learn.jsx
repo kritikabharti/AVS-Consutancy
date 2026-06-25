@@ -4,6 +4,11 @@ import { color, motion } from "framer-motion";
 import Footer from "../components/Footer";
 import learnVideo from "../assets/learnvideo.mp4";
 import logoFile from "../assets/logo.png";
+import longiLogo from "../assets/adnibrand.png";
+import canadianLogo from "../assets/aikobrand.png";
+import jaLogo from "../assets/axitecbrand.png";
+import jinkoLogo from "../assets/goldibrand.png";
+import trinaLogo from "../assets/vikrambrand.png";
 
 export default function Learn({ token, logout }) {
   const navigate = useNavigate();
@@ -13,29 +18,6 @@ export default function Learn({ token, logout }) {
     logout();
     navigate("/login");
   };
-
-  const courses = [
-    {
-      title: "WHY GO SOLAR?",
-      description:
-        "Going solar drastically cuts your monthly electricity bills and shields you from rising utility rates while significantly boosting your property value. By transitioning to clean, renewable sun energy, you actively reduce your carbon footprint and combat climate change. Government incentives, tax credits, and subsidies make the initial investment highly affordable, allowing systems to pay for themselves quickly. Ultimately, it offers long-term financial independence and a reliable, low-maintenance power source for decades to come.",
-    },
-    {
-      title: "BENEFITS OF SOLAR ENERGY",
-      description:
-        "Going solar offers exceptional financial and environmental advantages by instantly slashing your monthly electricity bills and protecting you from rising utility tariff hikes. This smart investment significantly increases your property value and delivers a rapid return on investment, which is further accelerated by lucrative government subsidy schemes like the PM Surya Ghar Yojana. On an environmental level, switching to clean sun energy drastically shrinks your carbon footprint, reduces greenhouse gases, and conserves vital natural resources without producing air pollution. Furthermore, solar systems are highly durable, requiring minimal maintenance while providing reliable, long-term energy independence for twenty-five years or more.",
-    },
-    {
-      title: "FINANCIAL BENEFITS",
-      description:
-        "Switching to solar energy delivers an immediate financial turnaround by drastically slashing monthly electricity bills and locking in free power for decades. This strategic investment protects property owners from unpredictable utility price hikes while significantly boosting the overall market value of the building. With lucrative government subsidies like the PM Surya Ghar Yojana lowering upfront installation costs, the system quickly pays for itself, paving the way for a high return on investment and long-term financial independence.",
-    },
-    {
-      title: "ENVIRONMENT IMPACT",
-      description:
-        "Every solar panel installed represents a powerful stand against environmental degradation, actively replacing toxic coal energy with pure, infinite sunlight. By making the switch, you immediately cut down on the smog and particulate matter that trigger respiratory illnesses, creating localized pockets of cleaner, safer air. Solar arrays also prevent the destructive land mining and cross-country fuel transport that devastate wildlife habitats and trigger ecological crises. Choosing this silent, pollution-free power source acts as a continuous, daily investment in restoring the earth's natural climate balance.",
-    },
-  ];
 
   return (
     <div style={styles.landingPage}>
@@ -84,30 +66,103 @@ export default function Learn({ token, logout }) {
         )}
       </nav>
 
-      {/* MAIN */}
-      <div style={styles.container}>
-        <div style={styles.cardContainer}>
-          {courses.map((course, index) => (
-            <motion.div
-              key={index}
-              style={styles.card}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{
-                scale: 1.05,
-                y: -10,
-                boxShadow: "0 15px 35px rgba(0,0,0,0.4)",
-              }}
-            >
-              <h3 style={styles.cardTitle}>{course.title}</h3>
-              <p style={styles.cardText}>{course.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+      {/* Hero Section */}
+              <section
+        style={{
+          ...styles.heroSection,
+         
+        }}
 
-      <Footer />
+      >
+        <motion.div
+          style={styles.heroContent}
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <motion.p
+            style={styles.heroTag}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            
+          </motion.p>
+
+
+          <motion.h1
+            style={styles.heroHeading}
+            initial={{ opacity: 0, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            KNOW
+            <br />
+            <span style={{ color: "#ffb703" }}>
+              MORE
+            </span>{" "}        
+          </motion.h1>
+      
+          <motion.p
+            style={styles.heroText}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+             AVS Solar Consultancy empowers homeowners and businesses to transition seamlessly to clean energy through a comprehensive, end-to-end service model. From your initial free financial consultation and precise engineering site survey to custom 3D system design, net-metering integration, and dedicated lifetime after-sales support, every step is managed by certified solar experts.
+          </motion.p>
+      
+        </motion.div>
+      </section>
+
+
+
+
+<section style={styles.brandSection}>
+  <h2 style={styles.brandTitle}>SOLAR PANELS</h2>
+
+  <div style={styles.brandLine}></div>
+
+  <p style={styles.brandDesc}>
+    High-efficiency solar panels for maximum energy generation and
+    long-term reliability.
+     <br />
+            <span style={{ color: "#ffb703" }}>
+              Top 5 Brands
+            </span>{" "}
+  </p>
+
+  <div style={styles.brandContainer}>
+    <div style={styles.brandCard}
+    >
+      <img src={longiLogo} alt="LONGi" style={styles.brandLogo} />
+      <h4>adani solar</h4>
+    </div>
+
+    <div style={styles.brandCard}>
+      <img src={canadianLogo} alt="Canadian Solar" style={styles.brandLogo} />
+      <h4>Aiko Solar</h4>
+    </div>
+
+    <div style={styles.brandCard}>
+      <img src={jaLogo} alt="JA Solar" style={styles.brandLogo} />
+      <h4>AXITEC Solar</h4>
+    </div>
+
+    <div style={styles.brandCard}>
+      <img src={jinkoLogo} alt="Jinko Solar" style={styles.brandLogo} />
+      <h4>Goldi Solar</h4>
+    </div>
+
+    <div style={styles.brandCard}>
+      <img src={trinaLogo} alt="Trina Solar" style={styles.brandLogo} />
+      <h4>Vikram Solar</h4>
+    </div> 
+  </div>
+</section>
+
+      {/* <Footer /> */}
     </div>
   );
 }
@@ -175,9 +230,10 @@ navLinks: {
 
   heading: {
     fontSize: "52px",
-    fontWeight: "700",
+    fontWeight: "500",
     color:"yellow",
   },
+
 
   subtitle: {
     maxWidth: "800px",
@@ -261,5 +317,170 @@ logoutBtn: {
 
   borderBottom: "1px solid rgba(255,255,255,0.1)",
   boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+},
+
+
+heading: {
+  fontSize: "52px",
+  fontWeight: "400",
+  color: "yellow",
+  marginTop: "80px",
+  marginBottom: "20px",
+  textTransform: "uppercase",
+  letterSpacing: "2px",
+},
+
+description: {
+maxWidth: "900px",
+margin: "0 auto 40px",
+lineHeight: "1.8",
+fontSize: "18px",
+color: "#f5f5f5",
+},
+
+journeySection: {
+  minHeight: "30vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "50px 10px",
+
+  background: "rgba(0,0,0,0.45)",
+  backdropFilter: "blur(10px)",
+},
+
+journeyContent: {
+  maxWidth: "1000px",
+  textAlign: "center",
+},
+
+journeyTitle: {
+  fontSize: "48px",
+  fontWeight: "400",
+  color: "#F4C542",
+  marginBottom: "15px",
+  textTransform: "uppercase",
+  letterSpacing: "2px",
+},
+
+journeyLine: {
+  width: "120px",
+  height: "4px",
+  background: "#F4C542",
+  margin: "0 auto 30px",
+  borderRadius: "20px",
+},
+
+journeyText: {
+  fontSize: "15px",
+  lineHeight: "1.5",
+  color: "#f5f5f5",
+  marginBottom: "35px",
+},
+heroSection: {
+  minHeight: "70vh",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  display: "flex",
+  justifyContent: "flex-center",
+  alignItems: "center",
+  padding: "40px 60px",
+},
+
+heroContent: {
+  maxWidth: "350px",
+  textAlign: "center",
+},
+
+headingLine: {
+  width: "120px",
+  height: "4px",
+  background: "#ffb703",
+  borderRadius: "20px",
+  marginBottom: "25px",
+},
+
+heroTag: {
+  color: "#ffb703",
+  letterSpacing: "4px",
+  fontSize: "14px",
+  fontWeight: "600",
+  marginBottom: "15px",
+  textAlign: "left",
+},
+
+heroHeading: {
+  fontSize: "50px",
+  fontWeight: "600",
+  lineHeight: "1.1",
+  color: "#fff",
+  marginBottom: "25px",
+  textAlign: "left",
+},
+
+heroText: {
+  fontSize: "15px",
+  color: "#e5e7eb",
+  lineHeight: "1.8",
+  marginBottom: "35px",
+  textAlign: "left",
+},
+
+
+brandSection: {
+  padding: "100px 50px",
+  background: "rgba(0,0,0,0.55)",
+  backdropFilter: "blur(10px)",
+  textAlign: "center",
+},
+
+brandTitle: {
+  fontSize: "60px",
+  color: "#f4c542",
+  fontWeight: "500",
+  marginBottom: "15px",
+},
+
+brandLine: {
+  width: "180px",
+  height: "4px",
+  background: "#f4c542",
+  margin: "0 auto 25px",
+  borderRadius: "20px",
+},
+
+brandDesc: {
+  color: "#fff",
+  fontSize: "20px",
+  marginBottom: "60px",
+},
+
+brandContainer: {
+  display: "flex",
+  justifyContent: "center",
+  gap: "25px",
+  flexWrap: "wrap",
+},
+
+brandCard: {
+  width: "200px",
+  height: "220px",
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(255,255,255,0.15)",
+  borderRadius: "20px",
+  backdropFilter: "blur(10px)",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  transition: "0.3s",
+  cursor: "pointer",
+},
+
+brandLogo: {
+  width: "180px",
+  objectFit: "contain",
+  marginBottom: "20px",
 },
 };

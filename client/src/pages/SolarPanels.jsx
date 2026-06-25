@@ -1,23 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import backgroundImageFile from "../assets/consultations.jpg";
+import backgroundImageFile from "../assets/solar-bg.jpg";
 
 function SolarPanels() {
   const navigate = useNavigate();
 
   const pageStyle = {
-    minHeight: "100vh",
-    backgroundImage: `url(${backgroundImageFile})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
+    height: "100vh",
+    width: "100%",
+    position: "relative",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     color: "#fff",
     textAlign: "center",
     padding: "20px",
-    position: "relative",
+    overflow: "hidden",
+  };
+
+  const backgroundImgStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
   };
 
   const buttonStyle = {
@@ -42,6 +50,11 @@ function SolarPanels() {
 
   return (
     <div style={pageStyle}>
+      <img
+        src={backgroundImageFile}
+        alt="Solar panels"
+        style={backgroundImgStyle}
+      />
       <button
         style={buttonStyle}
         onClick={() => navigate("/")}

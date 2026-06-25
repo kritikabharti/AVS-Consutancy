@@ -413,7 +413,7 @@ function Services({ token, logout }) {
   backgroundRepeat: "no-repeat",
 }}
 >
-  {/* Video Animation */}
+  {/* Image Animation */}
   <motion.div
     style={styles.journeyImageContainer}
     initial={{ opacity: 0, x: -100 }}

@@ -4,14 +4,21 @@ import logoFile from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import imagess from "../assets/free.jpg";
-import siteimg from "../assets/survey.jpg";
-import customimg from "../assets/custom.jpg";
-import quoimg from '../assets/quoimage.jpg';
-import insimg from "../assets/insimage.jpg";
-import netimage from "../assets/netimg.jpg";
+import imagess from "../assets/home1.jpg";
+import home2 from "../assets/Home2.jpg";
+import home3 from "../assets/home3.jpg";
+import home4 from "../assets/HOME4.jpg";
+import home5 from "../assets/home5.jpg";
+import home6 from "../assets/home6.jpg";
+import home7 from "../assets/home7.jpg";
 import afterimg from "../assets/images (4).jpg";
 import jourvideo from "../assets/journeyvid.mp4";
+import ChatBox from "../components/ChatBox";
+import bgSolarr from "../assets/cardd1.jpg";
+
+
+
+
 
 const containerVariants = {
 hidden: {},
@@ -43,6 +50,8 @@ export default function Home({ token, logout }) {
     logout();
     navigate('/login');
   };
+
+  
 
   return (
     <div style={styles.landingPage}>
@@ -241,7 +250,8 @@ Store
     <i>Our Solar Solution Journey</i>
   </motion.h2>
 
-  <div style={styles.headingLine}></div>
+  <div 
+  style={styles.headingLine}></div>
 
   <p style={styles.journeySubHeading}>
    Transitioning to green energy is made simple through a seamless 7-step process managed entirely by AVS Solar Consultancy. The journey begins with a precise energy audit and custom roof layout design tailored specifically to your property's monthly consumption needs. Next, their team handles all complex government subsidy applications and legal permits while sourcing premium, top-tier equipment. Professional engineers then execute a safe installation and coordinate with local authorities for regulatory testing and final net-metering connection. Once activated, the system delivers immediate financial savings, backed by AVS Solar Consultancy's continuous monitoring and long-term support.
@@ -249,259 +259,265 @@ Store
 </section>
 
 
-<section style={styles.cardsSection}>
-  <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  style={styles.cardsVideoBg}
+
+
+<div
+  style={{
+    backgroundImage: `url(${bgSolarr})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    padding: "1px 0",
+  }}
 >
-  <source src={jourvideo} type="video/mp4" />
-</video>
+
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={imagess}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
 
   <motion.div
-    style={styles.stepContainer}
-    variants={containerVariants}
-    initial="hidden"
-    whileInView="visible"
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
     viewport={{ once: true }}
   >
-  <motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
->
-  <img
-    src={imagess}
-    alt="Free Consultation"
-    style={styles.cardImage}
-  />
+    <h2 style={styles.infoTitle}>FREE CONSULTATION</h2>
 
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      1. Free Consultation
-    </h3>
-
-    <p style={styles.overlayText}>
-      We understand your energy needs and provide expert advice.
+    <p style={styles.infoText}>
+     Getting professional advice ensures your system is optimized for net metering and helps you secure necessary government incentives. In Punjab, homeowners who install rooftop solar can receive central financial assistance and state incentives through the PM Surya Ghar scheme, which can subsidize costs significantly.
     </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/solar-panels")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
->
-  <img
-    src={siteimg}
-    alt="Free Consultation"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-    2. Site Survey
-    </h3>
-
-    <p style={styles.overlayText}>
-      Our team visits your location and evaluates the site.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-       onClick={() => navigate("/site-survey")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{
-    y: -12,
-    scale: 1.03,
-  }}
->
-  <img
-     src={customimg}
-    alt="Custom Solar Design"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      3. Custom Solar Design
-    </h3>
-
-    <p style={styles.overlayText}>
-      Customized solar system tailored to your requirements.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/custom")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{ y: -12, scale: 1.03 }}
->
-  <img
-     src={quoimg}
-    alt="Quotation & Approval"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      4. Quotation & Approval
-    </h3>
-
-    <p style={styles.overlayText}>
-      Receive a transparent quotation and project approval.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/quotation")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{ y: -12, scale: 1.03 }}
->
-  <img
-    src={insimg}
-    alt="Installation"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      5. Installation
-    </h3>
-
-    <p style={styles.overlayText}>
-      Professional installation by certified experts.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/installation")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{ y: -12, scale: 1.03 }}
->
-  <img
-    src={netimage}
-    alt="Net Metering"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      6. Net Metering
-    </h3>
-
-    <p style={styles.overlayText}>
-      Assistance with net metering and electricity savings.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/netmetering")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
-
-
-
-
-
-<motion.div
-  style={styles.stepCard}
-  variants={cardVariants}
-  whileHover={{ y: -12, scale: 1.03 }}
->
-  <img
-    src={afterimg}
-    alt="After Sales Support"
-    style={styles.cardImage}
-  />
-
-  <div style={styles.cardOverlay}>
-    <h3 style={styles.overlayTitle}>
-      7. After-Sales Support
-    </h3>
-
-    <p style={styles.overlayText}>
-      Ongoing maintenance and support for long-term performance.
-    </p>
-
-    <button
-      style={styles.overlayBtn}
-      onClick={() => navigate("/after-support")}
-    >
-      Explore More →
-    </button>
-  </div>
-</motion.div>
   </motion.div>
 </section>
 
 
 
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home2}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>SITE SURVEY</h2>
+
+    <p style={styles.infoText}>
+    A professional AVS Solar site survey evaluates your roof's structure, orientation, and shadow patterns to maximize energy generation. Certified engineers measure available space and test structural weight capacity to ensure absolute safety. They also inspect your property’s electrical grid, meter, and wiring layout to design a secure, compliant installation blueprint. This critical physical check guarantees your solar system delivers peak power output with zero structural risks.
+    </p>
+  </motion.div>
+</section>
+
+
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home3}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>CUSTOM SOLAR DESIGN</h2>
+
+    <p style={styles.infoText}>
+    An AVS Solar custom design maximizes your energy yield by tailoring the installation blueprint to your property's unique characteristics. Engineers use site survey data to optimize panel placement, tilt angles, and electrical routing, bypassing shadows from trees or nearby structures. This precise engineering ensures maximum sun exposure, seamless architectural integration, and peak power output for your specific energy needs.
+    </p>
+  </motion.div>
+</section>
+
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home4}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>QUOTATION AND APPROVAL</h2>
+
+    <p style={styles.infoText}>
+    An AVS Solar quotation provides a transparent, itemized cost breakdown of your customized solar system, detailing component costs, warranties, and guaranteed government subsidy deductions. Once you review and accept the financial proposal, the team manages all engineering paperwork and submits your documentation to local discoms for immediate regulatory approval.
+    </p>
+  </motion.div>
+</section>
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home5}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>INSTALLATION</h2>
+
+    <p style={styles.infoText}>
+    Following design approval, certified technicians execute the physical installation by securely mounting the aluminum structures, aligning the solar panels, and integrating the inverter. The team completes all DC/AC wiring with robust earthing and surge protection to ensure maximum operational safety and system durability.
+    </p>
+  </motion.div>
+</section>
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home6}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>NET METERING</h2>
+
+    <p style={styles.infoText}>
+    Net metering connects your solar system to the local utility grid through a specialized bi-directional meter that tracks energy flow. When your panels generate surplus electricity during peak sunny hours, this excess power is fed into the grid, automatically spinning your meter backward and earning you energy credits. 
+    </p>
+  </motion.div>
+</section>
+
+
+
+<section style={styles.heroImageSection}
+>
+  <motion.img
+  src={home7}
+  alt="On Grid Solar"
+  style={styles.heroImage}
+  animate={{
+    scale: [1, 1.08, 1],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+/>
+
+  <div style={styles.darkOverlay}></div>
+
+  <motion.div
+    style={styles.textOverlay}
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    viewport={{ once: true }}
+  >
+    <h2 style={styles.infoTitle}>AFTER-SALES SUPPORT</h2>
+
+    <p style={styles.infoText}>
+   AVS Solar after-sales support ensures your system maintains peak performance through proactive real-time performance monitoring, scheduled preventive maintenance, and rapid troubleshooting. Dedicated service teams handle routine panel cleaning, electrical safety audits, and seamless processing of component warranties for inverters and modules
+    </p>
+  </motion.div>
+</section>
+ 
+</div>
       <Footer />
+      <ChatBox />
     </div>
   );
 }
@@ -715,8 +731,8 @@ stepContainer: {
 stepCard: {
   position: "relative",
   overflow: "hidden",
-  borderRadius: "25px",
-  height: "500px",
+  borderRadius: "15px",
+  height: "400px",
   cursor: "pointer",
 },
 
@@ -846,6 +862,146 @@ navbar: {
   borderBottom: "1px solid rgba(255,255,255,0.1)",
   boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
 },
+
+
+journeyImage: {
+  width: "100%",
+  maxWidth: "650px",
+  height: "450px",
+  objectFit: "cover",
+  borderRadius: "20px",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+  
+},
+
+infoSection: {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "60px",
+  padding: "100px 80px",
+},
+
+journeyImageContainer: {
+  flex: 1,
+},
+
+contentContainer: {
+  flex: 1,
+},
+
+infoTitle: {
+  color: "#3a1a1a",
+  fontSize: "30px",
+  fontWeight: "700",
+  marginBottom: "20px",
+},
+
+infoText: {
+  color: "#0e1317",
+  fontSize: "16px",
+  lineHeight: "1.6",
+  marginBottom: "26px",
+},
+
+infoList: {
+  color: "#fff",
+  fontSize: "18px",
+  lineHeight: "2",
+  listStyle: "none",
+  padding: 0,
+},
+infoSection: {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "60px",
+  padding: "100px 80px",
+},
+
+contentContainer: {
+  flex: 1,
+},
+
+journeyImageContainer: {
+  flex: 1,
+  display: "flex",
+  justifyContent: "center",
+},
+
+
+
+
+
+heroImageSection: {
+  position: "relative",
+  width: "95%",
+  height: "85vh",
+  margin: "40px auto",
+
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+
+  overflow: "hidden",
+  borderRadius: "25px",
+
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "flex-end",
+
+  boxShadow: "0 15px 40px rgba(0,0,0,0.35)",
+},
+
+heroImage: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+},
+
+darkOverlay: {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  background:
+    "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2))",
+  zIndex: 1,
+},
+
+textOverlay: {
+  position: "relative",
+  zIndex: 2,
+  color: "#fff",
+
+  width: "50%",
+  marginRight: "auto",   // pushes content left
+  marginLeft: "60px",
+
+  textAlign: "left",
+  padding: "40px",
+  marginBottom: "30px",
+},
+
+infoTitle: {
+  fontSize: "30px",
+  fontWeight: "500",
+  marginBottom: "20px",
+  color: "#c9b90c",
+  textAlign: "left",
+},
+
+infoText: {
+  fontSize: "15px",
+  lineHeight: "1.5",
+  color: "#a5bacf",
+  textAlign: "left",
+  maxWidth: "500px",
+},
+
 
 };
 
