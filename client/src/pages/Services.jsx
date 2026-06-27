@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import logoFile from "../assets/logo.png";
+import logoFile from "../assets/newlogo.png";
 import backgroundImage from "../assets/solar-bg.jpg";
 import whyChooseImg from "../assets/soInstallation.jpg";
 import epcBg from "../assets/wallpaper1.jpg";
@@ -13,6 +13,7 @@ import grid from "../assets/23.jpg";
 import gridoff from "../assets/images (5).jpg";
 import hybrid from "../assets/images (6).jpg";
 import battery from "../assets/battery.jpg";
+
 
 
 

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import backgroundVideo from "../assets/about-solar.mp4";
 import { motion } from "framer-motion";
 import epcBg from "../assets/epc.jpg";
-import logoFile from "../assets/logo.png";
+import logoFile from "../assets/newlogo.png";
 import epcVideo from "../assets/video1.mp4";
 import comimage from "../assets/comimage.jpg";
 import resvideo from "../assets/video2(1).mp4";

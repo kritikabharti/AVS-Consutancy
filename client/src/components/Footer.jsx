@@ -1,10 +1,12 @@
 import React from "react";
-
+import logofile from "../assets/logo.png";
 function Footer() {
 return (
      <div style={styles.footerContainer}>
   {/* Company */}
-  <div style={styles.footerColumn}>
+  <div style={styles.footerColumn}
+  
+  >
     <h3 style={styles.heading}>AVS Solar Consultancy</h3>
     <p style={styles.description}>
       Your trusted partner for complete solar solutions across India.
@@ -122,6 +124,7 @@ heading: {
 description: {
   lineHeight: "1.8",
   color: "#d1d5db",
+  fontSize: "15px",
 },
 
 copyright: {

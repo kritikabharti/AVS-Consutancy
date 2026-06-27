@@ -1,6 +1,6 @@
 import React from "react";
 import heroVideo from "../assets/solar-video.mp4";
-import logoFile from "../assets/logo.png";
+import logoFile from "../assets/newlogo.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";

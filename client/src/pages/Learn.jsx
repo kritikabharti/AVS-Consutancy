@@ -3,12 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { color, motion } from "framer-motion";
 import Footer from "../components/Footer";
 import learnVideo from "../assets/learnvideo.mp4";
-import logoFile from "../assets/logo.png";
+import logoFile from "../assets/newlogo.png";
 import longiLogo from "../assets/adnibrand.png";
 import canadianLogo from "../assets/aikobrand.png";
 import jaLogo from "../assets/axitecbrand.png";
 import jinkoLogo from "../assets/goldibrand.png";
 import trinaLogo from "../assets/vikrambrand.png";
+import solarry from "../assets/panels.jpg";
+import polycab from "../assets/Polycab.png";
+import havels from "../assets/Havells.png";
+import goodwe from "../assets/goodwe.png";
+import pvblink from "../assets/pvblink.png";  
+import obit from "../assets/obit.png";
+import inverters from "../assets/inverters.webp";
+import  batteries  from "../assets/batt.jpg";
+import grace from "../assets/grace.png";
+import evault from "../assets/evault.png";
+import voult  from "../assets/voltra.png";
+import luminous from "../assets/luminous.png";
+import  involtcis from "../assets/involtcis.png";
+
+
+
 
 export default function Learn({ token, logout }) {
   const navigate = useNavigate();
@@ -20,7 +36,8 @@ export default function Learn({ token, logout }) {
   };
 
   return (
-    <div style={styles.landingPage}>
+    <div style={styles.landingPage}
+    >
       {/* VIDEO BACKGROUND */}
       <video autoPlay muted loop playsInline style={styles.videoBg}>
         <source src={learnVideo} type="video/mp4" />
@@ -119,50 +136,360 @@ export default function Learn({ token, logout }) {
 
 
 
-<section style={styles.brandSection}>
-  <h2 style={styles.brandTitle}>SOLAR PANELS</h2>
+<motion.section
+  style={{
+    ...styles.brandSection,
+    ...styles.infoSectionReverse,
+    backgroundImage: `linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
+    ), url(${solarry})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <motion.h2
+    style={styles.brandTitle}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.15, duration: 0.6 }}
+  >
+    SOLAR PANELS
+  </motion.h2>
 
-  <div style={styles.brandLine}></div>
+  <motion.div
+    style={styles.brandLine}
+    initial={{ scaleX: 0 }}
+    whileInView={{ scaleX: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.25, duration: 0.6 }}
+  />
 
-  <p style={styles.brandDesc}>
+  <motion.p
+    style={styles.brandDesc}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.3, duration: 0.6 }}
+  >
     High-efficiency solar panels for maximum energy generation and
     long-term reliability.
-     <br />
-            <span style={{ color: "#ffb703" }}>
-              Top 5 Brands
-            </span>{" "}
-  </p>
+    <br />
+    <span style={{ color: "#ffb703" }}>Top 5 Brands</span>{" "}
+  </motion.p>
 
-  <div style={styles.brandContainer}>
-    <div style={styles.brandCard}
+  <motion.div
+    style={styles.brandContainer}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.35, duration: 0.7 }}
+  >
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
     >
       <img src={longiLogo} alt="LONGi" style={styles.brandLogo} />
-      <h4>adani solar</h4>
-    </div>
+      <h4>adani</h4>
+    </motion.div>
 
-    <div style={styles.brandCard}>
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+     transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
       <img src={canadianLogo} alt="Canadian Solar" style={styles.brandLogo} />
-      <h4>Aiko Solar</h4>
-    </div>
+      <h4>AIKO</h4>
+    </motion.div>
 
-    <div style={styles.brandCard}>
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
       <img src={jaLogo} alt="JA Solar" style={styles.brandLogo} />
-      <h4>AXITEC Solar</h4>
-    </div>
+      <h4>AXITEC</h4>
+    </motion.div>
 
-    <div style={styles.brandCard}>
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
       <img src={jinkoLogo} alt="Jinko Solar" style={styles.brandLogo} />
-      <h4>Goldi Solar</h4>
-    </div>
+      <h4>GOLDI</h4>
+    </motion.div>
 
-    <div style={styles.brandCard}>
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
       <img src={trinaLogo} alt="Trina Solar" style={styles.brandLogo} />
-      <h4>Vikram Solar</h4>
-    </div> 
-  </div>
-</section>
+      <h4>VIKRAM</h4>
+    </motion.div>
+  </motion.div>
+</motion.section>
 
-      {/* <Footer /> */}
+
+
+
+<motion.section
+  style={{
+    ...styles.brandSection,
+    ...styles.infoSectionReverse,
+    backgroundImage: `linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
+    ), url(${inverters})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <motion.h2
+    style={styles.brandTitle}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.15, duration: 0.6 }}
+  >
+    INVERTERS
+  </motion.h2>
+
+  <motion.div
+    style={styles.brandLine}
+    initial={{ scaleX: 0 }}
+    whileInView={{ scaleX: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.25, duration: 0.6 }}
+  />
+
+  <motion.p
+    style={styles.brandDesc}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.3, duration: 0.6 }}
+  >
+   Premium products. Trusted Brands. Reliable Performance.
+    <br />
+    <span style={{ color: "#ffb703" }}>Top 5 Brands</span>{" "}
+  </motion.p>
+
+  <motion.div
+    style={styles.brandContainer}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.35, duration: 0.7 }}
+  >
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={polycab} alt="LONGi" style={styles.brandLogo} />
+      <h4>POLYCAB</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+     transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={havels} alt="Canadian Solar" style={styles.brandLogo} />
+      <h4>HAVELLS</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={goodwe} alt="JA Solar" style={styles.brandLogo} />
+      <h4>GOODWE</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={pvblink} alt="Jinko Solar" style={styles.brandLogo} />
+      <h4>PV blink</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={obit} alt="Trina Solar" style={styles.brandLogo} />
+      <h4>OBit</h4>
+    </motion.div>
+  </motion.div>
+</motion.section>
+
+
+
+<motion.section
+  style={{
+    ...styles.brandSection,
+    ...styles.infoSectionReverse,
+    backgroundImage: `linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
+    ), url(${batteries})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <motion.h2
+    style={styles.brandTitle}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.15, duration: 0.6 }}
+  >
+    BATTERIES
+  </motion.h2>
+
+  <motion.div
+    style={styles.brandLine}
+    initial={{ scaleX: 0 }}
+    whileInView={{ scaleX: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.25, duration: 0.6 }}
+  />
+
+  <motion.p
+    style={styles.brandDesc}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.3, duration: 0.6 }}
+  >
+    Reliable Batteries for uninterrupted power & Energy Storage
+    <br />
+    <span style={{ color: "#ffb703" }}>Top 5 Brands</span>{" "}
+  </motion.p>
+
+  <motion.div
+    style={styles.brandContainer}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.35, duration: 0.7 }}
+  >
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={voult} alt="LONGi" style={styles.brandLogo} />
+      <h4>VOLTRA</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+     transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={grace} alt="Canadian Solar" style={styles.brandLogo} />
+      <h4>GRACE</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={evault} alt="JA Solar" style={styles.brandLogo} />
+      <h4>EVAULT</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={luminous} alt="Jinko Solar" style={styles.brandLogo} />
+      <h4>LUMINOUS</h4>
+    </motion.div>
+
+    <motion.div
+      style={styles.brandCard}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1, duration: 0 }}
+      whileHover={{ y: -8, scale: 1.03, boxShadow: "0 12px 28px rgba(0,0,0,0.25)" }}
+    >
+      <img src={involtcis} alt="Trina Solar" style={styles.brandLogo} />
+      <h4>INVOLTCIS</h4>
+    </motion.div>
+  </motion.div>
+</motion.section>
+
     </div>
   );
 }
@@ -479,7 +806,7 @@ brandCard: {
 },
 
 brandLogo: {
-  width: "180px",
+  width: "150px",
   objectFit: "contain",
   marginBottom: "20px",
 },
