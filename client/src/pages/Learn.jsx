@@ -490,6 +490,7 @@ transition={{ delay: 0.1, duration: 0 }}
   </motion.div>
 </motion.section>
 
+{/* <Footer /> */}
     </div>
   );
 }
@@ -503,6 +504,7 @@ const styles = {
     color: "white",
     position: "relative",
     overflow: "hidden",
+      padding: "10px 0px",
   },
 
   videoBg: {
@@ -510,7 +512,7 @@ const styles = {
     top: 0,
     left: 0,
     width: "100%",
-    height: "100%",
+    height: "90%",
     objectFit: "cover",
     zIndex: -1,
     filter: "brightness(40%)",
@@ -810,4 +812,5 @@ brandLogo: {
   objectFit: "contain",
   marginBottom: "20px",
 },
+
 };

@@ -190,5 +190,18 @@
     border-right-color: var(--border);
   }
 
+
+  
+.dropdown:hover .dropdownMenu{
+    opacity:1;
+    visibility:visible;
+    margin-top:10px;
+}
+
+.dropdownItem:hover{
+    background:#ffb703;
+    color:#000;
+    padding-left:35px;
+}
   
 }

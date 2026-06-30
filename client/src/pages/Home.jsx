@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import heroVideo from "../assets/solar-video.mp4";
 import logoFile from "../assets/newlogo.png";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +43,7 @@ y: 0,
 
 export default function Home({ token, logout }) {
   const navigate = useNavigate();
+  const [showMounts, setShowMounts] = useState(false);
   const isLoggedIn = !!token;
 
 
@@ -119,6 +120,36 @@ Services
 
 </motion.button>
 
+
+ {/* Mounts Dropdown */}
+  <div
+    style={styles.dropdown}
+    onMouseEnter={() => setShowMounts(true)}
+    onMouseLeave={() => setShowMounts(false)}
+  >
+    <button style={styles.link}>
+      Mounts ▼
+    </button>
+
+    {showMounts && (
+      <div style={styles.dropdownMenu}>
+        <button
+          style={styles.dropdownItem}
+          onClick={() => navigate("/mounting")}
+        >
+          Mounting
+        </button>
+
+        <button
+          style={styles.dropdownItem}
+          onClick={() => navigate("/monitoring")}
+        >
+          Monitoring
+        </button>
+      </div>
+    )}
+  </div>
+
 <motion.button
 onClick={() => navigate("/team")}
 style={styles.link}
@@ -131,7 +162,6 @@ scale: 0.95,
 }}
 
 >
-
 Our Team
 
 
@@ -154,10 +184,7 @@ Store
 
 </motion.button>
 
-
 </div>
-
-          
 
         {isLoggedIn ? (
           <button 
@@ -174,6 +201,8 @@ Store
             Log In
           </button>
         )}
+
+        
       </nav>
 
      {/* Hero Section */}
@@ -1002,7 +1031,36 @@ infoText: {
   maxWidth: "500px",
 },
 
+dropdown: {
+  position: "relative",
+},
 
+dropdownMenu: {
+  position: "absolute",
+  top: "100%",
+  left: 0,
+  background: "rgba(0,0,0,0.9)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "8px",
+  minWidth: "180px",
+  marginTop: "1px",
+  overflow: "hidden",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+  zIndex: 999,
+},
+
+dropdownItem: {
+  display: "block",
+  width: "100%",
+  padding: "15px 18px",
+  background: "transparent",
+  border: "none",
+  color: "#fff",
+  textAlign: "left",
+  cursor: "pointer",
+  fontSize: "15px",
+  transition: "0.3s",
+},
 };
 
 

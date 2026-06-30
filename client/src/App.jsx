@@ -21,6 +21,9 @@ import NetMetering from "./pages/Net";
 import After from "./pages/After";
 import SolarPanelProduct from "./pages/SolarPanelProduct";
 import Checkout from "./pages/Checkout";
+import Mounting from "./pages/Mounting";
+import Monitoring from "./pages/Monitoring";
+
 
 function App() {
   const [token, setToken] = useState(
@@ -99,7 +102,11 @@ function App() {
           <Route path="/solar-panel-product" element={<SolarPanelProduct />}/>
 
           <Route path="/checkout" element={<Checkout />} />
+
+          <Route path="/mounting" element={<Mounting />} />
           
+
+            <Route path="/monitoring" element={<Monitoring />} />
 
         {/* Forgot Password */}
         <Route
