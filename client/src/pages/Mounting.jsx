@@ -1,4 +1,25 @@
 import React from "react";
+import {
+  FaSolarPanel,
+  FaRulerCombined,
+  FaShieldAlt,
+    FaHome,
+  FaTools,
+    FaIndustry,
+  FaBroom,
+  FaBolt,
+  FaCompressArrowsAlt,
+  FaCloudSun,
+  FaParking,
+   FaCompass,
+  FaDollarSign,
+ FaSun,
+  FaChartLine,
+   FaCube,
+    FaSeedling,
+  FaGlobe,
+  FaTint,
+} from "react-icons/fa";
 import Footer from "../components/Footer";
 import mount from "../assets/mounting.mp4";
 import mmmm from "../assets/mmmmmm.jpg";
@@ -11,7 +32,7 @@ import tracker from "../assets/solartracker.jpg";
 import ballasted from "../assets/bellasted.jpg";
 import pole from "../assets/polemounted.jpg";
 import agricultural from "../assets/agricultural.jpg";
-
+import homep from "../assets/homep.png";
 
 
 
@@ -36,10 +57,8 @@ function Mounting() {
 <section
   style={{
     ...styles.content,
-    backgroundImage: `linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ), url(${mmmm})`,
+    backgroundImage: `
+    url(${mmmm})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -48,8 +67,9 @@ function Mounting() {
   <h2 style={styles.header}>Our Mounting Structures</h2>
  
 
-  {/* Mounting Cards */}
 
+<section style={styles.cardsSection}>
+  {/* Mounting Cards */}
 <motion.div
   style={styles.cardContainer}
   initial="hidden"
@@ -66,481 +86,809 @@ function Mounting() {
 >
 
    <motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${rooftop})`,
-  }}
-  variants={{
-  hidden: {
-    opacity: 0,
-    x: -120,
-    scale: 0.9,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  },
-}}
-  transition={{
-    duration: 0.6,
-    ease: "easeOut",
-  }}
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
   whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
+    y: -10,
+    scale: 1.02,
   }}
 >
-      <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->
-  Rooftop Mounting Systems
-</motion.h2>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={rooftop}
+    alt="Rooftop Mounting"
+    style={styles.productImage}
+  />
+</div>
 
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Strong, lightweight and corrosion-resistant rooftop mounting
-        structures designed for maximum durability and easy installation.
-      </motion.p>
-    </motion.div>
+  {/* Right Side */}
 
+  <div style={styles.rightSide}>
 
+    <h3 style={styles.productTitle}>
+      Rooftop Mounting Structure
+    </h3>
 
+    <div style={styles.feature}>
 
-
-   <motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${ground})`,
-  }}
- variants={{
-  hidden: {
-    opacity: 0,
-    x: -120,
-    scale: 0.9,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  },
-}}
-  transition={{
-    duration: 0.6,
-    ease: "easeOut",
-  }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->
-  Ground Mounted Structure
-</motion.h2>
-
-<motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Reliable ground-mounted solar systems engineered for commercial,
-        industrial and utility-scale solar power plants.
-      </motion.p>
-    </motion.div>
-
-
-
-
-
-
-<motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${elevated})`,
-  }}
-  variants={{
-  hidden: {
-    opacity: 0,
-    x: -120,
-    scale: 0.9,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  },
-}}
-  transition={{
-    duration: 0.6,
-    ease: "easeOut",
-  }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
-
-
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Elevated Mounting Structures</motion.h2>
-
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
-
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaHome />
   </motion.div>
-</section>
+</div>
 
+      <div>
 
+        <h4 style={styles.featureHeading}>Ideal for Residential & Commercial Roofs</h4>
 
+       
 
- {/* Content */}
-<section
-  style={{
-    ...styles.content,
-    backgroundImage: `linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ), url(${mmmm})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  {/* Mounting Cards */}
+      </div>
 
-  <motion.div style={styles.cardContainer}>
+    </div>
 
-    
-<motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${fixed})`,
-  }}
-   initial={{
-    opacity: 0,
-    x: 120,      // Start from right
-    scale: 0.9,
-  }}
-  whileInView={{
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
-  viewport={{ once: true }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
+    <div style={styles.feature}>
 
-
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Fixed Tilt Structure</motion.h2>
-
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
-
-
-
-
-    
-<motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${tracker})`,
-  }}
-   initial={{
-    opacity: 0,
-    x: 120,      // Start from right
-    scale: 0.9,
-  }}
-  whileInView={{
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
-  viewport={{ once: true }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
-
-
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Solar Tracter Structure</motion.h2>
-
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
-
-
-
-    
-<motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${ballasted})`,
-  }}
-   initial={{
-    opacity: 0,
-    x: 120,      // Start from right
-    scale: 0.9,
-  }}
-  whileInView={{
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
-  viewport={{ once: true }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
-
-
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Ballasted Mounting Structures</motion.h2>
-
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
-
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaSolarPanel />
   </motion.div>
-</section>
+</div>
+
+      <div>
+
+         <h4 style={styles.featureHeading}>Space Saving</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}
+      >
+        <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaTools />
+  </motion.div>
+        
+      </div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Strong & Corrosion Resistant</h4>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
 
 
 
-
-
-{/* Content */}
-<section
-  style={{
-    ...styles.content,
-    backgroundImage: `linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ), url(${mmmm})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  {/* Mounting Cards */}
-
-  <motion.div style={styles.cardContainer}>
 
   <motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${pole})`,
-  }}
-  variants={{
-    hidden: {
-      opacity: 0,
-      x: -150, // Starts from left
-      scale: 0.9,
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-    },
-  }}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
   whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
+    y: -10,
+    scale: 1.02,
   }}
 >
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={ground}
+    alt="Ground Mounting"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Ground Mounting Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaIndustry />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Suitable for Large-Scale Installations</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaBroom />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Easy Maintenance & Cleaning</h4>
 
 
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Pole Mounting Structures</motion.h2>
+      </div>
 
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
+    </div>
 
+    <div style={styles.feature}>
 
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaBolt />
+  </motion.div>
+</div>
 
-    <motion.div
-  style={{
-    ...styles.card,
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${agricultural})`,
-  }}
- variants={{
-    hidden: {
-      opacity: 0,
-      x: -150, // Starts from left
-      scale: 0.9,
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-    },
-  }}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, amount: 0.3 }}
-  transition={{
-    duration: 0.8,
-    ease: "easeOut",
-  }}
-  whileHover={{
-    scale: 1.06,
-    y: -12,
-    rotate: -1,
-    boxShadow: "0 25px 60px",
-  }}
->
+      <div>
 
+        <h4 style={styles.featureHeading}>Better Panel Tilt & Orientation</h4>
 
-     <motion.h2
-  style={styles.heading}
-  initial={{ opacity: 0, y: -50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->Agricultural Mounting Structures</motion.h2>
+      </div>
 
-     <motion.p
-  style={styles.text}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-        Tailor-made mounting solutions developed to match your site
-        conditions while ensuring safety, efficiency and long service life.
-      </motion.p>
-    </motion.div>
+    </div>
+
+  </div>
+
+</motion.div>
+
 
     
+
+
+     <motion.div
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  whileHover={{
+    y: -10,
+    scale: 1.02,
+  }}
+>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={elevated}
+    alt="Elevated Mounting"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Elevated Mounting Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaCompressArrowsAlt />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Utilizes Space Efficiency</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaCloudSun />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Provides Shade and Protection</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaParking />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Ideal for Parking & CommercialAreas</h4>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
+
+
+
+  <motion.div
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  whileHover={{
+    y: -10,
+    scale: 1.02,
+  }}
+>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={fixed}
+    alt="Fixed Mounting"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Fixed Mounting Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaCompass />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading} >Fixed at Optimum Angle</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaDollarSign />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Cost Effective Solution</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaShieldAlt />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Low Maintenance Requirements</h4>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
+
+
+
+
+
+  <motion.div
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  whileHover={{
+    y: -10,
+    scale: 1.02,
+  }}
+>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={tracker}
+    alt="Solar Tracker"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Solar Tracker Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaSun />
+  </motion.div>
+</div>
+
+      <div>
+
+         <h4 style={styles.featureHeading}>Follows Sun Movement</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaSolarPanel />
+  </motion.div>
+</div>
+
+      <div>
+
+       <h4 style={styles.featureHeading}>Higher Energy Generation</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaChartLine />
+  </motion.div>
+</div>
+      <div>
+
+        <h4 style={styles.featureHeading}>Maximizes Efficiency</h4>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
+
+
+
+
+<motion.div
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  whileHover={{
+    y: -10,
+    scale: 1.02,
+  }}
+>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={ballasted}
+    alt="Ballasted Tracker"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Ballasted Tracker Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaShieldAlt />
+  </motion.div>
+</div>
+
+      <div>
+
+         <h4 style={styles.featureHeading}>No Roof penetration</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaCube />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Uses Concrete Blocks</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaHome />
+  </motion.div>
+</div>
+
+      <div>
+
+         <h4 style={styles.featureHeading}>Ideal for Flat Roots</h4>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
+
+
+
+<motion.div
+  style={styles.productCard}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  whileHover={{
+    y: -10,
+    scale: 1.02,
+  }}
+>
+  {/* Left Side */}
+ <div style={styles.leftSide}>
+  <img
+    src={agricultural}
+    alt="Agricultural Tracker"
+    style={styles.productImage}
+  />
+</div>
+
+  {/* Right Side */}
+
+  <div style={styles.rightSide}>
+
+    <h3 style={styles.productTitle}>
+      Agricultural Tracker Structure
+    </h3>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <FaSeedling />
+  </motion.div>
+</div>
+
+      <div>
+
+         <h4 style={styles.featureHeading}>Supports Crop Cultivation</h4>
+
+       
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaGlobe />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>Efficient Land Utilization</h4>
+
+
+      </div>
+
+    </div>
+
+    <div style={styles.feature}>
+
+      <div style={styles.iconCircle}>
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: 0.2,
+    }}
+  >
+    <FaTint />
+  </motion.div>
+</div>
+
+      <div>
+
+        <h4 style={styles.featureHeading}>
+  Ideal for Solar Water Pumps
+</h4>
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.div>
+
+
 
   </motion.div>
 </section>
 
 
-
+</section>
       {/* Footer */}
       <Footer />
     </>
@@ -576,59 +924,114 @@ const styles = {
   },
 
   content: {
-    padding: "50px 80px",
+    padding: "40px 80px",
     background: "#fff",
-    minHeight: "400px",
+    width: "90%",
+    minHeight: "10px",
   },
 
 
 
 
 
-cardContainer: {
+cardsSection: {
   display: "flex",
+  gap: "30px",
   justifyContent: "center",
-  gap: "40px",
+  alignItems: "stretch",
   flexWrap: "wrap",
+  marginTop: "60px",
 },
 
-card: {
-  width: "260px",
-  minHeight: "420px",
-  borderRadius: "20px",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+productCard: {
+  width: "700%",
+  maxWidth: "1050px",
+    maxHeight: "500px",
+  background: "#fff",
+  borderRadius: "24px",
+  display: "flex",
+  overflow: "hidden",
+  boxShadow: "0 20px 50px rgba(0,0,0,.15)",
+  margin: "30px auto",
+},
+
+leftSide: {
+  width: "40%",
+  minHeight: "500px",
+  overflow: "hidden",
+},
+
+productImage: {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+},
+
+rightSide: {
+  width: "58%",
+  padding: "50px",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "flex-end",
-  padding: "35px",
-  color: "#fff",
-  boxShadow: "0 15px 35px rgba(0,0,0,0.25)",
-  transition: "0.4s ease",
-  cursor: "pointer",
 },
 
-cardTitle: {
-  fontSize: "28px",
+logo: {
+  width: "220px",
+  marginBottom: "30px",
+},
+
+
+productTitle: {
+  fontSize: "30px",
   fontWeight: "700",
-  marginBottom: "15px",
+  color: "#2d3748",
+  marginBottom: "35px",
+  lineHeight: "1.5",
+    fontFamily: "'Poppins', sans-serif",
 },
 
-cardText: {
-  fontSize: "16px",
-  lineHeight: "1.8",
-  color: "#f1f1f1",
+feature: {
+  display: "flex",
+  gap: "22px",
+  alignItems: "center",
+  marginBottom: "28px",
+  color: "black",
 },
+
+featureHeading: {
+  fontSize: "18px",
+  fontWeight: "500",
+  color: "#1f2937",
+  fontFamily: "Arial, sans-serif", // or "Roboto", "Inter", "Poppins"
+  lineHeight: "1.4",
+  margin: 0,
+},
+
+iconCircle: {
+  width: "72px",
+  height: "72px",
+  borderRadius: "50%",
+  background: "#212429",
+  color: "#fff",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "28px",
+},
+
 
 header:{
 fontSize: "52px",
-  fontWeight: "300",
+  fontWeight: "600",
   color: "yellow",
   marginTop: "0px",
   marginBottom: "20px",
   textTransform: "uppercase",
-  letterSpacing: "1px",
+  letterSpacing: "1.0px",
+},
+
+heading:{
+color: "yellow",
 },
 
 };
