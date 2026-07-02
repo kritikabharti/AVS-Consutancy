@@ -20,6 +20,7 @@ import {
   FaGlobe,
   FaTint,
 } from "react-icons/fa";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import mount from "../assets/mounting.mp4";
 import mmmm from "../assets/mmmmmm.jpg";
@@ -36,9 +37,16 @@ import homep from "../assets/homep.png";
 
 
 
-function Mounting() {
+export function Mounting({ token, logout })  {
+
+   const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <>
+        <Navbar token={token} logout={logout} />
       {/* Hero Section */}
       <section style={styles.hero}>
         <video
@@ -926,7 +934,7 @@ const styles = {
   content: {
     padding: "40px 80px",
     background: "#fff",
-    width: "90%",
+    width: "100%",
     minHeight: "10px",
   },
 
@@ -1028,6 +1036,7 @@ fontSize: "52px",
   marginBottom: "20px",
   textTransform: "uppercase",
   letterSpacing: "1.0px",
+   textAlign: "center",
 },
 
 heading:{

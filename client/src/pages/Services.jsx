@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -31,82 +32,7 @@ function Services({ token, logout }) {
   return (
     <>
       <div style={styles.container}>
-        {/* Navbar */}
-        <nav style={styles.navbar}>
-          <div style={styles.logo}>
-            <img
-              src={logoFile}
-              alt="AVS SOLAR CONSULTANCY"
-              style={styles.logoImage}
-            />
-            <span style={styles.logoText}>
-              AVS SOLAR CONSULTANCY
-            </span>
-          </div>
-
-          <div style={styles.navLinks}>
-            <motion.button
-              onClick={() => navigate("/")}
-              style={styles.link}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              HOME
-            </motion.button>
-
-            <motion.button
-              onClick={() => navigate("/about")}
-              style={styles.link}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              ABOUT
-            </motion.button>
-
-            <motion.button
-              onClick={() => navigate("/services")}
-              style={styles.link}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              SERVICES
-            </motion.button>
-
-            <motion.button
-              onClick={() => navigate("/team")}
-              style={styles.link}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              OUR TEAM
-            </motion.button>
-
-            <motion.button
-              onClick={() => navigate("/store")}
-              style={styles.link}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              STORE
-            </motion.button>
-          </div>
-
-          {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              style={styles.logoutBtn}
-            >
-              Log Out
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate("/login")}
-              style={styles.logInBtn}
-            >
-              Log In
-            </button>
-          )}
-        </nav>
+         <Navbar token={token} logout={logout} />
 
         {/* Hero Section */}
         <section

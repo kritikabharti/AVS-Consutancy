@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { color, motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import learnVideo from "../assets/learnvideo.mp4";
 import logoFile from "../assets/newlogo.png";
@@ -43,45 +44,7 @@ export default function Learn({ token, logout }) {
         <source src={learnVideo} type="video/mp4" />
       </video>
 
-      {/* NAVBAR */}
-      <nav style={styles.navbar}>
-        <div style={styles.logo}>
-          <img src={logoFile} alt="logo" style={styles.logoImage} />
-          <span style={styles.logoText}>AVS SOLAR CONSULTANCY</span>
-        </div>
-
-        <div style={styles.navLinks}>
-          <motion.button onClick={() => navigate("/")} style={styles.link}>
-            HOME
-          </motion.button>
-
-          <motion.button onClick={() => navigate("/about")} style={styles.link}>
-            About
-          </motion.button>
-
-          <motion.button onClick={() => navigate("/services")} style={styles.link}>
-            Services
-          </motion.button>
-
-          <motion.button onClick={() => navigate("/team")} style={styles.link}>
-            Our Team
-          </motion.button>
-
-          <motion.button onClick={() => navigate("/store")} style={styles.link}>
-            Store
-          </motion.button>
-        </div>
-
-        {isLoggedIn ? (
-          <button onClick={handleLogout} style={styles.logoutBtn}>
-            Log Out
-          </button>
-        ) : (
-          <button onClick={() => navigate("/login")} style={styles.logInBtn}>
-            Log In
-          </button>
-        )}
-      </nav>
+       <Navbar token={token} logout={logout} />
 
       {/* Hero Section */}
               <section

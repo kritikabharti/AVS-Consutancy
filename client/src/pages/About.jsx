@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import backgroundVideo from "../assets/about-solar.mp4";
 import { motion } from "framer-motion";
@@ -26,127 +27,7 @@ function About({ token, logout }) {
 return (
 
 <>     <div style={styles.landingPage}>
-  <nav style={styles.navbar}>
-  <div style={styles.logo}>
-    <img
-      src={logoFile}
-      alt="AVS SOLAR CONSULTANCY"
-      style={styles.logoImage}
-    />
-
-    <span style={styles.logoText}>
-      AVS SOLAR CONSULTANCY
-    </span>
-  </div>
-
-  <div style={styles.navLinks}>
-   <motion.button
-       onClick={() => navigate("/")}
-       style={styles.link}
-       whileHover={{
-         scale: 1.1,
-         y: -2,
-       }}
-       whileTap={{
-         scale: 0.95,
-       }}
-     >
-       HOME
-     </motion.button>
-   
-
-
-    <motion.button
-    onClick={() => navigate("/about")}
-    style={styles.link}
-    whileHover={{
-    scale: 1.1,
-    y: -2,
-    }}
-    whileTap={{
-    scale: 0.95,
-    }}
-    
-    >
-    
-    About
-    
-    </motion.button>
-
-    <motion.button
-    onClick={() => navigate("/services")}
-    style={styles.link}
-    whileHover={{
-    scale: 1.1,
-    y: -2,
-    }}
-    whileTap={{
-    scale: 0.95,
-    }}
-    
-    >
-    
-    Services
-    
-    
-    </motion.button>
-
-
-    
-    <motion.button
-    onClick={() => navigate("/team")}
-    style={styles.link}
-    whileHover={{
-    scale: 1.1,
-    y: -2,
-    }}
-    whileTap={{
-    scale: 0.95,
-    }}
-    
-    >
-    
-    Our Team
-    
-    
-    </motion.button>
-
-    <motion.button
-    onClick={() => navigate("/store")}
-    style={styles.link}
-    whileHover={{
-    scale: 1.1,
-    y: -2,
-    }}
-    whileTap={{
-    scale: 0.95,
-    }}
-    
-    >
-    
-    Store
-    
-    </motion.button>
-
-
-    
-  </div>
-   {isLoggedIn ? (
-    <button
-      onClick={handleLogout}
-      style={styles.logoutBtn}
-    >
-      Log Out
-    </button>
-  ) : (
-    <button
-      onClick={() => navigate("/login")}
-      style={styles.logInBtn}
-    >
-      Log In
-    </button>
-  )}
-</nav>
+ <Navbar token={token} logout={logout} />
   <video
     autoPlay
     loop
@@ -555,6 +436,7 @@ heading: {
   marginBottom: "20px",
   textTransform: "uppercase",
   letterSpacing: "2px",
+  color: "#cea521",
 },
 
 description: {

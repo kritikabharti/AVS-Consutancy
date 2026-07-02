@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import heroVideo from "../assets/solar-video.mp4";
 import logoFile from "../assets/newlogo.png";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+
 import Footer from "../components/Footer";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import imagess from "../assets/home1.jpg";
 import home2 from "../assets/Home2.jpg";
 import home3 from "../assets/home3.jpg";
@@ -56,155 +58,7 @@ export default function Home({ token, logout }) {
 
   return (
     <div style={styles.landingPage}>
-      {/* Header Navigation Bar */}
-      <nav style={styles.navbar}>
-        <div style={styles.logo}>
-  <img
-    src={logoFile}
-    alt="AVS SOLAR CONSULTANCY"
-    style={styles.logoImage}
-  />
-
-  <span style={styles.logoText}>
-    AVS SOLAR CONSULTANCY
-  </span>
-</div>
-
-       <div style={styles.navLinks}>
-  <motion.button
-    onClick={() => navigate("/")}
-    style={styles.link}
-    whileHover={{
-      scale: 1.1,
-      y: -2,
-    }}
-    whileTap={{
-      scale: 0.95,
-    }}
-  >
-    HOME
-  </motion.button>
-
-<motion.button
-onClick={() => navigate("/about")}
-style={styles.link}
-whileHover={{
-scale: 1.1,
-y: -2,
-}}
-whileTap={{
-scale: 0.95,
-}}
-
->
-
-About
-
-</motion.button>
-
-<motion.button
-onClick={() => navigate("/services")}
-style={styles.link}
-whileHover={{
-scale: 1.1,
-y: -2,
-}}
-whileTap={{
-scale: 0.95,
-}}
-
->
-
-Services
-
-
-</motion.button>
-
-
- {/* Mounts Dropdown */}
-  <div
-    style={styles.dropdown}
-    onMouseEnter={() => setShowMounts(true)}
-    onMouseLeave={() => setShowMounts(false)}
-  >
-    <button style={styles.link}>
-      Mounts ▼
-    </button>
-
-    {showMounts && (
-      <div style={styles.dropdownMenu}>
-        <button
-          style={styles.dropdownItem}
-          onClick={() => navigate("/mounting")}
-        >
-          Mounting
-        </button>
-
-        <button
-          style={styles.dropdownItem}
-          onClick={() => navigate("/monitoring")}
-        >
-          Monitoring
-        </button>
-      </div>
-    )}
-  </div>
-
-<motion.button
-onClick={() => navigate("/team")}
-style={styles.link}
-whileHover={{
-scale: 1.1,
-y: -2,
-}}
-whileTap={{
-scale: 0.95,
-}}
-
->
-Our Team
-
-
-</motion.button>
-
-<motion.button
-onClick={() => navigate("/store")}
-style={styles.link}
-whileHover={{
-scale: 1.1,
-y: -2,
-}}
-whileTap={{
-scale: 0.95,
-}}
-
->
-
-Store
-
-</motion.button>
-
-</div>
-
-        {isLoggedIn ? (
-          <button 
-            onClick={handleLogout} 
-            style={styles.logoutBtn}
-          >
-            Log Out
-          </button>
-        ) : (
-          <button 
-            onClick={() => navigate('/login')} 
-            style={styles.logInBtn}
-          >
-            Log In
-          </button>
-        )}
-
-        
-      </nav>
-
+    <Navbar token={token} logout={logout} />
      {/* Hero Section */}
 
 <div style={styles.heroSection}>
@@ -661,6 +515,7 @@ fontWeight: "700",
     lineHeight: "1.2",
     marginBottom: "24px",
     letterSpacing: "-1px",
+    color: "#d1b55a",
   },
 
   subtitle: {
@@ -669,10 +524,11 @@ fontWeight: "700",
     marginBottom: "40px",
     opacity: 0.9,
     fontWeight: "300",
+    color: "#fff",
   },
 
   learnMoreBtn: {
-    backgroundColor: "#f1b92b",
+    backgroundColor: "#d7b152",
     color: "#0A284F",
     border: "none",
     padding: "14px 40px",
@@ -733,6 +589,7 @@ fontSize: "56px",
 fontWeight: "700",
 color: "#ffffff",
 marginBottom: "10px",
+ textAlign: "center",
 },
 
 headingLine: {
@@ -747,6 +604,7 @@ journeySubHeading: {
 fontSize: "15px",
 color: "#dbeafe",
 marginBottom: "60px",
+ textAlign: "center",
 },
 
 stepContainer: {

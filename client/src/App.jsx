@@ -78,6 +78,20 @@ function App() {
     />
   }
 />
+
+
+ <Route
+  path="/mounting"
+  element={
+    <Mounting
+      token={token}
+      logout={logout}
+    />
+  }
+/>
+
+     
+
     
              {/* Team */}
         <Route path="/team" element={<Team />} />
@@ -103,10 +117,16 @@ function App() {
 
           <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="/mounting" element={<Mounting />} />
-          
+         < Route
+  path="/monitoring"
+  element={
+    <Monitoring
+      token={token}
+      logout={logout}
+    />
+  }
+/>
 
-            <Route path="/monitoring" element={<Monitoring />} />
 
         {/* Forgot Password */}
         <Route
