@@ -23,10 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-
-# Videos
-src/assets/video1.mp4
-src/assets/video2(1).mp4
-src/assets/video4.mp4
-src/assets/journeyvid.mp4
-src/assets/solar-video.mp4

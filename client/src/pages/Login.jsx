@@ -20,12 +20,12 @@ export default function Login({ setToken }) {
 
     const endpoint = isRegistering ? 'register' : 'login';
 
-    const payload = isRegistering
-      ? {
-          fullName: fullname,
-          email,
-          password,
-        }
+   const payload = isRegistering
+  ? {
+      name: fullname,
+      email,
+      password,
+    }
       : {
           email,
           password,
