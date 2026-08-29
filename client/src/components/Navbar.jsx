@@ -1,254 +1,939 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import logoFile from "../assets/logo.png";
-
 
 export default function Navbar({ token, logout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [menuOpen, setMenuOpen] = useState(false);
   const [showMounts, setShowMounts] = useState(false);
 
   const isLoggedIn = !!token;
 
+  const isActive = (path) => location.pathname === path;
+
   const handleLogout = () => {
-    logout();
+    if (logout) {
+      logout();
+    }
+
+    setMenuOpen(false);
+    setShowMounts(false);
     navigate("/login");
   };
 
-  const isActive = (path) => location.pathname === path;
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+    setShowMounts(false);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+    setShowMounts(false);
+  };
 
   return (
-    <nav style={styles.navbar}>
-      {/* Logo */}
+    <>
+      {/* ================= NAVBAR ================= */}
+      <nav className="avs-navbar">
 
-      <div
-        style={styles.logo}
-        onClick={() => navigate("/")}
-      >
-        <img
-          src={logoFile}
-          alt="AVS SOLAR"
-          style={styles.logoImage}
-        />
-
-        <span style={styles.logoText}>
-          AVS SOLAR CONSULTANCY
-        </span>
-      </div>
-
-      {/* Menu */}
-
-      <div style={styles.navLinks}>
-        <motion.button
-          onClick={() => navigate("/")}
-          style={{
-            ...styles.link,
-            ...(isActive("/") ? styles.active : {}),
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          HOME
-        </motion.button>
-
-        <motion.button
-          onClick={() => navigate("/about")}
-          style={{
-            ...styles.link,
-            ...(isActive("/about") ? styles.active : {}),
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          About
-        </motion.button>
-
-        <motion.button
-          onClick={() => navigate("/services")}
-          style={{
-            ...styles.link,
-            ...(isActive("/services") ? styles.active : {}),
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Services
-        </motion.button>
-
-        {/* Dropdown */}
-
+        {/* ================= LOGO ================= */}
         <div
-          style={styles.dropdown}
-          onMouseEnter={() => setShowMounts(true)}
-          onMouseLeave={() => setShowMounts(false)}
+          className="avs-logo"
+          onClick={() => handleNavigate("/")}
         >
-          <button style={styles.link}>
-            Mounts ▼
-          </button>
+          <img
+            src={logoFile}
+            alt="AVS Solar Consultancy"
+            className="avs-logo-image"
+          />
 
-          {showMounts && (
-            <motion.div
-              style={styles.dropdownMenu}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+          <span className="avs-logo-text">
+            AVS SOLAR CONSULTANCY
+          </span>
+        </div>
+
+        {/* ================= DESKTOP MENU ================= */}
+        <div className="avs-desktop-menu">
+
+          <motion.button
+            onClick={() => handleNavigate("/")}
+            className={`avs-nav-link ${
+              isActive("/") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            HOME
+          </motion.button>
+
+          <motion.button
+            onClick={() => handleNavigate("/about")}
+            className={`avs-nav-link ${
+              isActive("/about") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            About
+          </motion.button>
+
+          <motion.button
+            onClick={() => handleNavigate("/services")}
+            className={`avs-nav-link ${
+              isActive("/services") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Services
+          </motion.button>
+
+          {/* DESKTOP MOUNTS DROPDOWN */}
+          <div
+            className="avs-dropdown"
+            onMouseEnter={() => setShowMounts(true)}
+            onMouseLeave={() => setShowMounts(false)}
+          >
+            <button
+              className={`avs-nav-link ${
+                isActive("/mounting") ||
+                isActive("/monitoring")
+                  ? "active"
+                  : ""
+              }`}
             >
-              <button
-                style={styles.dropdownItem}
-                onClick={() => navigate("/mounting")}
-              >
-                Mounting
-              </button>
+              Mounts <span className="arrow">▼</span>
+            </button>
 
-              <button
-                style={styles.dropdownItem}
-                onClick={() => navigate("/monitoring")}
-              >
-                Monitoring
-                
-              </button>
-            </motion.div>
+            <AnimatePresence>
+              {showMounts && (
+                <motion.div
+                  className="avs-dropdown-menu"
+                  initial={{
+                    opacity: 0,
+                    y: 10,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: 10,
+                  }}
+                  transition={{
+                    duration: 0.2,
+                  }}
+                >
+                  <button
+                    className="avs-dropdown-item"
+                    onClick={() =>
+                      handleNavigate("/mounting")
+                    }
+                  >
+                    Mounting
+                  </button>
+
+                  <button
+                    className="avs-dropdown-item"
+                    onClick={() =>
+                      handleNavigate("/monitoring")
+                    }
+                  >
+                    Monitoring
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <motion.button
+            onClick={() => handleNavigate("/team")}
+            className={`avs-nav-link ${
+              isActive("/team") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Our Team
+          </motion.button>
+
+          <motion.button
+            onClick={() => handleNavigate("/store")}
+            className={`avs-nav-link ${
+              isActive("/store") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Store
+          </motion.button>
+        </div>
+
+        {/* ================= DESKTOP AUTH ================= */}
+        <div className="avs-desktop-auth">
+          {isLoggedIn ? (
+            <button
+              className="avs-auth-button"
+              onClick={handleLogout}
+            >
+              Log Out
+            </button>
+          ) : (
+            <button
+              className="avs-auth-button"
+              onClick={() => handleNavigate("/login")}
+            >
+              Log In
+            </button>
           )}
         </div>
 
-        <motion.button
-          onClick={() => navigate("/team")}
-          style={{
-            ...styles.link,
-            ...(isActive("/team") ? styles.active : {}),
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Our Team
-        </motion.button>
-
-        <motion.button
-          onClick={() => navigate("/store")}
-          style={{
-            ...styles.link,
-            ...(isActive("/store") ? styles.active : {}),
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Store
-        </motion.button>
-      </div>
-
-      {/* Login */}
-
-      {isLoggedIn ? (
+        {/* ================= MOBILE HAMBURGER ================= */}
         <button
-          style={styles.authButton}
-          onClick={handleLogout}
+          className={`avs-hamburger ${
+            menuOpen ? "open" : ""
+          }`}
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
         >
-          Log Out
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-      ) : (
-        <button
-          style={styles.authButton}
-          onClick={() => navigate("/login")}
-        >
-          Log In
-        </button>
-      )}
-    </nav>
+      </nav>
+
+      {/* ================= MOBILE MENU ================= */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              className="avs-mobile-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+            />
+
+            {/* Menu */}
+            <motion.div
+              className="avs-mobile-menu"
+              initial={{
+                opacity: 0,
+                x: "100%",
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              exit={{
+                opacity: 0,
+                x: "100%",
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeOut",
+              }}
+            >
+              {/* Mobile Menu Header */}
+              <div className="avs-mobile-header">
+                <div className="avs-mobile-brand">
+                  <img
+                    src={logoFile}
+                    alt="AVS Solar"
+                  />
+
+                  <span>
+                    AVS SOLAR
+                  </span>
+                </div>
+
+                <button
+                  className="avs-close-button"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* HOME */}
+              <button
+                className={`avs-mobile-link ${
+                  isActive("/") ? "active" : ""
+                }`}
+                onClick={() => handleNavigate("/")}
+              >
+                <span>HOME</span>
+              </button>
+
+              {/* ABOUT */}
+              <button
+                className={`avs-mobile-link ${
+                  isActive("/about") ? "active" : ""
+                }`}
+                onClick={() => handleNavigate("/about")}
+              >
+                <span>About</span>
+              </button>
+
+              {/* SERVICES */}
+              <button
+                className={`avs-mobile-link ${
+                  isActive("/services") ? "active" : ""
+                }`}
+                onClick={() =>
+                  handleNavigate("/services")
+                }
+              >
+                <span>Services</span>
+              </button>
+
+              {/* MOUNTS */}
+              <div className="avs-mobile-dropdown">
+                <button
+                  className={`avs-mobile-link ${
+                    isActive("/mounting") ||
+                    isActive("/monitoring")
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    setShowMounts((prev) => !prev)
+                  }
+                >
+                  <span>Mounts</span>
+
+                  <span
+                    className={`mobile-arrow ${
+                      showMounts ? "rotate" : ""
+                    }`}
+                  >
+                    ▼
+                  </span>
+                </button>
+
+                <AnimatePresence>
+                  {showMounts && (
+                    <motion.div
+                      className="avs-mobile-submenu"
+                      initial={{
+                        opacity: 0,
+                        height: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        height: "auto",
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                      }}
+                    >
+                      <button
+                        className="avs-mobile-sub-link"
+                        onClick={() =>
+                          handleNavigate("/mounting")
+                        }
+                      >
+                        Mounting
+                      </button>
+
+                      <button
+                        className="avs-mobile-sub-link"
+                        onClick={() =>
+                          handleNavigate("/monitoring")
+                        }
+                      >
+                        Monitoring
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* TEAM */}
+              <button
+                className={`avs-mobile-link ${
+                  isActive("/team") ? "active" : ""
+                }`}
+                onClick={() =>
+                  handleNavigate("/team")
+                }
+              >
+                <span>Our Team</span>
+              </button>
+
+              {/* STORE */}
+              <button
+                className={`avs-mobile-link ${
+                  isActive("/store") ? "active" : ""
+                }`}
+                onClick={() =>
+                  handleNavigate("/store")
+                }
+              >
+                <span>Store</span>
+              </button>
+
+              {/* AUTH */}
+              <div className="avs-mobile-auth">
+                {isLoggedIn ? (
+                  <button
+                    className="avs-mobile-auth-button"
+                    onClick={handleLogout}
+                  >
+                    Log Out
+                  </button>
+                ) : (
+                  <button
+                    className="avs-mobile-auth-button"
+                    onClick={() =>
+                      handleNavigate("/login")
+                    }
+                  >
+                    Log In
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ================= RESPONSIVE CSS ================= */}
+      <style>{`
+
+        * {
+          box-sizing: border-box;
+        }
+
+        /* ================= DESKTOP NAVBAR ================= */
+
+        .avs-navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 80px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 50px;
+
+          background: rgba(0, 0, 0, 0.45);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+
+          z-index: 9999;
+        }
+
+        /* ================= LOGO ================= */
+
+        .avs-logo {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+
+        .avs-logo-image {
+          width: auto;
+          height: 58px;
+          object-fit: contain;
+        }
+
+        .avs-logo-text {
+          color: #fff;
+          font-weight: 700;
+          font-size: 22px;
+          letter-spacing: 1.5px;
+          margin-left: 12px;
+          white-space: nowrap;
+        }
+
+        /* ================= DESKTOP MENU ================= */
+
+        .avs-desktop-menu {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 28px;
+        }
+
+        .avs-nav-link {
+          background: transparent;
+          border: none;
+          outline: none;
+
+          color: #fff;
+
+          cursor: pointer;
+
+          font-size: 16px;
+          font-weight: 600;
+
+          padding: 8px 0;
+
+          transition: all 0.3s ease;
+        }
+
+        .avs-nav-link:hover {
+          color: #FFD54F;
+        }
+
+        .avs-nav-link.active {
+          color: #FFD54F;
+        }
+
+        .arrow {
+          font-size: 10px;
+          margin-left: 4px;
+        }
+
+        /* ================= DROPDOWN ================= */
+
+        .avs-dropdown {
+          position: relative;
+        }
+
+        .avs-dropdown-menu {
+          position: absolute;
+
+          top: 35px;
+          left: 0;
+
+          min-width: 190px;
+
+          background: rgba(15, 15, 15, 0.97);
+
+          border-radius: 10px;
+
+          overflow: hidden;
+
+          box-shadow:
+            0 15px 40px rgba(0,0,0,0.4);
+
+          border: 1px solid rgba(255,255,255,0.08);
+
+          z-index: 10000;
+        }
+
+        .avs-dropdown-item {
+          width: 100%;
+
+          padding: 14px 18px;
+
+          border: none;
+
+          background: transparent;
+
+          color: #fff;
+
+          cursor: pointer;
+
+          text-align: left;
+
+          font-size: 15px;
+
+          transition: all 0.25s ease;
+        }
+
+        .avs-dropdown-item:hover {
+          background: rgba(255, 213, 79, 0.12);
+          color: #FFD54F;
+        }
+
+        /* ================= AUTH ================= */
+
+        .avs-desktop-auth {
+          flex-shrink: 0;
+        }
+
+        .avs-auth-button {
+          background: transparent;
+
+          color: #fff;
+
+          border: 1px solid rgba(255,255,255,0.7);
+
+          padding: 10px 18px;
+
+          border-radius: 20px;
+
+          font-weight: 600;
+
+          font-size: 16px;
+
+          cursor: pointer;
+
+          transition: all 0.3s ease;
+
+          white-space: nowrap;
+        }
+
+        .avs-auth-button:hover {
+          background: #FFD54F;
+          border-color: #FFD54F;
+          color: #111;
+        }
+
+        /* ================= HAMBURGER ================= */
+
+        .avs-hamburger {
+          display: none;
+
+          width: 44px;
+          height: 44px;
+
+          padding: 8px;
+
+          border: none;
+          background: transparent;
+
+          cursor: pointer;
+
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          gap: 5px;
+
+          z-index: 10001;
+        }
+
+        .avs-hamburger span {
+          display: block;
+
+          width: 26px;
+          height: 3px;
+
+          background: #fff;
+
+          border-radius: 5px;
+
+          transition: all 0.3s ease;
+        }
+
+        /* Hamburger → X */
+
+        .avs-hamburger.open span:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        .avs-hamburger.open span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .avs-hamburger.open span:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* ================= MOBILE MENU ================= */
+
+        .avs-mobile-overlay {
+          position: fixed;
+
+          inset: 0;
+
+          background: rgba(0,0,0,0.55);
+
+          z-index: 9997;
+        }
+
+        .avs-mobile-menu {
+          position: fixed;
+
+          top: 0;
+          right: 0;
+
+          width: min(320px, 85vw);
+          height: 100vh;
+
+          background:
+            linear-gradient(
+              180deg,
+              #111 0%,
+              #171717 100%
+            );
+
+          box-shadow:
+            -10px 0 40px rgba(0,0,0,0.45);
+
+          z-index: 9998;
+
+          overflow-y: auto;
+
+          padding-bottom: 30px;
+        }
+
+        /* ================= MOBILE HEADER ================= */
+
+        .avs-mobile-header {
+          height: 80px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 20px;
+
+          border-bottom:
+            1px solid rgba(255,255,255,0.1);
+        }
+
+        .avs-mobile-brand {
+          display: flex;
+          align-items: center;
+
+          color: #fff;
+
+          font-size: 15px;
+          font-weight: 700;
+
+          letter-spacing: 1px;
+        }
+
+        .avs-mobile-brand img {
+          width: 42px;
+          height: 42px;
+
+          object-fit: contain;
+
+          margin-right: 8px;
+        }
+
+        .avs-close-button {
+          border: none;
+          background: transparent;
+
+          color: #fff;
+
+          font-size: 34px;
+          line-height: 1;
+
+          cursor: pointer;
+
+          padding: 0 5px;
+        }
+
+        /* ================= MOBILE LINKS ================= */
+
+        .avs-mobile-link {
+          width: 100%;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 18px 25px;
+
+          border: none;
+          border-bottom:
+            1px solid rgba(255,255,255,0.06);
+
+          background: transparent;
+
+          color: #fff;
+
+          font-size: 17px;
+          font-weight: 600;
+
+          text-align: left;
+
+          cursor: pointer;
+
+          transition: all 0.25s ease;
+        }
+
+        .avs-mobile-link:hover {
+          background: rgba(255,255,255,0.06);
+          color: #FFD54F;
+        }
+
+        .avs-mobile-link.active {
+          color: #FFD54F;
+        }
+
+        /* ================= MOBILE SUBMENU ================= */
+
+        .avs-mobile-submenu {
+          overflow: hidden;
+
+          background: rgba(255,255,255,0.04);
+        }
+
+        .avs-mobile-sub-link {
+          width: 100%;
+
+          padding: 15px 45px;
+
+          border: none;
+
+          border-bottom:
+            1px solid rgba(255,255,255,0.05);
+
+          background: transparent;
+
+          color: #ddd;
+
+          font-size: 15px;
+
+          text-align: left;
+
+          cursor: pointer;
+
+          transition: all 0.25s ease;
+        }
+
+        .avs-mobile-sub-link:hover {
+          color: #FFD54F;
+          background: rgba(255,213,79,0.08);
+        }
+
+        .mobile-arrow {
+          font-size: 11px;
+
+          transition:
+            transform 0.25s ease;
+        }
+
+        .mobile-arrow.rotate {
+          transform: rotate(180deg);
+        }
+
+        /* ================= MOBILE AUTH ================= */
+
+        .avs-mobile-auth {
+          padding: 25px;
+        }
+
+        .avs-mobile-auth-button {
+          width: 100%;
+
+          padding: 13px 20px;
+
+          border-radius: 25px;
+
+          border: 1px solid #FFD54F;
+
+          background: #FFD54F;
+
+          color: #111;
+
+          font-size: 16px;
+
+          font-weight: 700;
+
+          cursor: pointer;
+
+          transition: all 0.3s ease;
+        }
+
+        .avs-mobile-auth-button:hover {
+          background: transparent;
+          color: #FFD54F;
+        }
+
+        /* ================================================= */
+        /* TABLET */
+        /* ================================================= */
+
+        @media (max-width: 1100px) {
+
+          .avs-navbar {
+            padding: 0 25px;
+          }
+
+          .avs-logo-text {
+            font-size: 17px;
+          }
+
+          .avs-logo-image {
+            height: 52px;
+          }
+
+          .avs-desktop-menu {
+            gap: 16px;
+          }
+
+          .avs-nav-link {
+            font-size: 14px;
+          }
+
+          .avs-auth-button {
+            font-size: 14px;
+            padding: 9px 15px;
+          }
+        }
+
+        /* ================================================= */
+        /* MOBILE */
+        /* ================================================= */
+
+        @media (max-width: 768px) {
+
+          .avs-navbar {
+            height: 70px;
+
+            padding:
+              0 15px;
+
+            background:
+              rgba(0,0,0,0.72);
+          }
+
+          .avs-logo-image {
+            height: 48px;
+          }
+
+          .avs-logo-text {
+            display: none;
+          }
+
+          .avs-desktop-menu {
+            display: none;
+          }
+
+          .avs-desktop-auth {
+            display: none;
+          }
+
+          .avs-hamburger {
+            display: flex;
+          }
+        }
+
+        /* ================================================= */
+        /* SMALL MOBILE */
+        /* ================================================= */
+
+        @media (max-width: 400px) {
+
+          .avs-navbar {
+            padding: 0 10px;
+          }
+
+          .avs-logo-image {
+            height: 44px;
+          }
+
+          .avs-mobile-menu {
+            width: 88vw;
+          }
+        }
+
+      `}</style>
+    </>
   );
 }
-
-const styles = {
-  navbar: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "80px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "0 50px",
-    background: "rgba(0,0,0,.45)",
-    backdropFilter: "blur(15px)",
-    WebkitBackdropFilter: "blur(15px)",
-    borderBottom: "1px solid rgba(255,255,255,.08)",
-    zIndex: 999,
-  },
-
-  logo: {
-    display: "flex",
-    alignItems: "center",
-    cursor: "pointer",
-  },
-
-  logoImage: {
-    height: "58px",
-  },
-
-  logoText: {
-    color: "#fff",
-    fontWeight: 700,
-    fontSize: "22px",
-    letterSpacing: "1.5px",
-    marginLeft: "12px",
-  },
-
-  navLinks: {
-    display: "flex",
-    alignItems: "center",
-    gap: "28px",
-  },
-
-  link: {
-    background: "transparent",
-    border: "none",
-    color: "#fff",
-    cursor: "pointer",
-    fontSize: "16px",
-    fontWeight: 600,
-    transition: ".3s",
-  },
-
-  active: {
-    color: "#FFD54F",
-  },
-
-  dropdown: {
-    position: "relative",
-  },
-
-  dropdownMenu: {
-    position: "absolute",
-    top: "20px",
-    left: 0,
-    background: "rgba(15,15,15,.95)",
-    borderRadius: "10px",
-    overflow: "hidden",
-    minWidth: "180px",
-    boxShadow: "0 10px 30px rgba(0,0,0,.35)",
-  },
-
-  dropdownItem: {
-    width: "100%",
-    padding: "14px",
-    border: "none",
-    background: "transparent",
-    color: "#fff",
-    cursor: "pointer",
-    textAlign: "left",
-    transition: ".3s",
-  },
-
-  authButton: {
-  background: "transparent",
-  color: "#fff",
-  border: "1px solid rgba(255,255,255,0.7)",
-  padding: "10px 18px",
-  borderRadius: "20px",
-  fontWeight: 600,
-  fontSize: "16px",
-  cursor: "pointer",
-  transition: "all 0.3s ease",
-},
-};

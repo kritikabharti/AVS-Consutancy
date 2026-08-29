@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <ScrollToTop />
     <ToastContainer />
       <Routes>
         {/* Login */}
