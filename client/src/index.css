@@ -4,18 +4,19 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+html {
   width: 100%;
-  min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
-  background:black;
+  background: black;
 }
 
 #root {
   width: 100%;
+  min-height: 100%;
 }
