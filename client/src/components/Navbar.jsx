@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logoFile from "../assets/logo.png";
@@ -9,38 +9,243 @@ export default function Navbar({ token, logout }) {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [showMounts, setShowMounts] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const isLoggedIn = !!token;
+  /*
+  ====================================================
+  AUTHENTICATION
+  ====================================================
+  */
 
-  const isActive = (path) => location.pathname === path;
+  const storedToken = token || localStorage.getItem("token");
+
+  const [isLoggedIn, setIsLoggedIn] = useState(!!storedToken);
+
+  /*
+  ====================================================
+  CHECK ADMIN STATUS
+  ====================================================
+  */
+
+  const checkAdminStatus = () => {
+    try {
+      const currentToken = token || localStorage.getItem("token");
+
+      const storedUser =
+        JSON.parse(localStorage.getItem("user")) || null;
+
+      const storedRole =
+        localStorage.getItem("role") ||
+        localStorage.getItem("userRole");
+
+      const storedIsAdmin =
+        localStorage.getItem("isAdmin") === "true";
+
+      let tokenUser = null;
+
+      /*
+      Decode JWT payload safely
+      */
+
+      if (currentToken) {
+        try {
+          const parts = currentToken.split(".");
+
+          if (parts.length !== 3) {
+            throw new Error("Malformed JWT");
+          }
+
+          tokenUser = JSON.parse(
+            atob(
+              parts[1]
+                .replace(/-/g, "+")
+                .replace(/_/g, "/")
+            )
+          );
+        } catch (error) {
+          console.warn("Could not decode JWT:", error);
+          localStorage.removeItem("token");
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("user");
+          localStorage.removeItem("userRole");
+          localStorage.removeItem("role");
+          localStorage.removeItem("isAdmin");
+          setIsAdmin(false);
+          setIsLoggedIn(false);
+          return;
+        }
+      }
+
+      /*
+      Admin if ANY trusted frontend auth source
+      says role = admin.
+      */
+
+      const adminDetected =
+        storedUser?.role === "admin" ||
+        storedRole === "admin" ||
+        tokenUser?.role === "admin" ||
+        storedIsAdmin;
+
+      setIsAdmin(adminDetected);
+      setIsLoggedIn(!!currentToken);
+
+      console.log("NAVBAR AUTH:", {
+        tokenExists: !!currentToken,
+        storedUser,
+        tokenUser,
+        storedRole,
+        storedIsAdmin,
+        isAdmin: adminDetected,
+      });
+    } catch (error) {
+      console.error(
+        "Navbar authentication check error:",
+        error
+      );
+
+      setIsAdmin(false);
+      setIsLoggedIn(false);
+    }
+  };
+
+  /*
+  ====================================================
+  RUN AUTH CHECK
+  ====================================================
+  */
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, [token, location.pathname]);
+
+  /*
+  ====================================================
+  HANDLE STORAGE CHANGES
+  ====================================================
+  */
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      checkAdminStatus();
+    };
+
+    window.addEventListener(
+      "storage",
+      handleStorageChange
+    );
+
+    /*
+    Custom event for same-tab login/logout
+    */
+
+    window.addEventListener(
+      "authChanged",
+      handleStorageChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "storage",
+        handleStorageChange
+      );
+
+      window.removeEventListener(
+        "authChanged",
+        handleStorageChange
+      );
+    };
+  }, [token]);
+
+  /*
+  ====================================================
+  ACTIVE ROUTE
+  ====================================================
+  */
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  /*
+  ====================================================
+  NAVIGATION
+  ====================================================
+  */
+
+  const handleNavigate = (path) => {
+    navigate(path);
+
+    setMenuOpen(false);
+    setShowMounts(false);
+  };
+
+  /*
+  ====================================================
+  LOGOUT
+  ====================================================
+  */
 
   const handleLogout = () => {
     if (logout) {
       logout();
     }
 
+    /*
+    Clear authentication data
+    */
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
+    localStorage.removeItem("isAdmin");
+
+    setIsAdmin(false);
+    setIsLoggedIn(false);
+
     setMenuOpen(false);
     setShowMounts(false);
+
+    /*
+    Tell other components that auth changed
+    */
+
+    window.dispatchEvent(
+      new Event("authChanged")
+    );
+
     navigate("/login");
   };
 
-  const handleNavigate = (path) => {
-    navigate(path);
-    setMenuOpen(false);
-    setShowMounts(false);
-  };
+  /*
+  ====================================================
+  MOBILE MENU
+  ====================================================
+  */
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
     setShowMounts(false);
   };
 
+  /*
+  ====================================================
+  RENDER
+  ====================================================
+  */
+
   return (
     <>
-      {/* ================= NAVBAR ================= */}
+      {/* ==================================================
+          NAVBAR
+      ================================================== */}
+
       <nav className="avs-navbar">
 
-        {/* ================= LOGO ================= */}
+        {/* ==================================================
+            LOGO
+        ================================================== */}
+
         <div
           className="avs-logo"
           onClick={() => handleNavigate("/")}
@@ -56,8 +261,13 @@ export default function Navbar({ token, logout }) {
           </span>
         </div>
 
-        {/* ================= DESKTOP MENU ================= */}
+        {/* ==================================================
+            DESKTOP MENU
+        ================================================== */}
+
         <div className="avs-desktop-menu">
+
+          {/* HOME */}
 
           <motion.button
             onClick={() => handleNavigate("/")}
@@ -70,6 +280,8 @@ export default function Navbar({ token, logout }) {
             HOME
           </motion.button>
 
+          {/* ABOUT */}
+
           <motion.button
             onClick={() => handleNavigate("/about")}
             className={`avs-nav-link ${
@@ -80,6 +292,8 @@ export default function Navbar({ token, logout }) {
           >
             About
           </motion.button>
+
+          {/* SERVICES */}
 
           <motion.button
             onClick={() => handleNavigate("/services")}
@@ -92,11 +306,18 @@ export default function Navbar({ token, logout }) {
             Services
           </motion.button>
 
-          {/* DESKTOP MOUNTS DROPDOWN */}
+          {/* ==================================================
+              MOUNTS DROPDOWN
+          ================================================== */}
+
           <div
             className="avs-dropdown"
-            onMouseEnter={() => setShowMounts(true)}
-            onMouseLeave={() => setShowMounts(false)}
+            onMouseEnter={() =>
+              setShowMounts(true)
+            }
+            onMouseLeave={() =>
+              setShowMounts(false)
+            }
           >
             <button
               className={`avs-nav-link ${
@@ -106,7 +327,10 @@ export default function Navbar({ token, logout }) {
                   : ""
               }`}
             >
-              Mounts <span className="arrow">▼</span>
+              Mounts
+              <span className="arrow">
+                ▼
+              </span>
             </button>
 
             <AnimatePresence>
@@ -132,7 +356,9 @@ export default function Navbar({ token, logout }) {
                   <button
                     className="avs-dropdown-item"
                     onClick={() =>
-                      handleNavigate("/mounting")
+                      handleNavigate(
+                        "/mounting"
+                      )
                     }
                   >
                     Mounting
@@ -141,7 +367,9 @@ export default function Navbar({ token, logout }) {
                   <button
                     className="avs-dropdown-item"
                     onClick={() =>
-                      handleNavigate("/monitoring")
+                      handleNavigate(
+                        "/monitoring"
+                      )
                     }
                   >
                     Monitoring
@@ -151,8 +379,12 @@ export default function Navbar({ token, logout }) {
             </AnimatePresence>
           </div>
 
+          {/* OUR TEAM */}
+
           <motion.button
-            onClick={() => handleNavigate("/team")}
+            onClick={() =>
+              handleNavigate("/team")
+            }
             className={`avs-nav-link ${
               isActive("/team") ? "active" : ""
             }`}
@@ -162,8 +394,12 @@ export default function Navbar({ token, logout }) {
             Our Team
           </motion.button>
 
+          {/* STORE */}
+
           <motion.button
-            onClick={() => handleNavigate("/store")}
+            onClick={() =>
+              handleNavigate("/store")
+            }
             className={`avs-nav-link ${
               isActive("/store") ? "active" : ""
             }`}
@@ -172,10 +408,39 @@ export default function Navbar({ token, logout }) {
           >
             Store
           </motion.button>
+
+          {/* ==================================================
+              ADMIN BUTTON
+          ================================================== */}
+
+          {isAdmin && (
+            <motion.button
+              onClick={() =>
+                handleNavigate(
+                  "/admin/dashboard"
+                )
+              }
+              className={`avs-nav-link admin-nav-link ${
+                isActive(
+                  "/admin/dashboard"
+                )
+                  ? "active"
+                  : ""
+              }`}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Admin
+            </motion.button>
+          )}
         </div>
 
-        {/* ================= DESKTOP AUTH ================= */}
+        {/* ==================================================
+            DESKTOP AUTH
+        ================================================== */}
+
         <div className="avs-desktop-auth">
+
           {isLoggedIn ? (
             <button
               className="avs-auth-button"
@@ -186,14 +451,20 @@ export default function Navbar({ token, logout }) {
           ) : (
             <button
               className="avs-auth-button"
-              onClick={() => handleNavigate("/login")}
+              onClick={() =>
+                handleNavigate("/login")
+              }
             >
               Log In
             </button>
           )}
+
         </div>
 
-        {/* ================= MOBILE HAMBURGER ================= */}
+        {/* ==================================================
+            MOBILE HAMBURGER
+        ================================================== */}
+
         <button
           className={`avs-hamburger ${
             menuOpen ? "open" : ""
@@ -208,20 +479,33 @@ export default function Navbar({ token, logout }) {
         </button>
       </nav>
 
-      {/* ================= MOBILE MENU ================= */}
+      {/* ==================================================
+          MOBILE MENU
+      ================================================== */}
+
       <AnimatePresence>
         {menuOpen && (
           <>
             {/* Overlay */}
+
             <motion.div
               className="avs-mobile-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMenuOpen(false)}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              onClick={() =>
+                setMenuOpen(false)
+              }
             />
 
             {/* Menu */}
+
             <motion.div
               className="avs-mobile-menu"
               initial={{
@@ -241,9 +525,15 @@ export default function Navbar({ token, logout }) {
                 ease: "easeOut",
               }}
             >
-              {/* Mobile Menu Header */}
+
+              {/* ==================================================
+                  MOBILE HEADER
+              ================================================== */}
+
               <div className="avs-mobile-header">
+
                 <div className="avs-mobile-brand">
+
                   <img
                     src={logoFile}
                     alt="AVS Solar"
@@ -252,51 +542,74 @@ export default function Navbar({ token, logout }) {
                   <span>
                     AVS SOLAR
                   </span>
+
                 </div>
 
                 <button
                   className="avs-close-button"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() =>
+                    setMenuOpen(false)
+                  }
                   aria-label="Close menu"
                 >
                   ×
                 </button>
+
               </div>
 
               {/* HOME */}
+
               <button
                 className={`avs-mobile-link ${
-                  isActive("/") ? "active" : ""
+                  isActive("/")
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => handleNavigate("/")}
+                onClick={() =>
+                  handleNavigate("/")
+                }
               >
                 <span>HOME</span>
               </button>
 
               {/* ABOUT */}
+
               <button
                 className={`avs-mobile-link ${
-                  isActive("/about") ? "active" : ""
+                  isActive("/about")
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => handleNavigate("/about")}
+                onClick={() =>
+                  handleNavigate("/about")
+                }
               >
                 <span>About</span>
               </button>
 
               {/* SERVICES */}
+
               <button
                 className={`avs-mobile-link ${
-                  isActive("/services") ? "active" : ""
+                  isActive("/services")
+                    ? "active"
+                    : ""
                 }`}
                 onClick={() =>
-                  handleNavigate("/services")
+                  handleNavigate(
+                    "/services"
+                  )
                 }
               >
                 <span>Services</span>
               </button>
 
-              {/* MOUNTS */}
+              {/* ==================================================
+                  MOBILE MOUNTS
+              ================================================== */}
+
               <div className="avs-mobile-dropdown">
+
                 <button
                   className={`avs-mobile-link ${
                     isActive("/mounting") ||
@@ -305,14 +618,20 @@ export default function Navbar({ token, logout }) {
                       : ""
                   }`}
                   onClick={() =>
-                    setShowMounts((prev) => !prev)
+                    setShowMounts(
+                      (prev) => !prev
+                    )
                   }
                 >
-                  <span>Mounts</span>
+                  <span>
+                    Mounts
+                  </span>
 
                   <span
                     className={`mobile-arrow ${
-                      showMounts ? "rotate" : ""
+                      showMounts
+                        ? "rotate"
+                        : ""
                     }`}
                   >
                     ▼
@@ -339,7 +658,9 @@ export default function Navbar({ token, logout }) {
                       <button
                         className="avs-mobile-sub-link"
                         onClick={() =>
-                          handleNavigate("/mounting")
+                          handleNavigate(
+                            "/mounting"
+                          )
                         }
                       >
                         Mounting
@@ -348,7 +669,9 @@ export default function Navbar({ token, logout }) {
                       <button
                         className="avs-mobile-sub-link"
                         onClick={() =>
-                          handleNavigate("/monitoring")
+                          handleNavigate(
+                            "/monitoring"
+                          )
                         }
                       >
                         Monitoring
@@ -356,34 +679,78 @@ export default function Navbar({ token, logout }) {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
               </div>
 
               {/* TEAM */}
+
               <button
                 className={`avs-mobile-link ${
-                  isActive("/team") ? "active" : ""
+                  isActive("/team")
+                    ? "active"
+                    : ""
                 }`}
                 onClick={() =>
                   handleNavigate("/team")
                 }
               >
-                <span>Our Team</span>
+                <span>
+                  Our Team
+                </span>
               </button>
 
               {/* STORE */}
+
               <button
                 className={`avs-mobile-link ${
-                  isActive("/store") ? "active" : ""
+                  isActive("/store")
+                    ? "active"
+                    : ""
                 }`}
                 onClick={() =>
                   handleNavigate("/store")
                 }
               >
-                <span>Store</span>
+                <span>
+                  Store
+                </span>
               </button>
 
-              {/* AUTH */}
+              {/* ==================================================
+                  MOBILE ADMIN
+              ================================================== */}
+
+              {isAdmin && (
+                <button
+                  className={`avs-mobile-link admin-mobile-link ${
+                    isActive(
+                      "/admin/dashboard"
+                    )
+                      ? "active"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleNavigate(
+                      "/admin/dashboard"
+                    )
+                  }
+                >
+                  <span>
+                    Admin
+                  </span>
+
+                  <span className="admin-badge">
+                    ADMIN
+                  </span>
+                </button>
+              )}
+
+              {/* ==================================================
+                  MOBILE AUTH
+              ================================================== */}
+
               <div className="avs-mobile-auth">
+
                 {isLoggedIn ? (
                   <button
                     className="avs-mobile-auth-button"
@@ -395,26 +762,35 @@ export default function Navbar({ token, logout }) {
                   <button
                     className="avs-mobile-auth-button"
                     onClick={() =>
-                      handleNavigate("/login")
+                      handleNavigate(
+                        "/login"
+                      )
                     }
                   >
                     Log In
                   </button>
                 )}
+
               </div>
+
             </motion.div>
           </>
         )}
       </AnimatePresence>
 
-      {/* ================= RESPONSIVE CSS ================= */}
+      {/* ==================================================
+          CSS
+      ================================================== */}
+
       <style>{`
 
         * {
           box-sizing: border-box;
         }
 
-        /* ================= DESKTOP NAVBAR ================= */
+        /* ==================================================
+           DESKTOP NAVBAR
+        ================================================== */
 
         .avs-navbar {
           position: fixed;
@@ -430,49 +806,70 @@ export default function Navbar({ token, logout }) {
           padding: 0 50px;
 
           background: rgba(0, 0, 0, 0.45);
+
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
 
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          border-bottom:
+            1px solid rgba(
+              255,
+              255,
+              255,
+              0.08
+            );
 
           z-index: 9999;
         }
 
-        /* ================= LOGO ================= */
+        /* ==================================================
+           LOGO
+        ================================================== */
 
         .avs-logo {
           display: flex;
           align-items: center;
+
           cursor: pointer;
+
           flex-shrink: 0;
         }
 
         .avs-logo-image {
           width: auto;
           height: 58px;
+
           object-fit: contain;
         }
 
         .avs-logo-text {
           color: #fff;
+
           font-weight: 700;
           font-size: 22px;
+
           letter-spacing: 1.5px;
+
           margin-left: 12px;
+
           white-space: nowrap;
         }
 
-        /* ================= DESKTOP MENU ================= */
+        /* ==================================================
+           DESKTOP MENU
+        ================================================== */
 
         .avs-desktop-menu {
           display: flex;
+
           align-items: center;
           justify-content: center;
+
           gap: 28px;
         }
 
         .avs-nav-link {
           background: transparent;
+
           border: none;
           outline: none;
 
@@ -485,7 +882,9 @@ export default function Navbar({ token, logout }) {
 
           padding: 8px 0;
 
-          transition: all 0.3s ease;
+          transition:
+            color 0.3s ease,
+            transform 0.3s ease;
         }
 
         .avs-nav-link:hover {
@@ -496,12 +895,22 @@ export default function Navbar({ token, logout }) {
           color: #FFD54F;
         }
 
-        .arrow {
-          font-size: 10px;
-          margin-left: 4px;
+        /* ==================================================
+           ADMIN DESKTOP
+        ================================================== */
+
+        .admin-nav-link {
+          color: #FFD54F;
+          font-weight: 700;
         }
 
-        /* ================= DROPDOWN ================= */
+        .admin-nav-link:hover {
+          color: #fff;
+        }
+
+        /* ==================================================
+           DROPDOWN
+        ================================================== */
 
         .avs-dropdown {
           position: relative;
@@ -515,16 +924,25 @@ export default function Navbar({ token, logout }) {
 
           min-width: 190px;
 
-          background: rgba(15, 15, 15, 0.97);
+          background:
+            rgba(15, 15, 15, 0.97);
 
           border-radius: 10px;
 
           overflow: hidden;
 
           box-shadow:
-            0 15px 40px rgba(0,0,0,0.4);
+            0 15px 40px
+            rgba(0, 0, 0, 0.4);
 
-          border: 1px solid rgba(255,255,255,0.08);
+          border:
+            1px solid
+            rgba(
+              255,
+              255,
+              255,
+              0.08
+            );
 
           z-index: 10000;
         }
@@ -550,11 +968,25 @@ export default function Navbar({ token, logout }) {
         }
 
         .avs-dropdown-item:hover {
-          background: rgba(255, 213, 79, 0.12);
+          background:
+            rgba(
+              255,
+              213,
+              79,
+              0.12
+            );
+
           color: #FFD54F;
         }
 
-        /* ================= AUTH ================= */
+        .arrow {
+          font-size: 10px;
+          margin-left: 4px;
+        }
+
+        /* ==================================================
+           AUTH
+        ================================================== */
 
         .avs-desktop-auth {
           flex-shrink: 0;
@@ -565,14 +997,20 @@ export default function Navbar({ token, logout }) {
 
           color: #fff;
 
-          border: 1px solid rgba(255,255,255,0.7);
+          border:
+            1px solid
+            rgba(
+              255,
+              255,
+              255,
+              0.7
+            );
 
           padding: 10px 18px;
 
           border-radius: 20px;
 
           font-weight: 600;
-
           font-size: 16px;
 
           cursor: pointer;
@@ -584,11 +1022,15 @@ export default function Navbar({ token, logout }) {
 
         .avs-auth-button:hover {
           background: #FFD54F;
+
           border-color: #FFD54F;
+
           color: #111;
         }
 
-        /* ================= HAMBURGER ================= */
+        /* ==================================================
+           HAMBURGER
+        ================================================== */
 
         .avs-hamburger {
           display: none;
@@ -599,11 +1041,13 @@ export default function Navbar({ token, logout }) {
           padding: 8px;
 
           border: none;
+
           background: transparent;
 
           cursor: pointer;
 
           flex-direction: column;
+
           justify-content: center;
           align-items: center;
 
@@ -625,31 +1069,43 @@ export default function Navbar({ token, logout }) {
           transition: all 0.3s ease;
         }
 
-        /* Hamburger → X */
-
-        .avs-hamburger.open span:nth-child(1) {
-          transform: translateY(8px) rotate(45deg);
+        .avs-hamburger.open
+        span:nth-child(1) {
+          transform:
+            translateY(8px)
+            rotate(45deg);
         }
 
-        .avs-hamburger.open span:nth-child(2) {
+        .avs-hamburger.open
+        span:nth-child(2) {
           opacity: 0;
         }
 
-        .avs-hamburger.open span:nth-child(3) {
-          transform: translateY(-8px) rotate(-45deg);
+        .avs-hamburger.open
+        span:nth-child(3) {
+          transform:
+            translateY(-8px)
+            rotate(-45deg);
         }
 
-        /* ================= MOBILE MENU ================= */
+        /* ==================================================
+           MOBILE OVERLAY
+        ================================================== */
 
         .avs-mobile-overlay {
           position: fixed;
 
           inset: 0;
 
-          background: rgba(0,0,0,0.55);
+          background:
+            rgba(0, 0, 0, 0.55);
 
           z-index: 9997;
         }
+
+        /* ==================================================
+           MOBILE MENU
+        ================================================== */
 
         .avs-mobile-menu {
           position: fixed;
@@ -657,7 +1113,9 @@ export default function Navbar({ token, logout }) {
           top: 0;
           right: 0;
 
-          width: min(320px, 85vw);
+          width:
+            min(320px, 85vw);
+
           height: 100vh;
 
           background:
@@ -668,7 +1126,8 @@ export default function Navbar({ token, logout }) {
             );
 
           box-shadow:
-            -10px 0 40px rgba(0,0,0,0.45);
+            -10px 0 40px
+            rgba(0, 0, 0, 0.45);
 
           z-index: 9998;
 
@@ -677,28 +1136,41 @@ export default function Navbar({ token, logout }) {
           padding-bottom: 30px;
         }
 
-        /* ================= MOBILE HEADER ================= */
+        /* ==================================================
+           MOBILE HEADER
+        ================================================== */
 
         .avs-mobile-header {
           height: 80px;
 
           display: flex;
+
           align-items: center;
-          justify-content: space-between;
+
+          justify-content:
+            space-between;
 
           padding: 0 20px;
 
           border-bottom:
-            1px solid rgba(255,255,255,0.1);
+            1px solid
+            rgba(
+              255,
+              255,
+              255,
+              0.1
+            );
         }
 
         .avs-mobile-brand {
           display: flex;
+
           align-items: center;
 
           color: #fff;
 
           font-size: 15px;
+
           font-weight: 700;
 
           letter-spacing: 1px;
@@ -715,11 +1187,13 @@ export default function Navbar({ token, logout }) {
 
         .avs-close-button {
           border: none;
+
           background: transparent;
 
           color: #fff;
 
           font-size: 34px;
+
           line-height: 1;
 
           cursor: pointer;
@@ -727,26 +1201,39 @@ export default function Navbar({ token, logout }) {
           padding: 0 5px;
         }
 
-        /* ================= MOBILE LINKS ================= */
+        /* ==================================================
+           MOBILE LINKS
+        ================================================== */
 
         .avs-mobile-link {
           width: 100%;
 
           display: flex;
+
           align-items: center;
-          justify-content: space-between;
+
+          justify-content:
+            space-between;
 
           padding: 18px 25px;
 
           border: none;
+
           border-bottom:
-            1px solid rgba(255,255,255,0.06);
+            1px solid
+            rgba(
+              255,
+              255,
+              255,
+              0.06
+            );
 
           background: transparent;
 
           color: #fff;
 
           font-size: 17px;
+
           font-weight: 600;
 
           text-align: left;
@@ -757,7 +1244,14 @@ export default function Navbar({ token, logout }) {
         }
 
         .avs-mobile-link:hover {
-          background: rgba(255,255,255,0.06);
+          background:
+            rgba(
+              255,
+              255,
+              255,
+              0.06
+            );
+
           color: #FFD54F;
         }
 
@@ -765,12 +1259,62 @@ export default function Navbar({ token, logout }) {
           color: #FFD54F;
         }
 
-        /* ================= MOBILE SUBMENU ================= */
+        /* ==================================================
+           MOBILE ADMIN
+        ================================================== */
+
+        .admin-mobile-link {
+          color: #FFD54F;
+
+          font-weight: 700;
+
+          background:
+            rgba(
+              255,
+              213,
+              79,
+              0.05
+            );
+        }
+
+        .admin-mobile-link:hover {
+          background:
+            rgba(
+              255,
+              213,
+              79,
+              0.12
+            );
+        }
+
+        .admin-badge {
+          font-size: 10px;
+
+          padding: 4px 8px;
+
+          border-radius: 10px;
+
+          background: #FFD54F;
+
+          color: #111;
+
+          font-weight: 800;
+        }
+
+        /* ==================================================
+           MOBILE SUBMENU
+        ================================================== */
 
         .avs-mobile-submenu {
           overflow: hidden;
 
-          background: rgba(255,255,255,0.04);
+          background:
+            rgba(
+              255,
+              255,
+              255,
+              0.04
+            );
         }
 
         .avs-mobile-sub-link {
@@ -781,7 +1325,13 @@ export default function Navbar({ token, logout }) {
           border: none;
 
           border-bottom:
-            1px solid rgba(255,255,255,0.05);
+            1px solid
+            rgba(
+              255,
+              255,
+              255,
+              0.05
+            );
 
           background: transparent;
 
@@ -798,7 +1348,14 @@ export default function Navbar({ token, logout }) {
 
         .avs-mobile-sub-link:hover {
           color: #FFD54F;
-          background: rgba(255,213,79,0.08);
+
+          background:
+            rgba(
+              255,
+              213,
+              79,
+              0.08
+            );
         }
 
         .mobile-arrow {
@@ -809,10 +1366,13 @@ export default function Navbar({ token, logout }) {
         }
 
         .mobile-arrow.rotate {
-          transform: rotate(180deg);
+          transform:
+            rotate(180deg);
         }
 
-        /* ================= MOBILE AUTH ================= */
+        /* ==================================================
+           MOBILE AUTH
+        ================================================== */
 
         .avs-mobile-auth {
           padding: 25px;
@@ -825,7 +1385,8 @@ export default function Navbar({ token, logout }) {
 
           border-radius: 25px;
 
-          border: 1px solid #FFD54F;
+          border:
+            1px solid #FFD54F;
 
           background: #FFD54F;
 
@@ -842,12 +1403,13 @@ export default function Navbar({ token, logout }) {
 
         .avs-mobile-auth-button:hover {
           background: transparent;
+
           color: #FFD54F;
         }
 
-        /* ================================================= */
-        /* TABLET */
-        /* ================================================= */
+        /* ==================================================
+           TABLET
+        ================================================== */
 
         @media (max-width: 1100px) {
 
@@ -873,24 +1435,30 @@ export default function Navbar({ token, logout }) {
 
           .avs-auth-button {
             font-size: 14px;
-            padding: 9px 15px;
+
+            padding:
+              9px 15px;
           }
         }
 
-        /* ================================================= */
-        /* MOBILE */
-        /* ================================================= */
+        /* ==================================================
+           MOBILE
+        ================================================== */
 
         @media (max-width: 768px) {
 
           .avs-navbar {
             height: 70px;
 
-            padding:
-              0 15px;
+            padding: 0 15px;
 
             background:
-              rgba(0,0,0,0.72);
+              rgba(
+                0,
+                0,
+                0,
+                0.72
+              );
           }
 
           .avs-logo-image {
@@ -914,9 +1482,9 @@ export default function Navbar({ token, logout }) {
           }
         }
 
-        /* ================================================= */
-        /* SMALL MOBILE */
-        /* ================================================= */
+        /* ==================================================
+           SMALL MOBILE
+        ================================================== */
 
         @media (max-width: 400px) {
 
