@@ -48,11 +48,11 @@ export default function AdminLayout() {
       path: "/admin/products",
       icon: <FiShoppingBag />,
     },
-    {
-      name: "Orders",
-      path: "/admin/orders",
-      icon: <FiClipboard />,
-    },
+    // {
+    //   name: "Orders",
+    //   path: "/admin/orders",
+    //   icon: <FiClipboard />,
+    // },
   ];
 
   return (

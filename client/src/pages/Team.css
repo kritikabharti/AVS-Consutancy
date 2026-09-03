@@ -1,0 +1,621 @@
+/* =========================================================
+   TEAM PAGE
+   ========================================================= */
+
+.team-page {
+  min-height: 100vh;
+  background: #f6f8fb;
+}
+
+.team-container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.team-hero {
+  padding: 150px 0 70px;
+  background: linear-gradient(
+    135deg,
+    #f8fbff 0%,
+    #eef6ff 50%,
+    #ffffff 100%
+  );
+  border-bottom: 1px solid #e5eaf0;
+}
+
+.team-heading {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-eyebrow {
+  margin: 0 0 12px;
+
+  color: #1d63a8;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.team-heading h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 800;
+
+  line-height: 1.1;
+}
+
+.team-heading-text {
+  max-width: 720px;
+
+  margin: 22px auto 0;
+
+  color: #64748b;
+
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   TEAM SECTION
+   ========================================================= */
+
+.team-section {
+  padding: 70px 0 100px;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.team-profile {
+  display: grid;
+
+  grid-template-columns: minmax(380px, 45%) 1fr;
+
+  min-height: 470px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e4e9ef;
+  border-radius: 22px;
+
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.team-profile:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+}
+
+/* =========================================================
+   FULL LEFT IMAGE
+   ========================================================= */
+
+.team-profile-image {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 470px;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #dbeafe,
+    #eff6ff
+  );
+}
+
+.team-profile-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.5s ease;
+}
+
+.team-profile:hover .team-profile-image img {
+  transform: scale(1.025);
+}
+
+/* Fallback */
+
+.team-image-fallback {
+  position: absolute;
+
+  inset: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #1d63a8;
+
+  font-size: 7rem;
+  font-weight: 800;
+
+  background: linear-gradient(
+    135deg,
+    #dbeafe,
+    #eff6ff
+  );
+}
+
+/* =========================================================
+   RIGHT CONTENT
+   ========================================================= */
+
+.team-profile-content {
+  display: flex;
+  flex-direction: column;
+
+  padding: 45px 45px 40px;
+}
+
+.team-profile-label {
+  margin: 0 0 9px;
+
+  color: #1d63a8;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+}
+
+.team-profile-header h2 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.team-designation {
+  margin: 9px 0 0;
+
+  color: #1d63a8;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
+
+.team-details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 13px;
+
+  margin-top: 28px;
+}
+
+.team-detail {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 12px;
+
+  border: 1px solid #edf0f4;
+  border-radius: 10px;
+
+  background: #fafbfc;
+}
+
+.team-detail-icon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #e8f2fc;
+
+  color: #1d63a8;
+}
+
+.team-detail-icon svg {
+  font-size: 16px;
+}
+
+.team-detail > div:last-child {
+  min-width: 0;
+}
+
+.team-detail span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.team-detail strong,
+.team-detail a {
+  display: block;
+
+  overflow-wrap: anywhere;
+
+  color: #334155;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1.45;
+
+  text-decoration: none;
+}
+
+.team-detail a:hover {
+  color: #1d63a8;
+}
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.team-about {
+  margin-top: 26px;
+}
+
+.team-about h3,
+.team-skills-section h3 {
+  margin: 0 0 9px;
+
+  color: #0f172a;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.team-about p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.team-skills-section {
+  margin-top: 24px;
+}
+
+.team-skills {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.team-skills span {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 7px 10px;
+
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+
+  background: #f0f7ff;
+
+  color: #1d63a8;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.team-skills svg {
+  font-size: 12px;
+}
+
+/* =========================================================
+   SOCIAL LINKS
+   ========================================================= */
+
+.team-socials {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.team-social {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 9px 13px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.team-social:hover {
+  transform: translateY(-1px);
+}
+
+.team-social.linkedin {
+  background: #eaf4ff;
+  color: #075985;
+}
+
+.team-social.linkedin:hover {
+  background: #dbeafe;
+}
+
+.team-social.website {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.team-social.website:hover {
+  background: #e2e8f0;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.team-loading {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #64748b;
+}
+
+.team-loader {
+  width: 40px;
+  height: 40px;
+
+  margin-bottom: 15px;
+
+  border: 3px solid #dbeafe;
+  border-top-color: #1d63a8;
+
+  border-radius: 50%;
+
+  animation: teamSpin 0.8s linear infinite;
+}
+
+.team-loading p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+@keyframes teamSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.team-empty {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.team-empty > svg {
+  margin-bottom: 15px;
+
+  color: #94a3b8;
+
+  font-size: 45px;
+}
+
+.team-empty h3 {
+  margin: 0 0 7px;
+
+  color: #0f172a;
+
+  font-size: 20px;
+}
+
+.team-empty p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .team-profile {
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+  }
+
+  .team-profile-image {
+    height: 430px;
+    min-height: 430px;
+  }
+
+  .team-profile-content {
+    padding: 35px;
+  }
+
+  .team-socials {
+    margin-top: 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .team-container {
+    width: min(100% - 28px, 1200px);
+  }
+
+  .team-hero {
+    padding: 120px 0 50px;
+  }
+
+  .team-heading h1 {
+    font-size: 2.15rem;
+  }
+
+  .team-heading-text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .team-section {
+    padding: 45px 0 70px;
+  }
+
+  .team-list {
+    gap: 25px;
+  }
+
+  .team-profile {
+    border-radius: 16px;
+  }
+
+  .team-profile-image {
+    height: 350px;
+    min-height: 350px;
+  }
+
+  .team-profile-content {
+    padding: 26px 20px 28px;
+  }
+
+  .team-profile-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .team-details-grid {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 22px;
+  }
+
+  .team-about {
+    margin-top: 22px;
+  }
+
+  .team-skills-section {
+    margin-top: 20px;
+  }
+
+  .team-socials {
+    padding-top: 22px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .team-profile-image {
+    height: 300px;
+    min-height: 300px;
+  }
+
+  .team-profile-content {
+    padding: 22px 16px;
+  }
+
+  .team-detail {
+    padding: 10px;
+  }
+
+  .team-skills span {
+    font-size: 10px;
+  }
+}

@@ -325,13 +325,13 @@ export default function AdminDashboard() {
       className: "blue",
     },
 
-    {
-      title: "Manage Orders",
-      description: "View and manage customer orders",
-      icon: FiShoppingBag,
-      path: "/admin/orders",
-      className: "orange",
-    },
+    // {
+    //   title: "Manage Orders",
+    //   description: "View and manage customer orders",
+    //   icon: FiShoppingBag,
+    //   path: "/admin/orders",
+    //   className: "orange",
+    // },
 
     {
       title: "Our Team",

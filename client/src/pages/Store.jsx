@@ -1,295 +1,350 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import "./Store.css";
+import {
+  FiShoppingBag,
+  FiArrowRight,
+  FiCheckCircle,
+  FiZap,
+  FiShield,
+  FiTruck,
+} from "react-icons/fi";
+
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import api from "../services/api";
 
- <Navbar />
+const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=80";
 
-const styles = {
-  container: {
-    minHeight: "100vh",
-    padding: "50px",
-    background: "#f4f8fb",
-  },
-
-  heading: {
-    textAlign: "center",
-    fontSize: "3rem",
-    color: "#0a3d62",
-    marginBottom: "15px",
-  },
-
-  subHeading: {
-    textAlign: "center",
-    color: "#666",
-    fontSize: "1.1rem",
-    marginBottom: "45px",
-  },
-
-  productGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "30px",
-    maxWidth: "1300px",
-    margin: "0 auto",
-  },
-
-  card: {
-    background: "#fff",
-    borderRadius: "15px",
-    overflow: "hidden",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
-    textAlign: "center",
-    paddingBottom: "25px",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  },
-
-  image: {
-    width: "100%",
-    height: "220px",
-    objectFit: "cover",
-    display: "block",
-  },
-
-  productName: {
-    fontSize: "1.25rem",
-    color: "#222",
-    margin: "18px 15px 8px",
-  },
-
-  description: {
-    color: "#777",
-    fontSize: "0.95rem",
-    minHeight: "40px",
-    padding: "0 15px",
-    marginBottom: "10px",
-  },
-
-  price: {
-    color: "#28a745",
-    fontSize: "1.3rem",
-    fontWeight: "bold",
-    marginBottom: "18px",
-  },
-
-  button: {
-    padding: "12px 25px",
-    border: "none",
-    borderRadius: "30px",
-    background: "#ff9800",
-    color: "#fff",
-    cursor: "pointer",
-    fontWeight: "bold",
-    fontSize: "15px",
-  },
-
-  loading: {
-    textAlign: "center",
-    fontSize: "1.2rem",
-    color: "#555",
-    padding: "50px",
-  },
-
-  error: {
-    textAlign: "center",
-    color: "#dc3545",
-    padding: "30px",
-    fontSize: "1.1rem",
-  },
-
-  empty: {
-    textAlign: "center",
-    color: "#777",
-    padding: "60px 20px",
-    fontSize: "1.1rem",
-  },
-
-  contactSection: {
-    marginTop: "80px",
-    background: "#0a3d62",
-    color: "#fff",
-    padding: "45px 20px",
-    textAlign: "center",
-  },
-
-  contactTitle: {
-    fontSize: "2rem",
-    marginBottom: "20px",
-  },
-
-  contactText: {
-    fontSize: "1.05rem",
-    margin: "8px 0",
-  },
-};
-
-function Store() {
+const Store = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // ==============================
-  // FETCH PRODUCTS FROM DATABASE
-  // ==============================
   useEffect(() => {
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
       try {
         setLoading(true);
         setError("");
 
         const response = await api.get("/products/public");
 
-        // Supports different common backend response formats
-        const data = response.data;
+        const data = response?.data;
 
         if (Array.isArray(data)) {
           setProducts(data);
-        } else if (Array.isArray(data.products)) {
+        } else if (Array.isArray(data?.products)) {
           setProducts(data.products);
-        } else if (Array.isArray(data.data)) {
+        } else if (Array.isArray(data?.data)) {
           setProducts(data.data);
         } else {
           setProducts([]);
         }
       } catch (err) {
-        console.error("Failed to load products:", err);
-
-        setError(
-          err.response?.data?.message ||
-            "Unable to load products. Please try again later."
-        );
+        console.error("Store products error:", err);
+        setError("Unable to load products. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    loadProducts();
   }, []);
 
-  // ==============================
-  // PRODUCT DETAILS
-  // ==============================
-  const handleViewDetails = (product) => {
-    // Use MongoDB _id if available
-    if (product._id) {
-      navigate(`/product/${product._id}`);
-      return;
+  const getImage = (image) => {
+    if (!image) return PLACEHOLDER_IMAGE;
+
+    if (
+      image.startsWith("http://") ||
+      image.startsWith("https://") ||
+      image.startsWith("data:image")
+    ) {
+      return image;
     }
 
-    // Fallback if backend uses id
-    if (product.id) {
-      navigate(`/product/${product.id}`);
-      return;
+    if (image.startsWith("/")) {
+      return `http://localhost:5000${image}`;
     }
 
-    console.error("Product ID not found:", product);
+    return image;
+  };
+
+  const formatPrice = (price) => {
+    return Number(price || 0).toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const getDiscount = (product) => {
+    if (
+      product.discountPrice &&
+      product.price &&
+      Number(product.discountPrice) < Number(product.price)
+    ) {
+      return Math.round(
+        ((Number(product.price) - Number(product.discountPrice)) /
+          Number(product.price)) *
+          100
+      );
+    }
+
+    return 0;
   };
 
   return (
-    <div style={styles.container}>
-      {/* ================= HEADER ================= */}
-      <h1 style={styles.heading}>Solar Store</h1>
+    <div className="store-page">
+      <Navbar />
 
-      <p style={styles.subHeading}>
-        Explore our latest solar products
-      </p>
+      {/* ================= HERO ================= */}
+      <section className="store-hero">
+        <div className="store-hero-content">
+          <span className="store-label">
+            <FiShoppingBag />
+            AVS SOLAR STORE
+          </span>
+
+          <h1>
+            Power Your Future
+            <span> With Solar Energy</span>
+          </h1>
+
+          <p>
+            Explore reliable solar panels, inverters, batteries and energy
+            solutions designed for efficient and sustainable power.
+          </p>
+
+          <button
+            className="store-hero-btn"
+            onClick={() =>
+              document
+                .getElementById("store-products")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Explore Products
+            <FiArrowRight />
+          </button>
+        </div>
+
+        <div className="store-hero-image">
+          <img
+            src={PLACEHOLDER_IMAGE}
+            alt="Solar energy"
+          />
+
+          <div className="hero-floating-card">
+            <FiZap />
+            <div>
+              <strong>Clean Energy</strong>
+              <span>Smart Solar Solutions</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= BENEFITS ================= */}
+      <section className="store-benefits">
+        <div className="store-benefit">
+          <div className="benefit-icon">
+            <FiCheckCircle />
+          </div>
+          <div>
+            <h3>Quality Products</h3>
+            <p>Reliable solar equipment</p>
+          </div>
+        </div>
+
+        <div className="store-benefit">
+          <div className="benefit-icon">
+            <FiShield />
+          </div>
+          <div>
+            <h3>Trusted Solutions</h3>
+            <p>Built for long-term use</p>
+          </div>
+        </div>
+
+        <div className="store-benefit">
+          <div className="benefit-icon">
+            <FiTruck />
+          </div>
+          <div>
+            <h3>Easy Ordering</h3>
+            <p>Simple and convenient</p>
+          </div>
+        </div>
+
+        <div className="store-benefit">
+          <div className="benefit-icon">
+            <FiZap />
+          </div>
+          <div>
+            <h3>Energy Efficient</h3>
+            <p>Save more with solar</p>
+          </div>
+        </div>
+      </section>
 
       {/* ================= PRODUCTS ================= */}
+      <section className="store-products-section" id="store-products">
+        <div className="store-section-heading">
+          <div>
+            <span>OUR PRODUCTS</span>
+            <h2>Solar Solutions For You</h2>
+          </div>
 
-      {loading && (
-        <div style={styles.loading}>
-          Loading products...
-        </div>
-      )}
-
-      {error && !loading && (
-        <div style={styles.error}>
-          {error}
-        </div>
-      )}
-
-      {!loading && !error && products.length === 0 && (
-        <div style={styles.empty}>
-          <h3>No products available</h3>
           <p>
-            Products added by the administrator will appear here.
+            Choose from our range of solar products and energy solutions.
           </p>
         </div>
-      )}
 
-      {!loading && !error && products.length > 0 && (
-        <div style={styles.productGrid}>
-          {products.map((product) => (
-            <div
-              key={product._id || product.id}
-              style={styles.card}
-            >
-              {/* PRODUCT IMAGE */}
-              <img
-                src={
-                  product.image ||
-                  product.imageUrl ||
-                  "https://via.placeholder.com/500x300?text=Solar+Product"
-                }
-                alt={product.name || "Solar Product"}
-                style={styles.image}
-              />
+        {loading && (
+          <div className="store-loading">
+            <div className="store-spinner"></div>
+            <p>Loading products...</p>
+          </div>
+        )}
 
-              {/* PRODUCT NAME */}
-              <h3 style={styles.productName}>
-                {product.name}
-              </h3>
+        {!loading && error && (
+          <div className="store-error">
+            <p>{error}</p>
+            <button onClick={() => window.location.reload()}>
+              Try Again
+            </button>
+          </div>
+        )}
 
-              {/* DESCRIPTION */}
-              {product.description && (
-                <p style={styles.description}>
-                  {product.description.length > 80
-                    ? `${product.description.substring(0, 80)}...`
-                    : product.description}
-                </p>
-              )}
-
-              {/* PRICE */}
-              <p style={styles.price}>
-                ₹
-                {Number(product.price || 0).toLocaleString("en-IN")}
-              </p>
-
-              {/* BUTTON */}
-              <button
-                style={styles.button}
-                onClick={() => handleViewDetails(product)}
-              >
-                View Details
-              </button>
+        {!loading && !error && products.length === 0 && (
+          <div className="store-empty">
+            <div className="empty-icon">
+              <FiShoppingBag />
             </div>
-          ))}
-        </div>
-      )}
 
-      {/* ================= CONTACT US ================= */}
+            <h3>No Products Available</h3>
 
-      <section style={styles.contactSection}>
-        <h2 style={styles.contactTitle}>
-          Contact Us
-        </h2>
+            <p>
+              Our solar products will appear here once they are added to the
+              store.
+            </p>
+          </div>
+        )}
 
-        <p style={styles.contactText}>
-          📞 Phone: +91 98765 43210
-        </p>
+        {!loading && !error && products.length > 0 && (
+          <div className="store-products-grid">
+            {products.map((product) => {
+              const discount = getDiscount(product);
 
-        <p style={styles.contactText}>
-          ✉️ Email: support@solarstore.com
-        </p>
+              const finalPrice =
+                product.discountPrice &&
+                Number(product.discountPrice) < Number(product.price)
+                  ? product.discountPrice
+                  : product.price;
 
-        <p style={styles.contactText}>
-          We are happy to help you with your solar product requirements.
-        </p>
+              return (
+                <article className="store-product-card" key={product._id}>
+                  {/* IMAGE */}
+                  <div className="product-image-container">
+                    {discount > 0 && (
+                      <span className="product-discount">
+                        {discount}% OFF
+                      </span>
+                    )}
+
+                    {product.featured && (
+                      <span className="product-featured">
+                        Featured
+                      </span>
+                    )}
+
+                    <img
+                      src={getImage(product.image)}
+                      alt={product.name}
+                      onError={(e) => {
+                        e.currentTarget.src = PLACEHOLDER_IMAGE;
+                      }}
+                    />
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="product-card-content">
+                    <div className="product-category">
+                      {product.category || "SOLAR"}
+                    </div>
+
+                    <h3>{product.name}</h3>
+
+                    {product.brand && (
+                      <p className="product-brand">
+                        <span>Brand:</span> {product.brand}
+                      </p>
+                    )}
+
+                    {product.description && (
+                      <p className="product-description">
+                        {product.description.length > 85
+                          ? `${product.description.substring(0, 85)}...`
+                          : product.description}
+                      </p>
+                    )}
+
+                    <div className="product-price-row">
+                      <strong>
+                        ₹{formatPrice(finalPrice)}
+                      </strong>
+
+                      {discount > 0 && (
+                        <del>
+                          ₹{formatPrice(product.price)}
+                        </del>
+                      )}
+                    </div>
+
+                    <button
+                      className="product-view-btn"
+                      onClick={() =>
+                        navigate(`/product/${product._id}`)
+                      }
+                    >
+                      View Product
+                      <FiArrowRight />
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
+
+      {/* ================= CTA ================= */}
+      <section className="store-cta">
+        <div>
+          <span>GO SOLAR WITH AVS</span>
+
+          <h2>
+            Ready to switch to
+            <br />
+            clean energy?
+          </h2>
+
+          <p>
+            Get the right solar solution for your home or business with
+            professional guidance from AVS Solar Consultancy.
+          </p>
+        </div>
+
+        <button onClick={() => navigate("/contact")}>
+          Contact Us
+          <FiArrowRight />
+        </button>
+      </section>
+
+      <Footer />
     </div>
   );
-}
+};
 
 export default Store;

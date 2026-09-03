@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import logoFile from "../assets/newlogo.png";
+
 import backgroundImage from "../assets/solar-bg.jpg";
 import whyChooseImg from "../assets/soInstallation.jpg";
 import epcBg from "../assets/wallpaper1.jpg";
@@ -17,6 +17,7 @@ import battery from "../assets/battery.jpg";
 
 function Services({ token, logout }) {
   const navigate = useNavigate();
+
   const isLoggedIn = !!token;
 
   const handleLogout = () => {
@@ -26,7 +27,10 @@ function Services({ token, logout }) {
 
   return (
     <>
-      {/* Responsive CSS - does not change your existing functionality */}
+      {/* =========================================================
+          RESPONSIVE CSS
+      ========================================================= */}
+
       <style>
         {`
           * {
@@ -60,7 +64,10 @@ function Services({ token, logout }) {
             display: block;
           }
 
-          /* Large tablets */
+          /* =====================================================
+             LARGE TABLETS
+          ===================================================== */
+
           @media (max-width: 1100px) {
 
             .services-hero {
@@ -90,7 +97,10 @@ function Services({ token, logout }) {
             }
           }
 
-          /* Tablets */
+          /* =====================================================
+             TABLETS
+          ===================================================== */
+
           @media (max-width: 900px) {
 
             .services-hero {
@@ -151,7 +161,10 @@ function Services({ token, logout }) {
             }
           }
 
-          /* Mobile */
+          /* =====================================================
+             MOBILE
+          ===================================================== */
+
           @media (max-width: 600px) {
 
             .services-hero {
@@ -216,7 +229,10 @@ function Services({ token, logout }) {
             }
           }
 
-          /* Small mobile */
+          /* =====================================================
+             SMALL MOBILE
+          ===================================================== */
+
           @media (max-width: 400px) {
 
             .services-hero {
@@ -248,14 +264,21 @@ function Services({ token, logout }) {
             }
           }
 
-          /* Prevent very large images from overflowing */
+          /* =====================================================
+             IMAGE PROTECTION
+          ===================================================== */
+
           img,
           video {
             max-width: 100%;
           }
 
-          /* Better mobile animation behavior */
+          /* =====================================================
+             REDUCED MOTION
+          ===================================================== */
+
           @media (prefers-reduced-motion: reduce) {
+
             *,
             *::before,
             *::after {
@@ -266,17 +289,24 @@ function Services({ token, logout }) {
       </style>
 
       <div style={styles.container} className="services-page">
+
         <Navbar token={token} logout={logout} />
 
-        {/* Hero Section */}
+        {/* =========================================================
+            HERO SECTION
+        ========================================================= */}
+
         <section
           className="services-hero"
           style={{
             ...styles.heroSection,
-            backgroundImage: `linear-gradient(
-              rgba(0,0,0,0.65),
-              rgba(0,0,0,0.75)
-            ), url(${backgroundImage})`,
+            backgroundImage: `
+              linear-gradient(
+                rgba(0,0,0,0.65),
+                rgba(0,0,0,0.75)
+              ),
+              url(${backgroundImage})
+            `,
           }}
         >
           <motion.div
@@ -287,6 +317,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.p
               className="services-hero-tag"
               style={styles.heroTag}
@@ -325,17 +356,22 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              AVS Solar Consultancy delivers complete solar energy
-              solutions from consultation and design to installation,
-              net metering, maintenance, and long-term support.
-              Our goal is to provide reliable, cost-effective and
-              sustainable solar systems for residential,
-              commercial and industrial customers across India.
+              AVS Solar Consultancy provides complete solar energy
+              solutions designed around the individual requirements
+              of homeowners, businesses, industries and institutions.
+              From the first consultation and site assessment to
+              system design, installation, documentation, net metering
+              and after-sales assistance, our approach focuses on
+              creating practical and dependable renewable energy
+              systems that deliver value over the long term.
             </motion.p>
           </motion.div>
         </section>
 
-        {/* Residential */}
+        {/* =========================================================
+            RESIDENTIAL SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -346,6 +382,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-image-container"
             style={styles.journeyImageContainer}
@@ -354,16 +391,18 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={whyChooseImg}
-              alt="Why Choose AVS Solar"
+              alt="Residential Solar Installation"
               style={styles.journeyImage}
               whileHover={{
                 scale: 1.05,
               }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
 
           <motion.div
@@ -374,6 +413,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -391,18 +431,54 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Residential solar installations by AVS Solar Consultancy
-              provide end-to-end services to help homeowners lower
-              electricity bills and achieve energy independence. Their
-              process includes site assessments, custom system designs,
-              and support for government subsidies. They install
-              grid-tie, off-grid, and hybrid configurations using
-              high-efficiency solar panels and reliable inverters.
+              AVS Solar Consultancy provides residential solar
+              solutions for homeowners who want to reduce their
+              dependence on conventional electricity and make
+              better use of available rooftop space. Every project
+              begins with understanding the customer's electricity
+              consumption, available installation area, roof
+              condition and expected energy requirements.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Based on the site assessment, a suitable solar system
+              configuration can be planned according to the
+              property's requirements. The installation process
+              includes mounting structure planning, solar panel
+              placement, inverter integration, electrical connections
+              and system testing. The objective is to create a neat,
+              safe and efficient installation that works reliably
+              throughout the year.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              Residential customers can also receive assistance
+              with documentation, grid connection procedures and
+              net-metering related requirements wherever applicable.
+              With proper planning and regular maintenance, a
+              rooftop solar system can become a dependable part of
+              a home's long-term energy strategy.
+            </motion.p>
+
           </motion.div>
         </section>
 
-        {/* Commercial */}
+        {/* =========================================================
+            COMMERCIAL SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -413,6 +489,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-content"
             style={styles.contentContainer}
@@ -421,6 +498,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -428,7 +506,7 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Commercial solar solution
+              Commercial Solar Solutions
             </motion.h2>
 
             <motion.p
@@ -438,20 +516,45 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              AVS Solar Consultancy provides scalable commercial solar
-              solutions engineered to minimize operational overhead,
-              achieve sustainability targets, and shield businesses
-              from rising grid tariffs. Their full-service engineering,
-              procurement, and construction (EPC) model begins with
-              advanced energy load profiling and structural roof analysis
-              to design high-yield, Tier-1 PV systems optimized for
-              factories, warehouses, office complexes, and institutional
-              facilities. Businesses can leverage capital-expenditure
-              (CAPEX) investment models for immediate asset ownership
-              or operational-expenditure (OPEX/PPA) frameworks to
-              install solar with zero upfront costs while purchasing
-              power at a fixed, discounted rate.
+              Commercial properties consume significant amounts of
+              electricity for lighting, cooling, machinery, office
+              equipment and other daily operations. AVS Solar
+              Consultancy helps businesses evaluate their energy
+              requirements and identify suitable solar opportunities
+              for offices, warehouses, shops, educational institutions,
+              hospitals and other commercial facilities.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Our commercial solar planning considers electricity
+              consumption patterns, rooftop availability, structural
+              conditions, orientation, shading and expected generation.
+              The resulting system is designed to make effective use
+              of available space while maintaining accessibility for
+              inspection and future maintenance.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              A professionally planned commercial solar installation
+              can help organizations manage energy expenditure while
+              supporting their environmental goals. AVS focuses on
+              practical engineering, organized installation and
+              dependable system support so that businesses can
+              continue concentrating on their core operations.
+            </motion.p>
+
           </motion.div>
 
           <motion.div
@@ -462,18 +565,24 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={solution}
-              alt="Residential Solar"
+              alt="Commercial Solar Solution"
               style={styles.journeyImage}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
+
         </section>
 
-        {/* Industrial */}
+        {/* =========================================================
+            INDUSTRIAL SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -484,6 +593,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-image-container"
             style={styles.journeyImageContainer}
@@ -492,16 +602,18 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={projects}
-              alt="Why Choose AVS Solar"
+              alt="Industrial Solar Projects"
               style={styles.journeyImage}
               whileHover={{
                 scale: 1.05,
               }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
 
           <motion.div
@@ -512,6 +624,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -529,24 +642,53 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              AVS Solar Consultancy delivers high-capacity industrial
-              solar projects engineered to significantly reduce
-              high-tension electricity costs and meet corporate
-              renewable purchase obligations (RPOs). Their comprehensive
-              turnkey services encompass rigorous structural roof health
-              checks, heavy-duty electrical engineering, procurement
-              of premium Tier-1 components, and professional installation
-              tailored for heavy industries like manufacturing, textiles,
-              and chemical plants. To accommodate diverse corporate
-              financial strategies, they offer flexible financing
-              structures including direct ownership (CAPEX) for maximum
-              long-term asset value or zero-upfront power purchase
-              agreements (OPEX) for immediate operational savings.
+              Industrial facilities often operate with large and
+              continuous electricity requirements. AVS Solar
+              Consultancy provides customized solar project planning
+              for manufacturing units, factories, processing facilities,
+              workshops, warehouses and other high-consumption
+              environments.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Industrial installations require careful attention to
+              structural strength, electrical distribution, equipment
+              placement, cable routing, safety procedures and system
+              capacity. Our project approach considers these factors
+              before installation so that the solar plant can be
+              integrated with the existing electrical infrastructure
+              in an organized manner.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              From project planning and component selection to
+              installation, testing and handover, every stage requires
+              coordination between technical teams and the customer.
+              The focus is on developing a scalable solar solution
+              that supports long-term energy management and operational
+              efficiency.
+            </motion.p>
+
           </motion.div>
+
         </section>
 
-        {/* On Grid */}
+        {/* =========================================================
+            ON-GRID SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -557,6 +699,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-content"
             style={styles.contentContainer}
@@ -565,6 +708,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -582,18 +726,44 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              AVS Solar Consultancy provides high-efficiency on-grid
-              solar solutions designed to drastically reduce monthly
-              electricity bills by syncing directly with the local
-              utility network. These grid-tied setups are the most
-              cost-effective solar option because they eliminate the
-              need for expensive battery banks, sending any excess
-              power generated during sunny hours back to the grid.
-              Through the integration of smart net-metering technology,
-              homeowners and businesses receive accurate energy credits
-              from their utility providers, which effectively offsets
-              their nighttime electricity consumption.
+              On-grid solar systems are connected directly to the
+              electricity distribution network. During periods of
+              sunlight, the solar panels generate electricity that
+              can be used by the property. This allows homes and
+              businesses to make use of their own solar generation
+              while remaining connected to the utility grid.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              One of the major advantages of an on-grid configuration
+              is that it generally does not require a large battery
+              storage system. This can make the system simpler to
+              operate and maintain. The solar inverter manages the
+              conversion of electricity generated by the panels and
+              coordinates the system with the grid connection.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              AVS can also assist customers in understanding the
+              documentation and process involved in grid connectivity
+              and net-metering requirements, subject to the applicable
+              local electricity regulations. Proper system sizing and
+              installation are important for achieving consistent
+              performance from an on-grid solar plant.
+            </motion.p>
+
           </motion.div>
 
           <motion.div
@@ -604,18 +774,24 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={grid}
-              alt="Residential Solar"
+              alt="On Grid Solar System"
               style={styles.journeyImage}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
+
         </section>
 
-        {/* Off Grid */}
+        {/* =========================================================
+            OFF-GRID SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -626,6 +802,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-image-container"
             style={styles.journeyImageContainer}
@@ -634,16 +811,18 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={gridoff}
-              alt="Why Choose AVS Solar"
+              alt="Off Grid Solar System"
               style={styles.journeyImage}
               whileHover={{
                 scale: 1.05,
               }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
 
           <motion.div
@@ -654,6 +833,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -661,7 +841,7 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Off-grid Solar Systems
+              Off-Grid Solar Systems
             </motion.h2>
 
             <motion.p
@@ -671,21 +851,52 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Residential Solar Installation of AVS Solar Consultancy
-              provides end-to-end residential solar solutions designed
-              to lower household energy costs, minimize grid dependency,
-              and guarantee a steady power supply. Their certified
-              engineers handle the entire project lifecycle, starting
-              with a free site evaluation and energy consumption audit
-              to tailor a custom system configuration for your roof.
-              To guarantee high-quality performance, the company
-              installs aesthetic, low-profile Tier-1 solar panel brands
-              backed by long-term performance and installation warranties.
+              Off-grid solar systems are designed for locations where
+              reliable grid electricity is limited, unavailable or
+              where independent power generation is preferred. These
+              systems combine solar panels with battery storage so
+              that electricity generated during the day can be stored
+              and used when sunlight is not available.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Before designing an off-grid system, the expected load,
+              daily consumption pattern, essential appliances and
+              required backup duration need to be evaluated carefully.
+              Correct sizing of the solar array, inverter and battery
+              bank is important because the system must balance energy
+              generation with available storage capacity.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              AVS focuses on creating practical independent power
+              systems for suitable residential, rural, remote and
+              specialized applications. With appropriate system
+              planning and regular maintenance, off-grid solar can
+              provide dependable access to renewable electricity
+              without relying entirely on the conventional grid.
+            </motion.p>
+
           </motion.div>
+
         </section>
 
-        {/* Hybrid */}
+        {/* =========================================================
+            HYBRID SOLAR
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -696,6 +907,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-content"
             style={styles.contentContainer}
@@ -704,6 +916,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -721,21 +934,45 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Hybrid solar systems combine the best features of
-              grid-tied and off-grid configurations by remaining
-              connected to the utility grid while integrating a
-              dedicated solar battery backup bank. During peak
-              daylight hours, the solar panels power your household
-              appliances directly, and any surplus electricity is
-              simultaneously routed to recharge your batteries.
-              Once the batteries are fully charged, the system funnels
-              the remaining excess power back into the utility grid,
-              allowing you to earn credits through net metering
-              regulations. If your panels produce less electricity
-              during nighttime or cloudy weather, the system intelligently
-              draws energy first from your stored battery reserves,
-              turning to the external grid only as a secondary fallback.
+              Hybrid solar systems combine solar generation,
+              electricity storage and grid connectivity into a single
+              energy solution. This configuration provides greater
+              flexibility because solar power can be used directly,
+              stored in batteries or supplied through the grid
+              depending on the system design and energy requirements.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              During daylight hours, solar generation can supply the
+              property's active electrical loads while surplus energy
+              can be directed towards battery charging. The stored
+              energy can then be used during periods of low solar
+              production or power interruptions. The system can also
+              remain connected to the grid as an additional energy
+              source when required.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              Hybrid systems are particularly useful for customers
+              who want the benefits of solar generation together with
+              backup capability. AVS helps evaluate energy usage,
+              backup expectations, available installation space and
+              storage requirements before recommending an appropriate
+              configuration.
+            </motion.p>
+
           </motion.div>
 
           <motion.div
@@ -746,18 +983,24 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={hybrid}
-              alt="Residential Solar"
+              alt="Hybrid Solar System"
               style={styles.journeyImage}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
+
         </section>
 
-        {/* Battery */}
+        {/* =========================================================
+            BATTERY SOLUTIONS
+        ========================================================= */}
+
         <section
           className="services-info-section"
           style={{
@@ -768,6 +1011,7 @@ function Services({ token, logout }) {
             backgroundRepeat: "no-repeat",
           }}
         >
+
           <motion.div
             className="services-image-container"
             style={styles.journeyImageContainer}
@@ -776,16 +1020,18 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.img
               className="services-image"
               src={battery}
-              alt="Why Choose AVS Solar"
+              alt="Solar Battery Solutions"
               style={styles.journeyImage}
               whileHover={{
                 scale: 1.05,
               }}
               transition={{ duration: 0.3 }}
             />
+
           </motion.div>
 
           <motion.div
@@ -796,6 +1042,7 @@ function Services({ token, logout }) {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
+
             <motion.h2
               className="services-title"
               style={styles.infoTitle}
@@ -813,40 +1060,88 @@ function Services({ token, logout }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Solar battery solutions serve as the critical energy
-              storage core for hybrid and off-grid configurations,
-              capturing the excess electricity generated by your
-              panels during peak sun hours for use at night or during
-              power outages. Modern residential installations primarily
-              utilize Lithium-ion, including Lithium Iron Phosphate
-              or LFP, batteries due to their high depth of discharge,
-              compact size, and long lifespans of up to 10 to 15 years,
-              though budget-friendly Lead-acid options remain available
-              for basic backup needs.
+              Battery storage plays an important role in solar
+              systems where backup power or greater energy independence
+              is required. Instead of using all generated electricity
+              immediately, a battery allows surplus energy to be stored
+              and made available later when solar production is low or
+              unavailable.
             </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Battery capacity should be selected according to the
+              customer's energy consumption, expected backup duration,
+              critical loads and solar generation capacity. Different
+              battery technologies have different characteristics in
+              terms of usable capacity, maintenance requirements,
+              operating conditions, charging behavior and expected
+              service life.
+            </motion.p>
+
+            <motion.p
+              className="services-text"
+              style={styles.infoText}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              AVS Solar Consultancy can help customers understand
+              available storage configurations and choose a solution
+              suitable for their solar setup. Proper installation,
+              system configuration and periodic monitoring are
+              important for maintaining safe and reliable battery
+              performance over the life of the system.
+            </motion.p>
+
           </motion.div>
+
         </section>
+
       </div>
+
+      {/* =========================================================
+          FOOTER
+      ========================================================= */}
 
       <Footer />
     </>
   );
 }
 
+
+/* ===============================================================
+   STYLES
+================================================================ */
+
 const styles = {
+
   container: {
     minHeight: "10vh",
     paddingTop: "0px",
   },
 
+  /* =============================================================
+     HERO
+  ============================================================= */
+
   heroSection: {
     minHeight: "70vh",
+
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
+
     display: "flex",
+
     justifyContent: "flex-start",
     alignItems: "center",
+
     padding: "120px 80px",
   },
 
@@ -858,51 +1153,85 @@ const styles = {
   headingLine: {
     width: "120px",
     height: "4px",
+
     background: "#ffb703",
+
     borderRadius: "20px",
+
     marginBottom: "25px",
   },
 
   heroTag: {
     color: "#ffb703",
+
     letterSpacing: "4px",
+
     fontSize: "14px",
+
     fontWeight: "600",
+
     marginBottom: "15px",
+
     textAlign: "left",
   },
 
   heroHeading: {
     fontSize: "50px",
+
     fontWeight: "600",
+
     lineHeight: "1.1",
+
     color: "#fff",
+
     marginBottom: "25px",
+
     textAlign: "left",
   },
 
   heroText: {
     fontSize: "15px",
+
     color: "#e5e7eb",
+
     lineHeight: "1.8",
+
     marginBottom: "35px",
+
     textAlign: "left",
   },
 
+  /* =============================================================
+     NAVBAR STYLES
+  ============================================================= */
+
   navbar: {
     display: "flex",
+
     justifyContent: "space-between",
+
     alignItems: "center",
+
     padding: "2px 20px",
+
     position: "fixed",
+
     top: 0,
+
     left: 0,
+
     right: 0,
+
     zIndex: 1000,
+
     background: "rgba(0, 0, 0, 0.65)",
+
     backdropFilter: "blur(15px)",
+
     WebkitBackdropFilter: "blur(15px)",
+
     borderBottom: "1px solid rgba(255,255,255,0.1)",
+
     boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
   },
 
@@ -918,94 +1247,167 @@ const styles = {
 
   logoText: {
     marginLeft: "12px",
+
     fontSize: "20px",
+
     fontWeight: "bold",
+
     letterSpacing: "2px",
+
     color: "#fff",
   },
 
   navLinks: {
     display: "flex",
+
     gap: "30px",
   },
 
   link: {
     background: "transparent",
+
     border: "none",
+
     color: "#fff",
+
     fontSize: "16px",
+
     fontWeight: "600",
+
     cursor: "pointer",
   },
 
   logInBtn: {
     background: "rgba(255,255,255,0.08)",
+
     color: "#fff",
+
     border: "1px solid rgba(255,255,255,0.15)",
+
     padding: "10px 24px",
+
     borderRadius: "30px",
+
     backdropFilter: "blur(10px)",
+
     cursor: "pointer",
   },
 
   logoutBtn: {
     background: "rgba(255,255,255,0.08)",
+
     color: "#fff",
+
     border: "1px solid rgba(255,255,255,0.15)",
+
     padding: "10px 24px",
+
     borderRadius: "30px",
+
     backdropFilter: "blur(10px)",
+
     cursor: "pointer",
   },
 
+  /* =============================================================
+     IMAGE
+  ============================================================= */
+
   journeyImage: {
     width: "100%",
+
     maxWidth: "650px",
+
     height: "450px",
+
     objectFit: "cover",
+
     borderRadius: "20px",
+
     boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
   },
 
+  /* =============================================================
+     INFORMATION SECTION
+  ============================================================= */
+
   infoSection: {
     display: "flex",
+
     alignItems: "center",
+
     justifyContent: "space-between",
+
     gap: "60px",
+
     padding: "100px 80px",
   },
 
+  /* =============================================================
+     IMAGE CONTAINER
+  ============================================================= */
+
   journeyImageContainer: {
     flex: 1,
+
     display: "flex",
+
     justifyContent: "center",
+
     minWidth: 0,
   },
+
+  /* =============================================================
+     CONTENT
+  ============================================================= */
 
   contentContainer: {
     flex: 1,
+
     minWidth: 0,
   },
 
+  /* =============================================================
+     TITLE
+  ============================================================= */
+
   infoTitle: {
     color: "#3a1a1a",
+
     fontSize: "40px",
+
     fontWeight: "600",
+
     marginBottom: "20px",
   },
 
+  /* =============================================================
+     TEXT
+  ============================================================= */
+
   infoText: {
     color: "#0e1317",
+
     fontSize: "16px",
+
     lineHeight: "1.6",
+
     marginBottom: "26px",
   },
 
+  /* =============================================================
+     LIST
+  ============================================================= */
+
   infoList: {
     color: "#fff",
+
     fontSize: "18px",
+
     lineHeight: "2",
+
     listStyle: "none",
+
     padding: 0,
   },
 };
