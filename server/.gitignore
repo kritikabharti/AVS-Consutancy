@@ -23,10 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+
 # Environment variables
 .env
 .env.*
 !.env.example
 
 # Client environment variables
-client/.env
+server/.env
