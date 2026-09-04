@@ -41,6 +41,16 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminTeam from "./pages/admin/AdminTeam";
 import AdminProducts from "./pages/admin/AdminProducts";
+import AdminContacts from "./pages/admin/AdminContacts";
+
+import ConsultationDetails from "./pages/ConsultationDetails";
+import SiteSurveyDetails from "./pages/SiteSurveyDetails";
+import SolarDesignDetails from "./pages/SolarDesignDetails";
+import QuotationDetails from "./pages/QuotationDetails";
+import InstallationDetails from "./pages/InstallationDetails";
+import NetMeteringDetails from "./pages/NetMeteringDetails";
+import AfterSalesDetails from "./pages/AfterSalesDetails";
+import Contact from "./pages/Contact";
 
 
 // =====================================================
@@ -226,6 +236,46 @@ function App() {
           }
         />
 
+
+
+
+        <Route
+  path="/solar-journey/consultation"
+  element={<ConsultationDetails />}
+/>
+
+<Route
+  path="/solar-journey/site-survey"
+  element={<SiteSurveyDetails />}
+/>
+
+<Route
+  path="/solar-journey/custom-design"
+  element={<SolarDesignDetails />}
+/>
+
+<Route
+  path="/solar-journey/quotation"
+  element={<QuotationDetails />}
+/>
+
+<Route
+  path="/solar-journey/installation"
+  element={<InstallationDetails />}
+/>
+
+<Route
+  path="/solar-journey/net-metering"
+  element={<NetMeteringDetails />}
+/>
+
+<Route
+  path="/solar-journey/after-sales"
+  element={<AfterSalesDetails />}
+/>
+
+
+<Route path="/contact" element={<Contact />} />
 
         {/* =================================================
             SERVICES
@@ -509,6 +559,11 @@ function App() {
   <Route
     path="products"
     element={<AdminProducts />}
+  />
+
+  <Route
+    path="contacts"
+    element={<AdminContacts />}
   />
 
   <Route

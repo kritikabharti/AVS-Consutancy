@@ -27,65 +27,70 @@ function Home() {
      SOLAR JOURNEY DATA
   ============================================================ */
 
-  const solarJourneyCards = [
+ const solarJourneyCards = [
+  {
+    number: "01",
+    title: "FREE CONSULTATION",
+    image: imagess,
+    text:
+      "We understand your energy needs and goals to recommend the right solar solution for your home or business.",
+    path: "/solar-journey/consultation",
+  },
 
-    {
-      number: "01",
-      title: "FREE CONSULTATION",
-      image: imagess,
-      text:
-        "We understand your energy needs and goals to recommend the right solar solution for your home or business.",
-    },
+  {
+    number: "02",
+    title: "SITE SURVEY",
+    image: home2,
+    text:
+      "Our experts visit your site to analyze roof structure, shading, space availability and electrical requirements.",
+    path: "/solar-journey/site-survey",
+  },
 
-    {
-      number: "02",
-      title: "SITE SURVEY",
-      image: home2,
-      text:
-        "Our experts visit your site to analyze roof structure, shading, space availability and electrical requirements.",
-    },
+  {
+    number: "03",
+    title: "CUSTOM SOLAR DESIGN",
+    image: home3,
+    text:
+      "We design a customized solar system that maximizes efficiency, performance and long-term savings.",
+    path: "/solar-journey/custom-design",
+  },
 
-    {
-      number: "03",
-      title: "CUSTOM SOLAR DESIGN",
-      image: home3,
-      text:
-        "We design a customized solar system that maximizes efficiency, performance and long-term savings.",
-    },
+  {
+    number: "04",
+    title: "QUOTATION AND APPROVAL",
+    image: home4,
+    text:
+      "You receive a transparent quotation with clear details. We assist you throughout documentation and approvals.",
+    path: "/solar-journey/quotation",
+  },
 
-    {
-      number: "04",
-      title: "QUOTATION AND APPROVAL",
-      image: home4,
-      text:
-        "You receive a transparent quotation with clear details. We assist you throughout documentation and approvals.",
-    },
+  {
+    number: "05",
+    title: "INSTALLATION",
+    image: home5,
+    text:
+      "Our skilled team installs the system using quality equipment with strict safety and industry standards.",
+    path: "/solar-journey/installation",
+  },
 
-    {
-      number: "05",
-      title: "INSTALLATION",
-      image: home5,
-      text:
-        "Our skilled team installs the system using quality equipment with strict safety and industry standards.",
-    },
+  {
+    number: "06",
+    title: "NET METERING",
+    image: home6,
+    text:
+      "We help you with net metering connection so you can export excess energy and reduce electricity bills.",
+    path: "/solar-journey/net-metering",
+  },
 
-    {
-      number: "06",
-      title: "NET METERING",
-      image: home6,
-      text:
-        "We help you with net metering connection so you can export excess energy and reduce electricity bills.",
-    },
-
-    {
-      number: "07",
-      title: "AFTER-SALES SUPPORT",
-      image: home7,
-      text:
-        "We provide ongoing monitoring, maintenance and support to ensure your system delivers peak performance.",
-    },
-
-  ];
+  {
+    number: "07",
+    title: "AFTER-SALES SUPPORT",
+    image: home7,
+    text:
+      "We provide ongoing monitoring, maintenance and support to ensure your system delivers peak performance.",
+    path: "/solar-journey/after-sales",
+  },
+];
 
 
   return (
@@ -2117,18 +2122,11 @@ function Home() {
                     </p>
 
 
-                    <button
-
-                      type="button"
-
-                      className="
-                        solar-explore-button
-                      "
-
-                      onClick={() =>
-                        navigate("/contact")
-                      }
-                    >
+                   <button
+  type="button"
+  className="solar-explore-button"
+  onClick={() => navigate(card.path)}
+>
 
                       <span>
                         EXPLORE MORE

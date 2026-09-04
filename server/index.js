@@ -8,6 +8,7 @@ import userRouter from "./routes/user.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 import User from "./models/User.js";
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use("/api/user", userRouter);
 app.use("/api/admin", adminRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.get("/", (req, res) => {
   res.json({

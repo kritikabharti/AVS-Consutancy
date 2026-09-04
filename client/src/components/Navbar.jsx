@@ -409,6 +409,20 @@ export default function Navbar({ token, logout }) {
             Store
           </motion.button>
 
+
+           <motion.button
+            onClick={() =>
+              handleNavigate("/contact")
+            }
+            className={`avs-nav-link ${
+              isActive("/contact") ? "active" : ""
+            }`}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Contact
+          </motion.button>
+
           {/* ==================================================
               ADMIN BUTTON
           ================================================== */}

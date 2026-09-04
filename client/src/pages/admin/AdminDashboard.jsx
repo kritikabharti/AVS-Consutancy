@@ -17,6 +17,7 @@ import {
   FiTrendingUp,
   FiCalendar,
   FiChevronRight,
+  FiPhone,
 } from "react-icons/fi";
 import axios from "axios";
 
@@ -347,6 +348,14 @@ export default function AdminDashboard() {
       icon: FiPackage,
       path: "/admin/products",
       className: "green",
+    },
+
+     {
+      title: "Contacts",
+      description: "Manage contact information",
+      icon: FiPhone,
+      path: "/admin/contacts",
+      className: "blue",
     },
   ];
 

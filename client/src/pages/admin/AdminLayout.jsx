@@ -6,6 +6,7 @@ import {
   FiUserCheck,
   FiShoppingBag,
   FiClipboard,
+  FiPhone,
   FiLogOut,
   FiMenu,
   FiX,
@@ -48,11 +49,11 @@ export default function AdminLayout() {
       path: "/admin/products",
       icon: <FiShoppingBag />,
     },
-    // {
-    //   name: "Orders",
-    //   path: "/admin/orders",
-    //   icon: <FiClipboard />,
-    // },
+    {
+      name: "Contacts",
+      path: "/admin/contacts",
+      icon: <FiPhone />,
+    },
   ];
 
   return (
