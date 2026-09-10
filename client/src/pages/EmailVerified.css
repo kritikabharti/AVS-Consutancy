@@ -1,49 +1,158 @@
+/* =========================================================
+   AVS SOLAR - EMAIL VERIFICATION PAGE
+========================================================= */
+
 .verification-page {
   min-height: 100vh;
   width: 100%;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(3, 15, 30, 0.96),
-      rgba(8, 35, 65, 0.94)
-    );
+  position: relative;
 
-  padding: 25px;
+  padding: 30px;
   box-sizing: border-box;
 
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* Natural solar-inspired background */
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(211, 184, 92, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(99, 128, 83, 0.16),
+      transparent 32%
+    ),
+    #f3f5f0;
+
+  overflow: hidden;
 }
+
+
+/* =========================================================
+   SOFT BACKGROUND SHAPES
+========================================================= */
+
+.verification-page::before {
+  content: "";
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  top: -220px;
+  right: -140px;
+
+  background: rgba(190, 166, 78, 0.12);
+
+  filter: blur(5px);
+}
+
+
+.verification-page::after {
+  content: "";
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  border-radius: 50%;
+
+  bottom: -200px;
+  left: -130px;
+
+  background: rgba(93, 125, 78, 0.10);
+
+  filter: blur(5px);
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
 
 .verification-card {
   width: 100%;
-  max-width: 520px;
+  max-width: 570px;
 
-  padding: 50px 45px;
+  position: relative;
+  z-index: 2;
+
+  padding: 55px 55px 45px;
 
   text-align: center;
 
-  background: rgba(255, 255, 255, 0.08);
+  background: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid #e2e7df;
 
-  border-radius: 24px;
-
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  border-radius: 18px;
 
   box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.45);
+    0 18px 45px rgba(42, 52, 42, 0.12),
+    0 3px 12px rgba(42, 52, 42, 0.05);
 
   box-sizing: border-box;
+
+  animation: verificationCardIn 0.55s ease both;
 }
 
+
+@keyframes verificationCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.verification-brand {
+  margin-bottom: 28px;
+
+  color: #536b4b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.verification-brand-line {
+  width: 42px;
+  height: 2px;
+
+  margin: 10px auto 0;
+
+  background: #b69a45;
+}
+
+
+/* =========================================================
+   VERIFICATION ICON
+========================================================= */
+
 .verification-icon {
-  width: 90px;
-  height: 90px;
+  width: 88px;
+  height: 88px;
 
   margin: 0 auto 25px;
 
@@ -53,41 +162,85 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 48px;
+  font-size: 42px;
+
+  transition: transform 0.25s ease;
 }
+
+
+.verification-icon:hover {
+  transform: scale(1.04);
+}
+
+
+/* SUCCESS */
 
 .verification-icon.success {
-  color: #22c55e;
-  background: rgba(34, 197, 94, 0.12);
-  box-shadow: 0 0 35px rgba(34, 197, 94, 0.15);
+  color: #5f8055;
+
+  background:
+    #f0f5ed;
+
+  border: 1px solid #d5e1d0;
+
+  box-shadow:
+    0 8px 25px rgba(91, 125, 79, 0.10);
 }
+
+
+/* ERROR */
 
 .verification-icon.error {
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.12);
+  color: #a45e5e;
+
+  background: #faf1f1;
+
+  border: 1px solid #ead7d7;
+
+  box-shadow:
+    0 8px 25px rgba(164, 94, 94, 0.08);
 }
 
-.verification-card h1 {
-  margin: 0 0 15px;
 
-  color: white;
+/* =========================================================
+   HEADING
+========================================================= */
+
+.verification-card h1 {
+  margin: 0 0 14px;
+
+  color: #293329;
 
   font-size: 34px;
 
-  font-weight: 700;
+  line-height: 1.2;
+
+  font-weight: 650;
+
+  letter-spacing: -0.6px;
 }
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 .verification-message {
-  margin: 0 auto 30px;
+  max-width: 455px;
 
-  max-width: 430px;
+  margin: 0 auto 28px;
 
-  color: rgba(255, 255, 255, 0.75);
+  color: #747b72;
 
-  font-size: 16px;
+  font-size: 15px;
 
-  line-height: 1.7;
+  line-height: 1.75;
 }
+
+
+/* =========================================================
+   SUCCESS INFORMATION BOX
+========================================================= */
 
 .success-box {
   display: flex;
@@ -98,43 +251,66 @@
 
   text-align: left;
 
-  padding: 16px;
+  padding: 17px 18px;
 
-  margin-bottom: 30px;
+  margin: 0 auto 28px;
 
-  border-radius: 12px;
+  border-radius: 9px;
 
-  background: rgba(34, 197, 94, 0.08);
+  background: #f4f7f2;
 
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid #dce5d8;
+
+  box-sizing: border-box;
 }
+
+
+/* ICON */
 
 .success-box > svg {
   flex-shrink: 0;
 
-  color: #22c55e;
+  width: 24px;
+  height: 24px;
 
-  font-size: 25px;
+  color: #65845b;
 }
+
+
+/* CONTENT */
 
 .success-box div {
   display: flex;
+
   flex-direction: column;
 
   gap: 4px;
+
+  min-width: 0;
 }
+
 
 .success-box strong {
-  color: white;
+  color: #40533b;
 
-  font-size: 15px;
+  font-size: 14px;
+
+  font-weight: 700;
 }
+
 
 .success-box span {
-  color: rgba(255, 255, 255, 0.65);
+  color: #7a8277;
 
-  font-size: 13px;
+  font-size: 12px;
+
+  line-height: 1.5;
 }
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
 
 .login-button {
   display: inline-flex;
@@ -146,65 +322,255 @@
 
   width: 100%;
 
-  padding: 14px 20px;
+  min-height: 52px;
+
+  padding: 14px 22px;
 
   box-sizing: border-box;
 
-  border-radius: 10px;
+  border-radius: 7px;
 
-  background: #0052cc;
+  background: #66845c;
 
-  color: white;
+  color: #ffffff;
 
   text-decoration: none;
 
-  font-size: 16px;
+  font-size: 15px;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  transition: all 0.25s ease;
+  border: 1px solid #66845c;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+
 .login-button:hover {
-  background: #0066ff;
+  background: #557249;
+
+  border-color: #557249;
 
   transform: translateY(-2px);
 
   box-shadow:
-    0 10px 25px rgba(0, 82, 204, 0.35);
+    0 9px 22px rgba(82, 112, 71, 0.20);
 }
+
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   BUTTON ARROW
+========================================================= */
+
+.login-button svg {
+  transition: transform 0.2s ease;
+}
+
+
+.login-button:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   BRAND FOOTER
+========================================================= */
 
 .brand-footer {
-  margin-top: 30px;
+  margin-top: 28px;
 
-  color: rgba(255, 255, 255, 0.55);
+  padding-top: 22px;
 
-  font-size: 13px;
+  border-top: 1px solid #e8ece6;
 
-  letter-spacing: 2px;
+  color: #929890;
+
+  font-size: 12px;
+
+  letter-spacing: 1.5px;
 }
 
+
 .brand-footer span {
-  color: #ffffff;
+  color: #596c52;
 
   font-weight: 700;
 }
 
-@media (max-width: 600px) {
-  .verification-card {
-    padding: 40px 25px;
 
-    border-radius: 18px;
+/* =========================================================
+   ERROR STATE
+========================================================= */
+
+.verification-card.error-state {
+  border-color: #eadada;
+}
+
+
+.verification-card.error-state .login-button {
+  background: #657e5b;
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .verification-page {
+    padding: 20px;
+  }
+
+  .verification-card {
+    max-width: 520px;
+
+    padding: 45px 35px 38px;
+
+    border-radius: 16px;
   }
 
   .verification-card h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
+
+  .verification-message {
+    font-size: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .verification-page {
+    padding: 15px;
+  }
+
+
+  .verification-card {
+    padding: 38px 22px 30px;
+
+    border-radius: 14px;
+  }
+
+
+  .verification-brand {
+    font-size: 11px;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 24px;
+  }
+
 
   .verification-icon {
-    width: 75px;
-    height: 75px;
+    width: 74px;
+    height: 74px;
 
-    font-size: 40px;
+    font-size: 35px;
+
+    margin-bottom: 22px;
   }
+
+
+  .verification-card h1 {
+    font-size: 26px;
+
+    letter-spacing: -0.3px;
+  }
+
+
+  .verification-message {
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin-bottom: 23px;
+  }
+
+
+  .success-box {
+    padding: 14px;
+
+    gap: 11px;
+  }
+
+
+  .success-box > svg {
+    width: 21px;
+    height: 21px;
+  }
+
+
+  .success-box strong {
+    font-size: 13px;
+  }
+
+
+  .success-box span {
+    font-size: 11px;
+  }
+
+
+  .login-button {
+    min-height: 50px;
+
+    font-size: 14px;
+  }
+
+
+  .brand-footer {
+    margin-top: 24px;
+
+    padding-top: 18px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.2px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 350px) {
+
+  .verification-page {
+    padding: 10px;
+  }
+
+
+  .verification-card {
+    padding: 32px 18px 25px;
+  }
+
+
+  .verification-card h1 {
+    font-size: 23px;
+  }
+
+
+  .verification-icon {
+    width: 68px;
+    height: 68px;
+
+    font-size: 32px;
+  }
+
 }

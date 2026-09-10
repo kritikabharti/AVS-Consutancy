@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
@@ -16,12 +16,20 @@ import home4 from "../assets/home5.jpg";
 import home5 from "../assets/home50.jpg";
 import home6 from "../assets/home6.jpg";
 import home7 from "../assets/home7.jpg";
-
+import Login from "../pages/Login";
 
 function Home() {
 
   const navigate = useNavigate();
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoginPopup(true);
+    }, 3000); // 60 seconds = 1 minute
+
+    return () => clearTimeout(timer);
+  }, []);
 
   /* ============================================================
      SOLAR JOURNEY DATA
@@ -102,1499 +110,3217 @@ function Home() {
           COMPLETE HOME PAGE CSS
       ========================================================== */}
 
-      <style>{`
+  <style>{`
 
-        /* ==========================================================
-           GLOBAL
-        ========================================================== */
+/* ==========================================================
+   GLOBAL
+========================================================== */
 
-        * {
-          box-sizing: border-box;
-        }
+* {
+  box-sizing: border-box;
+}
 
-        html {
-          scroll-behavior: smooth;
-        }
+html {
+  scroll-behavior: smooth;
+}
 
-        body {
-          margin: 0;
-          padding: 0;
-          overflow-x: hidden;
-          background: #ffffff;
-        }
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #ffffff;
+}
 
-        button {
-          font-family: inherit;
-        }
+button {
+  font-family: inherit;
+}
 
-        img,
-        video {
-          max-width: 100%;
-        }
+img,
+video {
+  max-width: 100%;
+}
 
+img {
+  display: block;
+}
 
-        /* ==========================================================
-           HERO SECTION
-        ========================================================== */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
-        .hero-section {
-          position: relative;
+h1,
+h2,
+h3,
+h4,
+p {
+  overflow-wrap: break-word;
+}
 
-          width: 100%;
-          height: 100vh;
-          min-height: 620px;
 
-          overflow: hidden;
+/* ==========================================================
+   HERO SECTION
+========================================================== */
 
-          display: flex;
-          align-items: center;
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
 
-          background: #061b2e;
-        }
+  overflow: hidden;
 
+  display: flex;
+  align-items: center;
 
-        .hero-video {
-          position: absolute;
+  background: #061b2e;
+}
 
-          inset: 0;
+.hero-video {
+  position: absolute;
 
-          width: 100%;
-          height: 100%;
+  inset: 0;
 
-          object-fit: cover;
+  width: 100%;
+  height: 100%;
 
-          z-index: 0;
-        }
+  object-fit: cover;
 
+  z-index: 0;
+}
 
-        .hero-overlay {
-          position: absolute;
+.hero-overlay {
+  position: absolute;
 
-          inset: 0;
+  inset: 0;
 
-          z-index: 1;
+  z-index: 1;
 
-          background:
-            linear-gradient(
-              90deg,
-              rgba(2, 18, 32, 0.92) 0%,
-              rgba(2, 18, 32, 0.72) 38%,
-              rgba(2, 18, 32, 0.30) 75%,
-              rgba(2, 18, 32, 0.15) 100%
-            );
-        }
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 18, 32, 0.92) 0%,
+      rgba(2, 18, 32, 0.72) 38%,
+      rgba(2, 18, 32, 0.30) 75%,
+      rgba(2, 18, 32, 0.15) 100%
+    );
+}
 
+.hero-content {
+  position: relative;
 
-        .hero-content {
-          position: relative;
+  z-index: 2;
 
-          z-index: 2;
+  width: 100%;
 
-          width: 100%;
+  max-width: 1200px;
 
-          max-width: 1200px;
+  margin: 0 auto;
 
-          margin: 0 auto;
+  padding: 40px 55px;
+}
 
-          padding:
-            40px 55px;
-        }
+.hero-content-inner {
+  max-width: 650px;
+}
 
+.hero-small-text {
+  margin: 0 0 13px;
 
-        .hero-content-inner {
-          max-width: 650px;
-        }
+  color: #d4af37;
 
+  font-size: 13px;
 
-        .hero-small-text {
-          margin:
-            0 0 13px;
+  font-weight: 700;
 
-          color: #d4af37;
+  letter-spacing: 1.5px;
 
-          font-size: 13px;
+  text-transform: uppercase;
+}
 
-          font-weight: 700;
+.hero-title {
+  margin: 0 0 18px;
 
-          letter-spacing: 1.5px;
+  color: #ffffff;
 
-          text-transform: uppercase;
-        }
+  font-size: clamp(42px, 5vw, 70px);
 
+  font-weight: 800;
 
-        .hero-title {
-          margin:
-            0 0 18px;
+  line-height: 1.04;
 
-          color: #ffffff;
+  letter-spacing: -1px;
+}
 
-          font-size:
-            clamp(42px, 5vw, 70px);
+.hero-title span {
+  color: #d4af37;
+}
 
-          font-weight: 800;
+.hero-subtitle {
+  max-width: 580px;
 
-          line-height: 1.04;
+  margin: 0 0 25px;
 
-          letter-spacing: -1px;
-        }
+  color: rgba(255, 255, 255, 0.92);
 
+  font-size: 15px;
 
-        .hero-title span {
-          color: #d4af37;
-        }
+  font-weight: 500;
 
+  line-height: 1.6;
+}
 
-        .hero-subtitle {
-          max-width: 580px;
+.learn-more-btn {
+  display: inline-flex;
 
-          margin:
-            0 0 25px;
+  align-items: center;
 
-          color:
-            rgba(255, 255, 255, 0.92);
+  justify-content: center;
 
-          font-size: 15px;
+  gap: 8px;
 
-          font-weight: 500;
+  min-height: 40px;
 
-          line-height: 1.6;
-        }
+  padding: 11px 20px;
 
+  background: #ffffff;
 
-        .learn-more-btn {
-          display: inline-flex;
+  color: #071d31;
 
-          align-items: center;
+  border: 1px solid #ffffff;
 
-          justify-content: center;
+  border-radius: 4px;
 
-          gap: 8px;
+  font-size: 12px;
 
-          padding:
-            11px 20px;
+  font-weight: 700;
 
-          background: #ffffff;
+  cursor: pointer;
 
-          color: #071d31;
+  transition: all 0.3s ease;
+}
 
-          border:
-            1px solid #ffffff;
+.learn-more-btn:hover {
+  background: transparent;
 
-          border-radius: 4px;
+  color: #ffffff;
 
-          font-size: 12px;
+  transform: translateY(-2px);
+}
 
-          font-weight: 700;
 
-          cursor: pointer;
+/* ==========================================================
+   COMPANY STATS
+========================================================== */
 
-          transition:
-            all 0.3s ease;
-        }
+.company-stats-section {
+  position: relative;
 
+  width: 100%;
 
-        .learn-more-btn:hover {
-          background: transparent;
+  padding: 17px 5%;
 
-          color: #ffffff;
+  background:
+    linear-gradient(
+      90deg,
+      #0a1e31,
+      #10283d
+    );
 
-          transform:
-            translateY(-2px);
-        }
+  overflow: hidden;
+}
 
+.company-stats-container {
+  position: relative;
 
-        /* ==========================================================
-           COMPANY STATS
-        ========================================================== */
+  z-index: 2;
 
-        .company-stats-section {
-          position: relative;
+  width: 100%;
 
-          width: 100%;
+  max-width: 1000px;
 
-          padding:
-            17px 5%;
+  margin: 0 auto;
 
-          background:
-            linear-gradient(
-              90deg,
-              #0a1e31,
-              #10283d
-            );
+  display: grid;
 
-          overflow: hidden;
-        }
+  grid-template-columns:
+    repeat(3, 1fr);
 
+  gap: 0;
+}
 
-        .company-stats-container {
-          position: relative;
+.company-stat-item {
+  position: relative;
 
-          z-index: 2;
+  min-width: 0;
 
-          width: 100%;
+  min-height: 62px;
 
-          max-width: 1000px;
+  padding: 7px 24px;
 
-          margin: 0 auto;
+  display: flex;
 
-          display: grid;
+  align-items: center;
 
-          grid-template-columns:
-            repeat(3, 1fr);
+  justify-content: center;
 
-          gap: 0;
-        }
+  gap: 13px;
 
+  text-align: left;
+}
 
-        .company-stat-item {
-          position: relative;
+.company-stat-item:not(:last-child)::after {
+  content: "";
 
-          min-height: 62px;
+  position: absolute;
 
-          padding:
-            7px 24px;
+  right: 0;
 
-          display: flex;
+  top: 10px;
 
-          align-items: center;
+  height: 42px;
 
-          justify-content: center;
+  width: 1px;
 
-          gap: 13px;
+  background:
+    rgba(255, 255, 255, 0.3);
+}
 
-          text-align: left;
-        }
+.company-stat-item h2 {
+  margin: 0;
 
+  color: #ffffff;
 
-        .company-stat-item:not(:last-child)::after {
-          content: "";
+  font-size: 27px;
 
-          position: absolute;
+  font-weight: 800;
 
-          right: 0;
+  line-height: 1;
 
-          top: 10px;
+  white-space: nowrap;
+}
 
-          height: 42px;
+.company-stat-item p {
+  margin: 0;
 
-          width: 1px;
+  color:
+    rgba(255, 255, 255, 0.88);
 
-          background:
-            rgba(255, 255, 255, 0.3);
-        }
+  font-size: 11px;
 
+  font-weight: 500;
 
-        .company-stat-item h2 {
-          margin: 0;
+  line-height: 1.3;
+}
 
-          color: #ffffff;
 
-          font-size: 27px;
+/* ==========================================================
+   SOLAR JOURNEY SECTION
+========================================================== */
 
-          font-weight: 800;
+.solar-journey-section {
+  width: 100%;
 
-          line-height: 1;
-        }
+  background: #ffffff;
 
+  padding: 45px 0 0;
 
-        .company-stat-item p {
-          margin: 0;
+  overflow: hidden;
+}
 
-          color:
-            rgba(255, 255, 255, 0.88);
 
-          font-size: 11px;
+/* ==========================================================
+   JOURNEY HEADING
+========================================================== */
 
-          font-weight: 500;
+.journey-heading-section {
+  width: 100%;
 
-          line-height: 1.3;
-        }
+  max-width: 850px;
 
+  margin: 0 auto;
 
-        /* ==========================================================
-           SOLAR JOURNEY SECTION
-        ========================================================== */
+  padding: 0 20px 35px;
 
-        .solar-journey-section {
-          width: 100%;
+  text-align: center;
+}
 
-          background: #ffffff;
+.journey-heading {
+  margin: 0 0 9px;
 
-          padding:
-            45px 0 0;
+  color: #09233a;
 
-          overflow: hidden;
-        }
+  font-size:
+    clamp(30px, 3vw, 42px);
 
+  font-weight: 800;
 
-        /* ==========================================================
-           JOURNEY HEADING
-        ========================================================== */
+  line-height: 1.1;
+}
 
-        .journey-heading-section {
-          width: 100%;
+.heading-line {
+  width: 55px;
 
-          max-width: 850px;
+  height: 3px;
 
-          margin: 0 auto;
+  margin: 0 auto 15px;
 
-          padding:
-            0 20px 35px;
+  background: #09233a;
 
-          text-align: center;
-        }
+  border-radius: 10px;
+}
 
+.journey-description {
+  max-width: 700px;
 
-        .journey-heading {
-          margin:
-            0 0 9px;
+  margin: auto;
 
-          color: #09233a;
+  color: #4c5660;
 
-          font-size:
-            clamp(30px, 3vw, 42px);
+  font-size: 14px;
 
-          font-weight: 800;
+  line-height: 1.65;
+}
 
-          line-height: 1.1;
-        }
 
+/* ==========================================================
+   CARDS CONTAINER
+========================================================== */
 
-        .heading-line {
-          width: 55px;
+.solar-cards-container {
+  width: 100%;
 
-          height: 3px;
+  margin: 0;
 
-          margin:
-            0 auto 15px;
+  padding: 0;
+}
 
-          background: #09233a;
 
-          border-radius: 10px;
-        }
+/* ==========================================================
+   MAIN SOLAR CARD
+========================================================== */
 
+.solar-split-card {
+  position: relative;
 
-        .journey-description {
-          max-width: 700px;
+  width: 100%;
 
-          margin: auto;
+  height: 430px;
 
-          color: #4c5660;
+  min-height: 430px;
 
-          font-size: 14px;
+  margin: 0;
 
-          line-height: 1.65;
-        }
+  padding: 0;
 
+  display: grid;
 
-        /* ==========================================================
-           CARDS CONTAINER
-        ========================================================== */
+  grid-template-columns:
+    53% 47%;
 
-        .solar-cards-container {
-          width: 100%;
+  overflow: hidden;
 
-          margin: 0;
+  background: #383b3e;
 
-          padding: 0;
-        }
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.22);
 
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.22);
 
-        /* ==========================================================
-           MAIN CARD
-           
-           FULL WIDTH
-           LARGE HEIGHT
-        ========================================================== */
+  isolation: isolate;
 
-        .solar-split-card {
-          position: relative;
+  transition:
+    box-shadow 0.4s ease;
+}
 
-          width: 100%;
+.solar-split-card:hover {
+  box-shadow:
+    0 15px 35px
+    rgba(0, 0, 0, 0.25);
+}
 
-          height: 430px;
 
-          min-height: 430px;
+/* ==========================================================
+   IMAGE WRAPPER
+========================================================== */
 
-          margin: 0;
+.solar-split-image-wrapper {
+  position: relative;
 
-          padding: 0;
+  width: calc(100% + 75px);
 
-          display: grid;
+  height: 100%;
 
-          grid-template-columns:
-            53% 47%;
+  min-height: 430px;
 
-          overflow: hidden;
+  overflow: hidden;
 
-          background: #383b3e;
+  z-index: 4;
 
-          border-top:
-            1px solid
-            rgba(255, 255, 255, 0.22);
+  margin-right: -75px;
 
-          border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.22);
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      82% 100%,
+      0 100%
+    );
+}
 
-          isolation: isolate;
 
-          transition:
-            box-shadow 0.4s ease;
-        }
+/* ==========================================================
+   IMAGE
+========================================================== */
 
+.solar-split-image {
+  display: block;
 
-        .solar-split-card:hover {
-          box-shadow:
-            0 15px 35px
-            rgba(0, 0, 0, 0.25);
-        }
+  width: 100%;
 
+  height: 100%;
 
-        /* ==========================================================
-           IMAGE WRAPPER
+  object-fit: cover;
 
-           The image itself has a diagonal edge.
-        ========================================================== */
+  object-position: center;
 
-        .solar-split-image-wrapper {
-          position: relative;
+  transition:
+    transform 0.8s ease;
+}
 
-          width: calc(100% + 75px);
+.solar-split-card:hover
+.solar-split-image {
+  transform:
+    scale(1.045);
+}
 
-          height: 100%;
 
-          min-height: 430px;
+/* ==========================================================
+   IMAGE OVERLAY
+========================================================== */
 
-          overflow: hidden;
+.solar-split-image-wrapper::after {
+  content: "";
 
-          z-index: 4;
+  position: absolute;
 
-          margin-right: -75px;
+  inset: 0;
 
-          clip-path:
-            polygon(
-              0 0,
-              100% 0,
-              82% 100%,
-              0 100%
-            );
-        }
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 0, 0, 0.18)
+    );
 
+  pointer-events: none;
+}
 
-        /* ==========================================================
-           IMAGE
-        ========================================================== */
 
-        .solar-split-image {
-          display: block;
+/* ==========================================================
+   IMAGE LEFT
+========================================================== */
 
-          width: 100%;
+.solar-split-card.image-left {
+  grid-template-columns:
+    53% 47%;
+}
 
-          height: 100%;
+.solar-split-card.image-left
+.solar-split-image-wrapper {
+  grid-column: 1;
 
-          object-fit: cover;
+  grid-row: 1;
 
-          object-position: center;
+  margin-right: -75px;
 
-          transition:
-            transform 0.8s ease;
-        }
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      82% 100%,
+      0 100%
+    );
+}
 
+.solar-split-card.image-left
+.solar-split-content {
+  grid-column: 2;
 
-        .solar-split-card:hover
-        .solar-split-image {
-          transform:
-            scale(1.045);
-        }
+  grid-row: 1;
 
+  padding-left: 105px;
+}
 
-        /* ==========================================================
-           IMAGE OVERLAY
-        ========================================================== */
 
-        .solar-split-image-wrapper::after {
-          content: "";
+/* ==========================================================
+   IMAGE RIGHT
+========================================================== */
 
-          position: absolute;
+.solar-split-card.image-right {
+  grid-template-columns:
+    47% 53%;
+}
 
-          inset: 0;
+.solar-split-card.image-right
+.solar-split-image-wrapper {
+  grid-column: 2;
 
-          background:
-            linear-gradient(
-              90deg,
-              rgba(0, 0, 0, 0.02),
-              rgba(0, 0, 0, 0.18)
-            );
+  grid-row: 1;
 
-          pointer-events: none;
-        }
+  margin-left: -75px;
 
+  clip-path:
+    polygon(
+      18% 0,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+}
 
-        /* ==========================================================
-           IMAGE LEFT
-        ========================================================== */
+.solar-split-card.image-right
+.solar-split-content {
+  grid-column: 1;
 
-        .solar-split-card.image-left {
-          grid-template-columns:
-            53% 47%;
-        }
+  grid-row: 1;
 
+  padding-right: 105px;
+}
 
-        .solar-split-card.image-left
-        .solar-split-image-wrapper {
 
-          grid-column: 1;
+/* ==========================================================
+   CONTENT SIDE
+========================================================== */
 
-          grid-row: 1;
+.solar-split-content {
+  position: relative;
 
-          margin-right: -75px;
+  z-index: 3;
 
-          clip-path:
-            polygon(
-              0 0,
-              100% 0,
-              82% 100%,
-              0 100%
-            );
-        }
+  width: 100%;
 
+  min-width: 0;
 
-        .solar-split-card.image-left
-        .solar-split-content {
+  height: 100%;
 
-          grid-column: 2;
+  min-height: 430px;
 
-          grid-row: 1;
+  display: flex;
 
-          padding-left: 105px;
-        }
+  flex-direction: column;
 
+  justify-content: center;
 
-        /* ==========================================================
-           IMAGE RIGHT
-        ========================================================== */
+  padding-top: 45px;
 
-        .solar-split-card.image-right {
-          grid-template-columns:
-            47% 53%;
-        }
+  padding-bottom: 45px;
 
+  padding-left: 80px;
 
-        .solar-split-card.image-right
-        .solar-split-image-wrapper {
+  padding-right: 70px;
 
-          grid-column: 2;
+  background:
+    linear-gradient(
+      135deg,
+      #414448,
+      #34373a
+    );
 
-          grid-row: 1;
+  color: #ffffff;
+}
 
-          margin-left: -75px;
 
-          clip-path:
-            polygon(
-              18% 0,
-              100% 0,
-              100% 100%,
-              0 100%
-            );
-        }
+/* ==========================================================
+   NUMBER
+========================================================== */
 
+.solar-card-number {
+  margin-bottom: 8px;
 
-        .solar-split-card.image-right
-        .solar-split-content {
+  color: #ffffff;
 
-          grid-column: 1;
+  font-size: 17px;
 
-          grid-row: 1;
+  font-weight: 800;
 
-          padding-right: 105px;
-        }
+  line-height: 1;
 
+  letter-spacing: 1px;
+}
 
-        /* ==========================================================
-           CONTENT SIDE
-        ========================================================== */
 
-        .solar-split-content {
-          position: relative;
+/* ==========================================================
+   TITLE
+========================================================== */
 
-          z-index: 3;
+.solar-split-title {
+  margin:
+    8px 0 14px;
 
-          width: 100%;
+  color: #ffffff;
 
-          height: 100%;
+  font-size:
+    clamp(28px, 3vw, 40px);
 
-          min-height: 430px;
+  font-weight: 800;
 
-          display: flex;
+  line-height: 1.08;
 
-          flex-direction: column;
+  letter-spacing: 0.3px;
+}
 
-          justify-content: center;
 
-          padding-top: 45px;
+/* ==========================================================
+   WHITE UNDERLINE
+========================================================== */
 
-          padding-bottom: 45px;
+.solar-content-line {
+  width: 65px;
 
-          padding-left: 80px;
+  height: 3px;
 
-          padding-right: 70px;
+  margin-bottom: 20px;
 
-          background:
-            linear-gradient(
-              135deg,
-              #414448,
-              #34373a
-            );
+  background: #ffffff;
 
-          color: #ffffff;
-        }
+  border-radius: 10px;
+}
 
 
-        /* ==========================================================
-           NUMBER
-        ========================================================== */
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
 
-        .solar-card-number {
-          margin-bottom: 8px;
+.solar-split-text {
+  width: 100%;
 
-          color: #ffffff;
+  max-width: 570px;
 
-          font-size: 17px;
+  margin:
+    0 0 25px;
 
-          font-weight: 800;
+  color:
+    rgba(255, 255, 255, 0.88);
 
-          line-height: 1;
+  font-size: 15px;
 
-          letter-spacing: 1px;
-        }
+  font-weight: 500;
 
+  line-height: 1.7;
+}
 
-        /* ==========================================================
-           TITLE
-        ========================================================== */
 
-        .solar-split-title {
-          margin:
-            8px 0 14px;
+/* ==========================================================
+   EXPLORE BUTTON
+========================================================== */
 
-          color: #ffffff;
+.solar-explore-button {
+  width: max-content;
 
-          font-size:
-            clamp(28px, 3vw, 40px);
+  min-width: 125px;
 
-          font-weight: 800;
+  min-height: 38px;
 
-          line-height: 1.08;
+  height: 38px;
 
-          letter-spacing: 0.3px;
-        }
+  padding:
+    0 18px;
 
+  display: inline-flex;
 
-        /* ==========================================================
-           WHITE UNDERLINE
-        ========================================================== */
+  align-items: center;
 
-        .solar-content-line {
-          width: 65px;
+  justify-content: center;
 
-          height: 3px;
+  gap: 9px;
 
-          margin-bottom: 20px;
+  background: #ffffff;
 
-          background: #ffffff;
+  color: #303337;
 
-          border-radius: 10px;
-        }
+  border:
+    1px solid #ffffff;
 
+  border-radius: 3px;
 
-        /* ==========================================================
-           DESCRIPTION
-        ========================================================== */
+  font-size: 11px;
 
-        .solar-split-text {
-          width: 100%;
+  font-weight: 800;
 
-          max-width: 570px;
+  letter-spacing: 0.5px;
 
-          margin:
-            0 0 25px;
+  cursor: pointer;
 
-          color:
-            rgba(255, 255, 255, 0.88);
+  transition:
+    all 0.3s ease;
+}
 
-          font-size: 15px;
+.solar-explore-button:hover {
+  background: transparent;
 
-          font-weight: 500;
+  color: #ffffff;
 
-          line-height: 1.7;
-        }
+  transform:
+    translateY(-2px);
+}
 
 
-        /* ==========================================================
-           EXPLORE BUTTON
-        ========================================================== */
+/* ==========================================================
+   REMOVE OLD DIAGONAL DIVIDER
+========================================================== */
 
-        .solar-explore-button {
-          width: max-content;
+.solar-diagonal-divider {
+  display: none !important;
+}
 
-          min-width: 125px;
 
-          height: 38px;
+/* ==========================================================
+   WHY AVS SOLAR
+========================================================== */
 
-          padding:
-            0 18px;
+.why-avs-section {
+  width: 100%;
 
-          display: inline-flex;
+  padding: 95px 7%;
 
-          align-items: center;
+  background: #f5f7f8;
 
-          justify-content: center;
+  overflow: hidden;
+}
 
-          gap: 9px;
+.why-avs-heading {
+  max-width: 850px;
 
-          background: #ffffff;
+  margin: 0 auto 60px;
 
-          color: #303337;
+  text-align: center;
+}
 
-          border:
-            1px solid #ffffff;
+.why-avs-heading > span,
+.solar-solutions-heading > span,
+.how-solar-heading > span,
+.benefits-intro > span,
+.solar-home-cta-content > span {
+  display: block;
 
-          border-radius: 3px;
+  margin-bottom: 13px;
 
-          font-size: 11px;
+  color: #b28a18;
 
-          font-weight: 800;
+  font-size: 11px;
 
-          letter-spacing: 0.5px;
+  font-weight: 800;
 
-          cursor: pointer;
+  letter-spacing: 2px;
+}
 
-          transition:
-            all 0.3s ease;
-        }
+.why-avs-heading h2,
+.solar-solutions-heading h2,
+.how-solar-heading h2 {
+  margin: 0 0 20px;
 
+  color: #09233a;
 
-        .solar-explore-button:hover {
-          background: transparent;
+  font-size:
+    clamp(32px, 4vw, 48px);
 
-          color: #ffffff;
+  line-height: 1.12;
+}
 
-          transform:
-            translateY(-2px);
-        }
+.why-avs-heading h2 strong,
+.solar-solutions-heading h2 strong,
+.how-solar-heading h2 strong {
+  color: #0c5a83;
+}
 
+.why-avs-heading p,
+.solar-solutions-heading p,
+.how-solar-heading p {
+  max-width: 720px;
 
-        /* ==========================================================
-           REMOVE OLD DIAGONAL DIVIDER
-        ========================================================== */
+  margin: auto;
 
-        .solar-diagonal-divider {
-          display: none !important;
-        }
+  color: #5d6870;
 
+  font-size: 15px;
 
-        /* ==========================================================
-           1200 PX
-        ========================================================== */
+  line-height: 1.8;
+}
 
-        @media (max-width: 1200px) {
+.why-avs-grid {
+  max-width: 1180px;
 
-          .hero-content {
-            padding:
-              40px 45px;
-          }
+  margin: auto;
 
+  display: grid;
 
-          .solar-split-card {
-            height: 410px;
+  grid-template-columns:
+    repeat(4, 1fr);
 
-            min-height: 410px;
-          }
+  border-top:
+    1px solid #d9dfe2;
 
+  border-bottom:
+    1px solid #d9dfe2;
+}
 
-          .solar-split-image-wrapper {
-            min-height: 410px;
+.why-avs-item {
+  min-width: 0;
 
-            width: calc(100% + 65px);
+  min-height: 270px;
 
-            margin-right: -65px;
-          }
+  padding: 35px 28px;
 
+  border-right:
+    1px solid #d9dfe2;
+}
 
-          .solar-split-card.image-left
-          .solar-split-image-wrapper {
-            margin-right: -65px;
-          }
+.why-avs-item:last-child {
+  border-right: none;
+}
 
+.why-number {
+  margin-bottom: 30px;
 
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
-            margin-left: -65px;
-          }
+  color: #d4af37;
 
+  font-size: 14px;
 
-          .solar-split-content {
-            min-height: 410px;
-          }
+  font-weight: 800;
 
+  letter-spacing: 1px;
+}
 
-          .solar-split-card.image-left
-          .solar-split-content {
-            padding-left: 90px;
-          }
+.why-avs-item h3 {
+  margin: 0 0 15px;
 
+  color: #09233a;
 
-          .solar-split-card.image-right
-          .solar-split-content {
-            padding-right: 90px;
-          }
+  font-size: 19px;
+}
 
-        }
+.why-avs-item p {
+  margin: 0;
 
+  color: #66727a;
 
-        /* ==========================================================
-           1024 PX
-        ========================================================== */
+  font-size: 13px;
 
-        @media (max-width: 1024px) {
+  line-height: 1.75;
+}
 
-          .hero-content {
-            padding:
-              35px 40px;
-          }
 
+/* ==========================================================
+   SOLAR SOLUTIONS
+========================================================== */
 
-          .hero-title {
-            font-size: 52px;
-          }
+.solar-solutions-section {
+  width: 100%;
 
+  padding: 100px 7%;
 
-          .solar-split-card {
-            height: 390px;
+  background: #ffffff;
+}
 
-            min-height: 390px;
-          }
+.solar-solutions-heading {
+  max-width: 850px;
 
+  margin: 0 auto 65px;
 
-          .solar-split-image-wrapper {
-            min-height: 390px;
+  text-align: center;
+}
 
-            width: calc(100% + 60px);
+.solar-solution-list {
+  max-width: 1100px;
 
-            margin-right: -60px;
-          }
+  margin: auto;
+}
 
+.solar-solution-row {
+  display: grid;
 
-          .solar-split-card.image-left
-          .solar-split-image-wrapper {
-            margin-right: -60px;
-          }
+  grid-template-columns:
+    110px 1fr;
 
+  gap: 35px;
 
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
-            margin-left: -60px;
-          }
+  padding: 42px 0;
 
+  border-top:
+    1px solid #dce1e4;
+}
 
-          .solar-split-content {
-            min-height: 390px;
+.solar-solution-row:last-child {
+  border-bottom:
+    1px solid #dce1e4;
+}
 
-            padding-top: 35px;
+.solution-index {
+  color: #d4af37;
 
-            padding-bottom: 35px;
+  font-size: 14px;
 
-            padding-left: 75px;
+  font-weight: 800;
 
-            padding-right: 55px;
-          }
+  letter-spacing: 1px;
+}
 
+.solution-content {
+  min-width: 0;
+}
 
-          .solar-split-card.image-left
-          .solar-split-content {
-            padding-left: 85px;
-          }
+.solution-content h3 {
+  margin: 0 0 14px;
 
+  color: #09233a;
 
-          .solar-split-card.image-right
-          .solar-split-content {
-            padding-right: 85px;
-          }
+  font-size: 27px;
+}
 
+.solution-content p {
+  max-width: 850px;
 
-          .solar-split-title {
-            font-size: 29px;
-          }
+  margin: 0 0 22px;
 
+  color: #5d6870;
 
-          .solar-split-text {
-            font-size: 13px;
+  font-size: 14px;
 
-            line-height: 1.6;
-          }
+  line-height: 1.8;
+}
 
-        }
+.solution-points {
+  display: flex;
 
+  flex-wrap: wrap;
 
-        /* ==========================================================
-           768 PX
-        ========================================================== */
+  gap: 10px;
+}
 
-        @media (max-width: 768px) {
+.solution-points span {
+  padding: 8px 13px;
 
-          /* HERO */
+  border:
+    1px solid #dce1e4;
 
-          .hero-section {
-            height: 100svh;
+  border-radius: 3px;
 
-            min-height: 580px;
-          }
+  color: #35505e;
 
+  background: #f8fafb;
 
-          .hero-content {
-            padding:
-              25px 22px;
-          }
+  font-size: 11px;
 
+  font-weight: 700;
+}
 
-          .hero-title {
-            font-size:
-              clamp(34px, 9vw, 47px);
-          }
 
+/* ==========================================================
+   HOW SOLAR WORKS
+========================================================== */
 
-          .hero-subtitle {
-            font-size: 13px;
-          }
+.how-solar-section {
+  width: 100%;
 
+  padding: 100px 7%;
 
-          /* STATS */
+  background: #09233a;
+}
 
-          .company-stats-section {
-            padding:
-              10px 15px;
-          }
+.how-solar-heading {
+  max-width: 850px;
 
+  margin: 0 auto 70px;
 
-          .company-stats-container {
-            max-width: 600px;
-          }
+  text-align: center;
+}
 
+.how-solar-heading h2 {
+  color: #ffffff;
+}
 
-          .company-stat-item {
-            min-height: 58px;
+.how-solar-heading h2 strong {
+  color: #d4af37;
+}
 
-            padding:
-              7px 12px;
+.how-solar-heading p {
+  color:
+    rgba(255,255,255,0.72);
+}
 
-            gap: 7px;
-          }
+.solar-process {
+  max-width: 1200px;
 
+  margin: auto;
 
-          .company-stat-item h2 {
-            font-size: 22px;
-          }
+  display: grid;
 
+  grid-template-columns:
+    repeat(4, 1fr);
+}
 
-          .company-stat-item p {
-            font-size: 9px;
-          }
+.solar-process-item {
+  min-width: 0;
 
+  min-height: 260px;
 
-          .company-stat-item:not(:last-child)::after {
-            height: 34px;
+  padding: 0 28px;
 
-            top: 12px;
-          }
+  border-right:
+    1px solid
+    rgba(255,255,255,0.15);
+}
 
+.solar-process-item:last-child {
+  border-right: none;
+}
 
-          /* JOURNEY */
+.process-top {
+  display: flex;
 
-          .solar-journey-section {
-            padding:
-              30px 0 0;
-          }
+  align-items: center;
 
+  gap: 18px;
 
-          .journey-heading-section {
-            padding:
-              0 18px 25px;
-          }
+  margin-bottom: 35px;
+}
 
+.process-top span {
+  color: #d4af37;
 
-          .journey-heading {
-            font-size: 28px;
-          }
+  font-size: 13px;
 
+  font-weight: 800;
+}
 
-          .journey-description {
-            font-size: 12px;
-          }
+.process-top div {
+  height: 1px;
 
+  flex: 1;
 
-          /* ======================================================
-             MOBILE CARD
-          ====================================================== */
+  background:
+    rgba(255,255,255,0.18);
+}
 
-          .solar-split-card,
-          .solar-split-card.image-left,
-          .solar-split-card.image-right {
+.solar-process-item h3 {
+  margin: 0 0 14px;
 
-            height: auto;
+  color: #ffffff;
 
-            min-height: 0;
+  font-size: 19px;
+}
 
-            display: flex;
+.solar-process-item p {
+  margin: 0;
 
-            flex-direction: column;
-          }
+  color:
+    rgba(255,255,255,0.65);
 
+  font-size: 13px;
 
-          /* IMAGE */
+  line-height: 1.75;
+}
 
-          .solar-split-image-wrapper,
-          .solar-split-card.image-left
-          .solar-split-image-wrapper,
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
 
-            width: 100%;
+/* ==========================================================
+   BENEFITS
+========================================================== */
 
-            height: 300px;
+.solar-benefits-section {
+  width: 100%;
 
-            min-height: 300px;
+  padding: 100px 7%;
 
-            margin: 0;
+  background: #f5f7f8;
+}
 
-            clip-path:
-              polygon(
-                0 0,
-                100% 0,
-                100% 88%,
-                0 100%
-              );
+.solar-benefits-inner {
+  max-width: 1200px;
 
-            flex-shrink: 0;
-          }
+  margin: auto;
 
+  display: grid;
 
-          /* CONTENT */
+  grid-template-columns:
+    0.8fr 1.2fr;
 
-          .solar-split-content,
-          .solar-split-card.image-left
-          .solar-split-content,
-          .solar-split-card.image-right
-          .solar-split-content {
+  gap: 80px;
 
-            width: 100%;
+  align-items: start;
+}
 
-            min-height: 300px;
+.benefits-intro {
+  position: sticky;
 
-            padding:
-              45px 25px 40px;
+  top: 100px;
 
-            justify-content: center;
-          }
+  min-width: 0;
+}
 
+.benefits-intro h2 {
+  margin: 0 0 20px;
 
-          .solar-card-number {
-            font-size: 13px;
-          }
+  color: #09233a;
 
+  font-size:
+    clamp(32px, 4vw, 46px);
 
-          .solar-split-title {
-            font-size: 24px;
-          }
+  line-height: 1.1;
+}
 
+.benefits-intro h2 strong {
+  color: #0c5a83;
+}
 
-          .solar-split-text {
-            font-size: 12px;
+.benefits-intro p {
+  margin: 0;
 
-            line-height: 1.6;
-          }
+  color: #626e76;
 
+  font-size: 14px;
 
-          .solar-explore-button {
-            height: 34px;
+  line-height: 1.8;
+}
 
-            min-width: 110px;
+.benefits-grid {
+  display: grid;
 
-            font-size: 9px;
-          }
+  grid-template-columns:
+    repeat(2, 1fr);
 
-        }
+  gap: 1px;
 
+  background: #d7dde0;
 
-        /* ==========================================================
-           600 PX
-        ========================================================== */
+  border:
+    1px solid #d7dde0;
+}
 
-        @media (max-width: 600px) {
+.benefit-box {
+  min-width: 0;
 
-          .hero-content {
-            padding:
-              20px 17px;
-          }
+  min-height: 210px;
 
+  padding: 30px;
 
-          .hero-small-text {
-            font-size: 10px;
-          }
+  background: #ffffff;
+}
 
+.benefit-box strong {
+  display: block;
 
-          .hero-title {
-            font-size: 33px;
+  margin-bottom: 25px;
 
-            letter-spacing:
-              -0.5px;
-          }
+  color: #d4af37;
 
+  font-size: 13px;
+}
 
-          .hero-subtitle {
-            font-size: 12px;
+.benefit-box h3 {
+  margin: 0 0 12px;
 
-            max-width: 400px;
-          }
+  color: #09233a;
 
+  font-size: 18px;
+}
 
-          /* STATS */
+.benefit-box p {
+  margin: 0;
 
-          .company-stats-section {
-            padding:
-              10px 8px;
-          }
+  color: #68747b;
 
+  font-size: 12px;
 
-          .company-stat-item {
-            padding:
-              7px 5px;
+  line-height: 1.7;
+}
 
-            gap: 5px;
-          }
 
+/* ==========================================================
+   FINAL CTA
+========================================================== */
 
-          .company-stat-item h2 {
-            font-size: 19px;
-          }
+.solar-home-cta {
+  width: 100%;
 
+  padding: 95px 25px;
 
-          .company-stat-item p {
-            font-size: 8px;
-          }
+  background:
+    linear-gradient(
+      135deg,
+      #0b2d47,
+      #071b2c
+    );
 
+  text-align: center;
+}
 
-          /* JOURNEY */
+.solar-home-cta-content {
+  max-width: 750px;
 
-          .journey-heading {
-            font-size: 25px;
-          }
+  margin: auto;
+}
 
+.solar-home-cta-content > span {
+  color: #d4af37;
+}
 
-          .journey-description {
-            font-size: 11px;
-          }
+.solar-home-cta-content h2 {
+  margin: 0 0 18px;
 
+  color: #ffffff;
 
-          /* IMAGE */
+  font-size:
+    clamp(34px, 5vw, 52px);
 
-          .solar-split-image-wrapper,
-          .solar-split-card.image-left
-          .solar-split-image-wrapper,
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
+  line-height: 1.08;
+}
 
-            height: 270px;
+.solar-home-cta-content h2 strong {
+  color: #d4af37;
+}
 
-            min-height: 270px;
-          }
+.solar-home-cta-content p {
+  max-width: 600px;
 
+  margin: 0 auto 30px;
 
-          /* CONTENT */
+  color:
+    rgba(255,255,255,0.72);
 
-          .solar-split-content,
-          .solar-split-card.image-left
-          .solar-split-content,
-          .solar-split-card.image-right
-          .solar-split-content {
+  font-size: 14px;
 
-            min-height: 290px;
+  line-height: 1.8;
+}
 
-            padding:
-              40px 22px 35px;
-          }
+.solar-cta-button {
+  display: inline-flex;
 
+  align-items: center;
 
-          .solar-card-number {
-            font-size: 11px;
-          }
+  justify-content: center;
 
+  gap: 9px;
 
-          .solar-split-title {
-            font-size: 20px;
-          }
+  min-height: 42px;
 
+  padding: 13px 22px;
 
-          .solar-content-line {
-            width: 45px;
+  border:
+    1px solid #d4af37;
 
-            height: 2px;
+  border-radius: 3px;
 
-            margin-bottom: 13px;
-          }
+  background: #d4af37;
 
+  color: #09233a;
 
-          .solar-split-text {
-            font-size: 10px;
+  font-size: 11px;
 
-            line-height: 1.5;
+  font-weight: 800;
 
-            margin-bottom: 15px;
-          }
+  letter-spacing: 0.7px;
 
+  cursor: pointer;
 
-          .solar-explore-button {
-            height: 30px;
+  transition:
+    all 0.3s ease;
+}
 
-            min-width: 100px;
+.solar-cta-button:hover {
+  background: transparent;
 
-            font-size: 8px;
-          }
+  color: #ffffff;
 
-        }
+  transform:
+    translateY(-2px);
+}
 
 
-        /* ==========================================================
-           480 PX
-        ========================================================== */
+/* ==========================================================
+   LARGE TABLET / SMALL DESKTOP
+   1200 PX
+========================================================== */
 
-        @media (max-width: 480px) {
+@media (max-width: 1200px) {
 
-          .hero-section {
-            min-height: 560px;
-          }
+  .hero-content {
+    padding: 40px 45px;
+  }
 
+  .solar-split-card {
+    height: 410px;
 
-          .hero-content {
-            padding:
-              20px 15px;
-          }
+    min-height: 410px;
+  }
 
+  .solar-split-image-wrapper {
+    min-height: 410px;
 
-          .hero-title {
-            font-size: 30px;
-          }
+    width:
+      calc(100% + 65px);
 
+    margin-right: -65px;
+  }
 
-          .hero-subtitle {
-            font-size: 11px;
+  .solar-split-card.image-left
+  .solar-split-image-wrapper {
+    margin-right: -65px;
+  }
 
-            line-height: 1.5;
-          }
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+    margin-left: -65px;
+  }
 
+  .solar-split-content {
+    min-height: 410px;
+  }
 
-          .learn-more-btn {
-            padding:
-              9px 15px;
+  .solar-split-card.image-left
+  .solar-split-content {
+    padding-left: 90px;
+  }
 
-            font-size: 10px;
-          }
+  .solar-split-card.image-right
+  .solar-split-content {
+    padding-right: 90px;
+  }
 
+  .solar-benefits-inner {
+    gap: 55px;
+  }
 
-          /* STATS */
+  .why-avs-item {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 
-          .company-stat-item h2 {
-            font-size: 17px;
-          }
+  .solar-process-item {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
 
 
-          .company-stat-item p {
-            font-size: 7px;
-          }
+/* ==========================================================
+   TABLET
+   1024 PX
+========================================================== */
 
+@media (max-width: 1024px) {
 
-          /* JOURNEY */
+  .hero-content {
+    padding: 35px 40px;
+  }
 
-          .solar-journey-section {
-            padding:
-              25px 0 0;
-          }
+  .hero-title {
+    font-size: 52px;
+  }
 
+  .hero-subtitle {
+    max-width: 520px;
+  }
 
-          .journey-heading-section {
-            padding:
-              0 12px 20px;
-          }
+  .solar-split-card {
+    height: 390px;
 
+    min-height: 390px;
+  }
 
-          .journey-heading {
-            font-size: 23px;
-          }
+  .solar-split-image-wrapper {
+    min-height: 390px;
 
+    width:
+      calc(100% + 60px);
 
-          .journey-description {
-            font-size: 10px;
-          }
+    margin-right: -60px;
+  }
 
+  .solar-split-card.image-left
+  .solar-split-image-wrapper {
+    margin-right: -60px;
+  }
 
-          /* IMAGE */
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+    margin-left: -60px;
+  }
 
-          .solar-split-image-wrapper,
-          .solar-split-card.image-left
-          .solar-split-image-wrapper,
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
+  .solar-split-content {
+    min-height: 390px;
 
-            height: 235px;
+    padding-top: 35px;
 
-            min-height: 235px;
-          }
+    padding-bottom: 35px;
 
+    padding-left: 60px;
 
-          /* CONTENT */
+    padding-right: 45px;
+  }
 
-          .solar-split-content,
-          .solar-split-card.image-left
-          .solar-split-content,
-          .solar-split-card.image-right
-          .solar-split-content {
+  .solar-split-card.image-left
+  .solar-split-content {
+    padding-left: 75px;
+  }
 
-            min-height: 270px;
+  .solar-split-card.image-right
+  .solar-split-content {
+    padding-right: 75px;
+  }
 
-            padding:
-              35px 20px 30px;
-          }
+  .solar-split-title {
+    font-size: 29px;
+  }
 
+  .solar-split-text {
+    font-size: 13px;
 
-          .solar-card-number {
-            font-size: 9px;
-          }
+    line-height: 1.6;
+  }
 
+  .why-avs-section,
+  .solar-solutions-section,
+  .how-solar-section,
+  .solar-benefits-section {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 
-          .solar-split-title {
-            font-size: 17px;
-          }
+  .why-avs-item {
+    padding:
+      30px 20px;
+  }
 
+  .solar-process-item {
+    padding:
+      0 20px;
+  }
 
-          .solar-content-line {
-            width: 40px;
+  .solar-benefits-inner {
+    gap: 45px;
+  }
+}
 
-            height: 2px;
 
-            margin-bottom: 9px;
-          }
+/* ==========================================================
+   TABLET / MOBILE
+   900 PX
+========================================================== */
 
+@media (max-width: 900px) {
 
-          .solar-split-text {
-            font-size: 9px;
+  .why-avs-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
 
-            line-height: 1.45;
-          }
+  .why-avs-item:nth-child(2) {
+    border-right: none;
+  }
 
+  .why-avs-item:nth-child(-n+2) {
+    border-bottom:
+      1px solid #d9dfe2;
+  }
 
-          .solar-explore-button {
-            height: 28px;
+  .solar-process {
+    grid-template-columns:
+      repeat(2, 1fr);
 
-            min-width: 95px;
+    gap: 45px 0;
+  }
 
-            font-size: 7px;
-          }
+  .solar-process-item:nth-child(2) {
+    border-right: none;
+  }
 
-        }
+  .solar-process-item:nth-child(-n+2) {
+    border-bottom:
+      1px solid rgba(255,255,255,0.15);
+  }
 
+  .solar-benefits-inner {
+    grid-template-columns: 1fr;
 
-        /* ==========================================================
-           360 PX
-        ========================================================== */
+    gap: 50px;
+  }
 
-        @media (max-width: 360px) {
+  .benefits-intro {
+    position: static;
 
-          .hero-title {
-            font-size: 27px;
-          }
+    text-align: center;
 
+    max-width: 700px;
 
-          .hero-subtitle {
-            font-size: 10px;
-          }
+    margin: auto;
+  }
+}
 
 
-          /* STATS */
+/* ==========================================================
+   MOBILE
+   768 PX
+========================================================== */
+@media screen and (max-width: 768px) {
 
-          .company-stat-item h2 {
-            font-size: 15px;
-          }
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
+  #root {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-          .company-stat-item p {
-            font-size: 6px;
-          }
+  /* =======================================================
+     HERO
+     ======================================================= */
 
+  .hero-section,
+  .hero,
+  .home-hero {
+    width: 100%;
+    min-height: calc(100svh - 60px);
+    height: auto;
 
-          /* JOURNEY */
+    position: relative;
 
-          .journey-heading {
-            font-size: 21px;
-          }
+    overflow: hidden;
+  }
 
 
-          /* IMAGE */
+  /* =======================================================
+     HERO BACKGROUND / IMAGE
+     ======================================================= */
 
-          .solar-split-image-wrapper,
-          .solar-split-card.image-left
-          .solar-split-image-wrapper,
-          .solar-split-card.image-right
-          .solar-split-image-wrapper {
+  .hero-section img,
+  .hero img {
+    max-width: 100%;
+  }
 
-            height: 210px;
 
-            min-height: 210px;
-          }
+  /* --------------------------------------------------------
+     STATS
+  -------------------------------------------------------- */
 
+  .company-stats-section {
+    padding:
+      10px 15px;
+  }
 
-          /* CONTENT */
+  .company-stats-container {
+    max-width: 600px;
 
-          .solar-split-content,
-          .solar-split-card.image-left
-          .solar-split-content,
-          .solar-split-card.image-right
-          .solar-split-content {
+    width: 100%;
+  }
 
-            min-height: 245px;
+  .company-stat-item {
+    min-height: 58px;
 
-            padding:
-              30px 18px 28px;
-          }
+    padding:
+      7px 12px;
 
+    gap: 7px;
 
-          .solar-card-number {
-            font-size: 8px;
-          }
+    justify-content: center;
+  }
 
+  .company-stat-item h2 {
+    font-size: 22px;
+  }
 
-          .solar-split-title {
-            font-size: 14px;
-          }
+  .company-stat-item p {
+    font-size: 9px;
+  }
 
+  .company-stat-item:not(:last-child)::after {
+    height: 34px;
 
-          .solar-split-text {
-            font-size: 7px;
+    top: 12px;
+  }
 
-            line-height: 1.35;
-          }
 
+  /* --------------------------------------------------------
+     JOURNEY
+  -------------------------------------------------------- */
 
-          .solar-explore-button {
-            height: 25px;
+  .solar-journey-section {
+    padding:
+      30px 0 0;
+  }
 
-            min-width: 85px;
+  .journey-heading-section {
+    padding:
+      0 18px 25px;
+  }
 
-            font-size: 6px;
-          }
+  .journey-heading {
+    font-size: 28px;
+  }
 
-        }
+  .journey-description {
+    font-size: 12px;
 
-      `}</style>
+    line-height: 1.65;
+  }
+
+
+  /* --------------------------------------------------------
+     MOBILE SOLAR CARDS
+  -------------------------------------------------------- */
+
+  .solar-split-card,
+  .solar-split-card.image-left,
+  .solar-split-card.image-right {
+
+    height: auto;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+
+  /* IMAGE */
+
+  .solar-split-image-wrapper,
+  .solar-split-card.image-left
+  .solar-split-image-wrapper,
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+
+    width: 100%;
+
+    height: 300px;
+
+    min-height: 300px;
+
+    margin: 0;
+
+    clip-path:
+      polygon(
+        0 0,
+        100% 0,
+        100% 88%,
+        0 100%
+      );
+
+    flex-shrink: 0;
+  }
+
+  .solar-split-image {
+    object-position: center;
+  }
+
+
+  /* CONTENT */
+
+  .solar-split-content,
+  .solar-split-card.image-left
+  .solar-split-content,
+  .solar-split-card.image-right
+  .solar-split-content {
+
+    width: 100%;
+
+    min-height: 300px;
+
+    padding:
+      45px 25px 40px;
+
+    justify-content: center;
+  }
+
+  .solar-card-number {
+    font-size: 13px;
+  }
+
+  .solar-split-title {
+    font-size: 24px;
+
+    line-height: 1.12;
+  }
+
+  .solar-content-line {
+    width: 55px;
+
+    height: 2px;
+
+    margin-bottom: 16px;
+  }
+
+  .solar-split-text {
+    max-width: 100%;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+  }
+
+  .solar-explore-button {
+    height: 36px;
+
+    min-height: 36px;
+
+    min-width: 110px;
+
+    padding:
+      0 15px;
+
+    font-size: 9px;
+  }
+
+
+  /* --------------------------------------------------------
+     ADDITIONAL SECTIONS
+  -------------------------------------------------------- */
+
+  .why-avs-section,
+  .solar-solutions-section,
+  .how-solar-section,
+  .solar-benefits-section {
+
+    padding:
+      75px 25px;
+  }
+
+  .why-avs-heading,
+  .solar-solutions-heading,
+  .how-solar-heading {
+
+    margin-bottom: 45px;
+  }
+
+  .why-avs-heading > span,
+  .solar-solutions-heading > span,
+  .how-solar-heading > span,
+  .benefits-intro > span,
+  .solar-home-cta-content > span {
+
+    font-size: 10px;
+
+    letter-spacing: 1.7px;
+  }
+
+  .why-avs-heading h2,
+  .solar-solutions-heading h2,
+  .how-solar-heading h2 {
+
+    font-size: 32px;
+
+    line-height: 1.12;
+  }
+
+  .why-avs-heading p,
+  .solar-solutions-heading p,
+  .how-solar-heading p {
+
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+
+  /* WHY */
+
+  .why-avs-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .why-avs-item {
+    min-height: 220px;
+
+    padding:
+      30px 22px;
+  }
+
+  .why-number {
+    margin-bottom: 20px;
+
+    font-size: 13px;
+  }
+
+  .why-avs-item h3 {
+    font-size: 18px;
+  }
+
+  .why-avs-item p {
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  /* SOLAR SOLUTIONS */
+
+  .solar-solution-row {
+    grid-template-columns:
+      55px 1fr;
+
+    gap: 20px;
+
+    padding:
+      32px 0;
+  }
+
+  .solution-index {
+    font-size: 12px;
+  }
+
+  .solution-content h3 {
+    font-size: 23px;
+  }
+
+  .solution-content p {
+    font-size: 12px;
+
+    line-height: 1.75;
+  }
+
+  .solution-points {
+    gap: 8px;
+  }
+
+  .solution-points span {
+    padding:
+      7px 10px;
+
+    font-size: 9px;
+  }
+
+
+  /* HOW SOLAR WORKS */
+
+  .solar-process {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 0;
+  }
+
+  .solar-process-item {
+    min-height: 230px;
+
+    padding:
+      25px 20px;
+  }
+
+  .process-top {
+    gap: 12px;
+
+    margin-bottom: 25px;
+  }
+
+  .process-top span {
+    font-size: 12px;
+  }
+
+  .solar-process-item h3 {
+    font-size: 18px;
+  }
+
+  .solar-process-item p {
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  /* BENEFITS */
+
+  .solar-benefits-inner {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+  .benefits-intro {
+    position: static;
+
+    text-align: center;
+  }
+
+  .benefits-intro h2 {
+    font-size: 32px;
+  }
+
+  .benefits-intro p {
+    font-size: 13px;
+  }
+
+  .benefits-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .benefit-box {
+    min-height: 190px;
+
+    padding: 25px;
+  }
+
+  .benefit-box strong {
+    margin-bottom: 20px;
+
+    font-size: 12px;
+  }
+
+  .benefit-box h3 {
+    font-size: 17px;
+  }
+
+  .benefit-box p {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+
+  /* CTA */
+
+  .solar-home-cta {
+    padding:
+      75px 25px;
+  }
+
+  .solar-home-cta-content h2 {
+    font-size: 34px;
+  }
+
+  .solar-home-cta-content p {
+    font-size: 12px;
+
+    line-height: 1.75;
+  }
+
+  .solar-cta-button {
+    min-height: 42px;
+
+    padding:
+      12px 20px;
+
+    font-size: 10px;
+  }
+}
+
+
+/* ==========================================================
+   MOBILE
+   600 PX
+========================================================== */
+
+@media (max-width: 600px) {
+
+  /* HERO */
+
+  .hero-section {
+    min-height: 560px;
+  }
+
+  .hero-content {
+    padding:
+      20px 17px;
+  }
+
+  .hero-small-text {
+    font-size: 10px;
+
+    letter-spacing: 1.2px;
+  }
+
+  .hero-title {
+    font-size: 33px;
+
+    letter-spacing:
+      -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+
+    max-width: 400px;
+
+    line-height: 1.55;
+  }
+
+  .learn-more-btn {
+    min-height: 38px;
+
+    padding:
+      9px 15px;
+
+    font-size: 10px;
+  }
+
+
+  /* STATS */
+
+  .company-stats-section {
+    padding:
+      10px 8px;
+  }
+
+  .company-stat-item {
+    min-width: 0;
+
+    padding:
+      7px 5px;
+
+    gap: 5px;
+  }
+
+  .company-stat-item h2 {
+    font-size: 19px;
+  }
+
+  .company-stat-item p {
+    font-size: 8px;
+
+    line-height: 1.25;
+  }
+
+  .company-stat-item:not(:last-child)::after {
+    height: 30px;
+
+    top: 14px;
+  }
+
+
+  /* JOURNEY */
+
+  .solar-journey-section {
+    padding:
+      25px 0 0;
+  }
+
+  .journey-heading-section {
+    padding:
+      0 15px 25px;
+  }
+
+  .journey-heading {
+    font-size: 26px;
+  }
+
+  .journey-description {
+    font-size: 11px;
+
+    line-height: 1.65;
+  }
+
+
+  /* IMAGE */
+
+  .solar-split-image-wrapper,
+  .solar-split-card.image-left
+  .solar-split-image-wrapper,
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+
+    height: 270px;
+
+    min-height: 270px;
+
+    clip-path:
+      polygon(
+        0 0,
+        100% 0,
+        100% 89%,
+        0 100%
+      );
+  }
+
+
+  /* CONTENT */
+
+  .solar-split-content,
+  .solar-split-card.image-left
+  .solar-split-content,
+  .solar-split-card.image-right
+  .solar-split-content {
+
+    min-height: 290px;
+
+    padding:
+      40px 22px 35px;
+  }
+
+  .solar-card-number {
+    font-size: 11px;
+  }
+
+  .solar-split-title {
+    font-size: 21px;
+
+    line-height: 1.12;
+  }
+
+  .solar-content-line {
+    width: 45px;
+
+    height: 2px;
+
+    margin-bottom: 13px;
+  }
+
+  .solar-split-text {
+    font-size: 11px;
+
+    line-height: 1.55;
+
+    margin-bottom: 18px;
+  }
+
+  .solar-explore-button {
+    height: 34px;
+
+    min-height: 34px;
+
+    min-width: 100px;
+
+    font-size: 8px;
+  }
+
+
+  /* ADDITIONAL SECTIONS */
+
+  .why-avs-section,
+  .solar-solutions-section,
+  .how-solar-section,
+  .solar-benefits-section {
+
+    padding:
+      65px 20px;
+  }
+
+  .why-avs-heading,
+  .solar-solutions-heading,
+  .how-solar-heading {
+
+    margin-bottom: 40px;
+  }
+
+  .why-avs-heading h2,
+  .solar-solutions-heading h2,
+  .how-solar-heading h2 {
+
+    font-size: 29px;
+  }
+
+  .why-avs-heading p,
+  .solar-solutions-heading p,
+  .how-solar-heading p {
+
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  /* WHY */
+
+  .why-avs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-avs-item {
+    min-height: auto;
+
+    padding:
+      28px 20px;
+
+    border-right: none;
+
+    border-bottom:
+      1px solid #d9dfe2;
+  }
+
+  .why-avs-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .why-avs-item:nth-child(-n+2) {
+    border-bottom:
+      1px solid #d9dfe2;
+  }
+
+  .why-avs-item:last-child {
+    border-bottom: none;
+  }
+
+  .why-number {
+    margin-bottom: 18px;
+
+    font-size: 12px;
+  }
+
+  .why-avs-item h3 {
+    font-size: 17px;
+  }
+
+  .why-avs-item p {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+
+  /* SOLAR SOLUTIONS */
+
+  .solar-solution-row {
+    grid-template-columns:
+      45px 1fr;
+
+    gap: 15px;
+
+    padding:
+      30px 0;
+  }
+
+  .solution-index {
+    font-size: 11px;
+  }
+
+  .solution-content h3 {
+    font-size: 21px;
+
+    line-height: 1.2;
+  }
+
+  .solution-content p {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+  .solution-points {
+    gap: 7px;
+  }
+
+  .solution-points span {
+    font-size: 9px;
+
+    padding:
+      7px 9px;
+  }
+
+
+  /* HOW SOLAR */
+
+  .solar-process {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .solar-process-item {
+    min-height: auto;
+
+    padding:
+      25px 0;
+
+    border-right: none;
+
+    border-bottom:
+      1px solid
+      rgba(255,255,255,0.15);
+  }
+
+  .solar-process-item:nth-child(-n+2) {
+    border-bottom:
+      1px solid
+      rgba(255,255,255,0.15);
+  }
+
+  .solar-process-item:last-child {
+    border-bottom: none;
+  }
+
+  .process-top {
+    margin-bottom: 20px;
+  }
+
+  .solar-process-item h3 {
+    font-size: 17px;
+  }
+
+  .solar-process-item p {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+
+  /* BENEFITS */
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefit-box {
+    min-height: auto;
+
+    padding:
+      25px;
+  }
+
+  .benefit-box h3 {
+    font-size: 16px;
+  }
+
+  .benefit-box p {
+    font-size: 11px;
+  }
+
+
+  /* CTA */
+
+  .solar-home-cta {
+    padding:
+      70px 20px;
+  }
+
+  .solar-home-cta-content h2 {
+    font-size: 31px;
+  }
+
+  .solar-home-cta-content p {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+  .solar-cta-button {
+    min-height: 40px;
+
+    padding:
+      11px 18px;
+
+    font-size: 9px;
+  }
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+   480 PX
+========================================================== */
+
+@media (max-width: 480px) {
+
+  /* HERO */
+
+  .hero-section {
+    min-height: 540px;
+  }
+
+  .hero-content {
+    padding:
+      20px 15px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+
+    line-height: 1.07;
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+
+    line-height: 1.5;
+  }
+
+
+  /* STATS */
+
+  .company-stat-item {
+    padding:
+      7px 3px;
+
+    gap: 4px;
+  }
+
+  .company-stat-item h2 {
+    font-size: 17px;
+  }
+
+  .company-stat-item p {
+    font-size: 7px;
+
+    line-height: 1.2;
+  }
+
+
+  /* JOURNEY */
+
+  .journey-heading-section {
+    padding:
+      0 12px 20px;
+  }
+
+  .journey-heading {
+    font-size: 23px;
+  }
+
+  .journey-description {
+    font-size: 10px;
+
+    line-height: 1.6;
+  }
+
+
+  /* IMAGE */
+
+  .solar-split-image-wrapper,
+  .solar-split-card.image-left
+  .solar-split-image-wrapper,
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+
+    height: 235px;
+
+    min-height: 235px;
+  }
+
+
+  /* CONTENT */
+
+  .solar-split-content,
+  .solar-split-card.image-left
+  .solar-split-content,
+  .solar-split-card.image-right
+  .solar-split-content {
+
+    min-height: 270px;
+
+    padding:
+      35px 20px 30px;
+  }
+
+  .solar-card-number {
+    font-size: 10px;
+  }
+
+  .solar-split-title {
+    font-size: 18px;
+  }
+
+  .solar-content-line {
+    width: 40px;
+
+    height: 2px;
+
+    margin-bottom: 10px;
+  }
+
+  .solar-split-text {
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+  }
+
+  .solar-explore-button {
+    height: 32px;
+
+    min-height: 32px;
+
+    min-width: 95px;
+
+    padding:
+      0 12px;
+
+    font-size: 8px;
+  }
+
+
+  /* ADDITIONAL SECTIONS */
+
+  .why-avs-section,
+  .solar-solutions-section,
+  .how-solar-section,
+  .solar-benefits-section {
+
+    padding:
+      55px 17px;
+  }
+
+  .why-avs-heading,
+  .solar-solutions-heading,
+  .how-solar-heading {
+
+    margin-bottom: 35px;
+  }
+
+  .why-avs-heading > span,
+  .solar-solutions-heading > span,
+  .how-solar-heading > span,
+  .benefits-intro > span,
+  .solar-home-cta-content > span {
+
+    font-size: 9px;
+
+    letter-spacing: 1.4px;
+  }
+
+  .why-avs-heading h2,
+  .solar-solutions-heading h2,
+  .how-solar-heading h2 {
+
+    font-size: 26px;
+  }
+
+  .why-avs-heading p,
+  .solar-solutions-heading p,
+  .how-solar-heading p {
+
+    font-size: 11px;
+  }
+
+
+  /* WHY */
+
+  .why-avs-item {
+    padding:
+      25px 17px;
+  }
+
+  .why-number {
+    font-size: 11px;
+
+    margin-bottom: 15px;
+  }
+
+  .why-avs-item h3 {
+    font-size: 16px;
+  }
+
+  .why-avs-item p {
+    font-size: 10px;
+  }
+
+
+  /* SOLUTIONS */
+
+  .solar-solution-row {
+    grid-template-columns:
+      38px 1fr;
+
+    gap: 12px;
+
+    padding:
+      25px 0;
+  }
+
+  .solution-index {
+    font-size: 10px;
+  }
+
+  .solution-content h3 {
+    font-size: 19px;
+  }
+
+  .solution-content p {
+    font-size: 10px;
+
+    line-height: 1.65;
+  }
+
+  .solution-points span {
+    font-size: 8px;
+
+    padding:
+      6px 8px;
+  }
+
+
+  /* PROCESS */
+
+  .solar-process-item {
+    padding:
+      22px 0;
+  }
+
+  .process-top {
+    gap: 10px;
+
+    margin-bottom: 17px;
+  }
+
+  .process-top span {
+    font-size: 11px;
+  }
+
+  .solar-process-item h3 {
+    font-size: 16px;
+  }
+
+  .solar-process-item p {
+    font-size: 10px;
+  }
+
+
+  /* BENEFITS */
+
+  .benefit-box {
+    padding:
+      22px 20px;
+  }
+
+  .benefit-box strong {
+    font-size: 11px;
+
+    margin-bottom: 17px;
+  }
+
+  .benefit-box h3 {
+    font-size: 15px;
+  }
+
+  .benefit-box p {
+    font-size: 10px;
+  }
+
+
+  /* CTA */
+
+  .solar-home-cta {
+    padding:
+      60px 17px;
+  }
+
+  .solar-home-cta-content h2 {
+    font-size: 28px;
+  }
+
+  .solar-home-cta-content p {
+    font-size: 10px;
+  }
+
+  .solar-cta-button {
+    min-height: 38px;
+
+    padding:
+      10px 16px;
+
+    font-size: 8px;
+  }
+}
+
+
+/* ==========================================================
+   EXTRA SMALL MOBILE
+   380 PX
+========================================================== */
+
+@media (max-width: 380px) {
+
+  /* HERO */
+
+  .hero-section {
+    min-height: 520px;
+  }
+
+  .hero-content {
+    padding:
+      18px 13px;
+  }
+
+  .hero-small-text {
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+
+    letter-spacing:
+      -0.4px;
+
+    margin-bottom: 14px;
+  }
+
+  .hero-subtitle {
+    font-size: 10px;
+
+    line-height: 1.45;
+
+    margin-bottom: 20px;
+  }
+
+  .learn-more-btn {
+    min-height: 36px;
+
+    padding:
+      8px 13px;
+
+    font-size: 9px;
+  }
+
+
+  /* STATS */
+
+  .company-stats-section {
+    padding:
+      8px 5px;
+  }
+
+  .company-stat-item {
+    min-height: 52px;
+
+    padding:
+      5px 2px;
+
+    gap: 3px;
+  }
+
+  .company-stat-item h2 {
+    font-size: 15px;
+  }
+
+  .company-stat-item p {
+    font-size: 6.5px;
+  }
+
+  .company-stat-item:not(:last-child)::after {
+    height: 27px;
+
+    top: 12px;
+  }
+
+
+  /* JOURNEY */
+
+  .solar-journey-section {
+    padding-top: 22px;
+  }
+
+  .journey-heading-section {
+    padding:
+      0 10px 18px;
+  }
+
+  .journey-heading {
+    font-size: 21px;
+  }
+
+  .journey-description {
+    font-size: 9px;
+
+    line-height: 1.55;
+  }
+
+
+  /* IMAGE */
+
+  .solar-split-image-wrapper,
+  .solar-split-card.image-left
+  .solar-split-image-wrapper,
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+
+    height: 210px;
+
+    min-height: 210px;
+  }
+
+
+  /* CONTENT */
+
+  .solar-split-content,
+  .solar-split-card.image-left
+  .solar-split-content,
+  .solar-split-card.image-right
+  .solar-split-content {
+
+    min-height: 245px;
+
+    padding:
+      30px 18px 28px;
+  }
+
+  .solar-card-number {
+    font-size: 9px;
+
+    margin-bottom: 6px;
+  }
+
+  .solar-split-title {
+    font-size: 16px;
+
+    margin:
+      7px 0 11px;
+  }
+
+  .solar-content-line {
+    width: 36px;
+
+    height: 2px;
+
+    margin-bottom: 9px;
+  }
+
+  .solar-split-text {
+    font-size: 9px;
+
+    line-height: 1.45;
+
+    margin-bottom: 14px;
+  }
+
+  .solar-explore-button {
+    height: 30px;
+
+    min-height: 30px;
+
+    min-width: 88px;
+
+    font-size: 7px;
+
+    padding:
+      0 10px;
+  }
+
+
+  /* ADDITIONAL SECTIONS */
+
+  .why-avs-section,
+  .solar-solutions-section,
+  .how-solar-section,
+  .solar-benefits-section {
+
+    padding:
+      48px 14px;
+  }
+
+  .why-avs-heading h2,
+  .solar-solutions-heading h2,
+  .how-solar-heading h2 {
+
+    font-size: 23px;
+  }
+
+  .why-avs-heading p,
+  .solar-solutions-heading p,
+  .how-solar-heading p {
+
+    font-size: 10px;
+
+    line-height: 1.65;
+  }
+
+
+  /* WHY */
+
+  .why-avs-item {
+    padding:
+      23px 15px;
+  }
+
+  .why-number {
+    font-size: 10px;
+  }
+
+  .why-avs-item h3 {
+    font-size: 15px;
+  }
+
+  .why-avs-item p {
+    font-size: 9px;
+
+    line-height: 1.65;
+  }
+
+
+  /* SOLUTIONS */
+
+  .solar-solution-row {
+    grid-template-columns:
+      32px 1fr;
+
+    gap: 10px;
+
+    padding:
+      22px 0;
+  }
+
+  .solution-index {
+    font-size: 9px;
+  }
+
+  .solution-content h3 {
+    font-size: 17px;
+  }
+
+  .solution-content p {
+    font-size: 9px;
+  }
+
+  .solution-points {
+    gap: 5px;
+  }
+
+  .solution-points span {
+    font-size: 7px;
+
+    padding:
+      5px 7px;
+  }
+
+
+  /* PROCESS */
+
+  .solar-process-item {
+    padding:
+      20px 0;
+  }
+
+  .process-top {
+    margin-bottom: 15px;
+  }
+
+  .process-top span {
+    font-size: 10px;
+  }
+
+  .solar-process-item h3 {
+    font-size: 15px;
+  }
+
+  .solar-process-item p {
+    font-size: 9px;
+
+    line-height: 1.65;
+  }
+
+
+  /* BENEFITS */
+
+  .benefit-box {
+    padding:
+      20px 17px;
+  }
+
+  .benefit-box strong {
+    font-size: 10px;
+
+    margin-bottom: 14px;
+  }
+
+  .benefit-box h3 {
+    font-size: 14px;
+  }
+
+  .benefit-box p {
+    font-size: 9px;
+  }
+
+
+  /* CTA */
+
+  .solar-home-cta {
+    padding:
+      52px 14px;
+  }
+
+  .solar-home-cta-content h2 {
+    font-size: 25px;
+  }
+
+  .solar-home-cta-content p {
+    font-size: 9px;
+
+    line-height: 1.65;
+  }
+
+  .solar-cta-button {
+    min-height: 36px;
+
+    padding:
+      9px 14px;
+
+    font-size: 7px;
+  }
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+   360 PX
+========================================================== */
+
+@media (max-width: 360px) {
+
+  .hero-title {
+    font-size: 27px;
+  }
+
+  .hero-subtitle {
+    font-size: 10px;
+  }
+
+  .company-stat-item h2 {
+    font-size: 15px;
+  }
+
+  .company-stat-item p {
+    font-size: 6px;
+  }
+
+  .journey-heading {
+    font-size: 20px;
+  }
+
+  .journey-description {
+    font-size: 8.5px;
+  }
+
+  .solar-split-image-wrapper,
+  .solar-split-card.image-left
+  .solar-split-image-wrapper,
+  .solar-split-card.image-right
+  .solar-split-image-wrapper {
+
+    height: 200px;
+
+    min-height: 200px;
+  }
+
+  .solar-split-content,
+  .solar-split-card.image-left
+  .solar-split-content,
+  .solar-split-card.image-right
+  .solar-split-content {
+
+    min-height: 235px;
+
+    padding:
+      28px 16px 25px;
+  }
+
+  .solar-card-number {
+    font-size: 8px;
+  }
+
+  .solar-split-title {
+    font-size: 15px;
+  }
+
+  .solar-split-text {
+    font-size: 8.5px;
+
+    line-height: 1.4;
+  }
+
+  .solar-explore-button {
+    height: 29px;
+
+    min-height: 29px;
+
+    min-width: 84px;
+
+    font-size: 6.5px;
+  }
+
+  .why-avs-heading h2,
+  .solar-solutions-heading h2,
+  .how-solar-heading h2 {
+
+    font-size: 22px;
+  }
+
+  .solution-content h3 {
+    font-size: 16px;
+  }
+
+  .solar-home-cta-content h2 {
+    font-size: 24px;
+  }
+}
+
+
+/* ==========================================================
+   LANDSCAPE MOBILE
+========================================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+  .hero-section {
+    height: auto;
+
+    min-height: 520px;
+  }
+
+  .hero-content {
+    padding:
+      55px 30px;
+  }
+
+  .hero-title {
+    font-size:
+      clamp(30px, 6vw, 48px);
+  }
+
+  .hero-subtitle {
+    max-width: 600px;
+
+    font-size: 12px;
+  }
+
+  .company-stats-section {
+    padding:
+      8px 15px;
+  }
+
+  .company-stat-item {
+    min-height: 50px;
+  }
+
+  .solar-split-image-wrapper {
+    height: 280px;
+  }
+}
+
+
+/* ==========================================================
+   TOUCH DEVICES
+   KEEP ANIMATIONS
+========================================================== */
+
+@media (hover: none) {
+
+  .solar-split-card:hover {
+    box-shadow: none;
+  }
+
+  .solar-split-card:hover
+  .solar-split-image {
+    transform: none;
+  }
+
+  .learn-more-btn:hover,
+  .solar-explore-button:hover,
+  .solar-cta-button:hover {
+    transform: none;
+  }
+}
+
+`}</style>
 
 
       {/* ==========================================================
@@ -1772,6 +3498,378 @@ function Home() {
         </motion.div>
 
       </section>
+
+
+
+{/* ==========================================================
+    WHY CHOOSE AVS SOLAR
+========================================================== */}
+
+<section className="why-avs-section">
+
+  <motion.div
+    className="why-avs-heading"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+  >
+    <span>WHY CHOOSE US</span>
+
+    <h2>
+      Smarter Solar Solutions.
+      <br />
+      <strong>Designed Around You.</strong>
+    </h2>
+
+    <p>
+      At AVS Solar, we believe solar energy should be simple,
+      reliable and designed according to your actual energy
+      requirements. From the first consultation to long-term
+      system support, our team focuses on delivering a smooth
+      and transparent solar experience.
+    </p>
+  </motion.div>
+
+
+  <div className="why-avs-grid">
+
+    <motion.div
+      className="why-avs-item"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="why-number">01</div>
+
+      <h3>Customized Solutions</h3>
+
+      <p>
+        Every property has different energy requirements.
+        We evaluate your consumption, available space and
+        project requirements before recommending a suitable
+        solar solution.
+      </p>
+    </motion.div>
+
+
+    <motion.div
+      className="why-avs-item"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
+      <div className="why-number">02</div>
+
+      <h3>Quality Installation</h3>
+
+      <p>
+        Our installation process focuses on proper system
+        design, safe electrical connections, professional
+        mounting and careful commissioning of your solar
+        system.
+      </p>
+    </motion.div>
+
+
+    <motion.div
+      className="why-avs-item"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+    >
+      <div className="why-number">03</div>
+
+      <h3>Transparent Process</h3>
+
+      <p>
+        We explain the system, quotation, documentation,
+        installation and approvals clearly so you can make
+        informed decisions without unnecessary complexity.
+      </p>
+    </motion.div>
+
+
+    <motion.div
+      className="why-avs-item"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
+      <div className="why-number">04</div>
+
+      <h3>Long-Term Support</h3>
+
+      <p>
+        Our relationship does not end after installation.
+        We provide support, monitoring and maintenance guidance
+        to help your solar system continue performing efficiently.
+      </p>
+    </motion.div>
+
+  </div>
+
+</section>
+
+
+{/* ==========================================================
+    SOLAR SOLUTIONS
+========================================================== */}
+
+<section className="solar-solutions-section">
+
+  <motion.div
+    className="solar-solutions-heading"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+  >
+    <span>OUR SOLUTIONS</span>
+
+    <h2>
+      Solar Energy For
+      <br />
+      <strong>Every Kind of Property</strong>
+    </h2>
+
+    <p>
+      Whether you are looking to reduce electricity expenses
+      at home, improve business operating costs or power a
+      large industrial facility, our solar solutions can be
+      planned around your specific requirements.
+    </p>
+  </motion.div>
+
+
+  <div className="solar-solution-list">
+
+    <motion.article
+      className="solar-solution-row"
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+
+      <div className="solution-index">01</div>
+
+      <div className="solution-content">
+        <h3>Residential Solar</h3>
+
+        <p>
+          Generate clean electricity for your home and take
+          greater control over your household energy expenses.
+          Our residential systems can be planned according to
+          your roof space, electricity consumption and future
+          energy requirements.
+        </p>
+
+        <div className="solution-points">
+          <span>Home Energy Planning</span>
+          <span>Rooftop Installation</span>
+          <span>Net Metering Assistance</span>
+        </div>
+      </div>
+
+    </motion.article>
+
+
+    <motion.article
+      className="solar-solution-row"
+      initial={{ opacity: 0, x: 40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+
+      <div className="solution-index">02</div>
+
+      <div className="solution-content">
+        <h3>Commercial Solar</h3>
+
+        <p>
+          Businesses can use solar power to manage energy
+          expenditure while making better use of available
+          rooftop and commercial space. We design systems
+          around operational requirements and electricity usage.
+        </p>
+
+        <div className="solution-points">
+          <span>Business Energy Assessment</span>
+          <span>Rooftop Solar Systems</span>
+          <span>Performance Monitoring</span>
+        </div>
+      </div>
+
+    </motion.article>
+
+
+    <motion.article
+      className="solar-solution-row"
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+
+      <div className="solution-index">03</div>
+
+      <div className="solution-content">
+        <h3>Industrial Solar</h3>
+
+        <p>
+          Industrial facilities often have substantial energy
+          requirements. We help plan solar installations with
+          attention to available area, electrical requirements,
+          system capacity and long-term operational needs.
+        </p>
+
+        <div className="solution-points">
+          <span>Industrial Energy Planning</span>
+          <span>Large-Scale Solar Systems</span>
+          <span>System Monitoring</span>
+        </div>
+      </div>
+
+    </motion.article>
+
+  </div>
+
+</section>
+
+
+{/* ==========================================================
+    HOW SOLAR WORKS
+========================================================== */}
+
+<section className="how-solar-section">
+
+  <motion.div
+    className="how-solar-heading"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+  >
+
+    <span>UNDERSTANDING SOLAR</span>
+
+    <h2>
+      From Sunlight
+      <br />
+      <strong>To Usable Energy</strong>
+    </h2>
+
+    <p>
+      A properly designed solar system converts sunlight into
+      usable electricity and helps you make better use of
+      renewable energy for your property.
+    </p>
+
+  </motion.div>
+
+
+  <div className="solar-process">
+
+    <motion.div
+      className="solar-process-item"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+
+      <div className="process-top">
+        <span>01</span>
+        <div></div>
+      </div>
+
+      <h3>Solar Panels</h3>
+
+      <p>
+        Solar panels capture energy from sunlight and convert
+        it into electrical energy.
+      </p>
+
+    </motion.div>
+
+
+    <motion.div
+      className="solar-process-item"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
+
+      <div className="process-top">
+        <span>02</span>
+        <div></div>
+      </div>
+
+      <h3>Energy Conversion</h3>
+
+      <p>
+        The inverter converts the electricity generated by
+        the panels into usable power for your property.
+      </p>
+
+    </motion.div>
+
+
+    <motion.div
+      className="solar-process-item"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+    >
+
+      <div className="process-top">
+        <span>03</span>
+        <div></div>
+      </div>
+
+      <h3>Power Your Property</h3>
+
+      <p>
+        The generated electricity can be used to power
+        appliances, equipment and other electrical loads.
+      </p>
+
+    </motion.div>
+
+
+    <motion.div
+      className="solar-process-item"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
+
+      <div className="process-top">
+        <span>04</span>
+        <div></div>
+      </div>
+
+      <h3>Monitor & Maintain</h3>
+
+      <p>
+        System monitoring and regular maintenance help keep
+        the solar installation operating effectively.
+      </p>
+
+    </motion.div>
+
+  </div>
+
+</section>
 
 
       {/* ==========================================================
@@ -2155,6 +4253,157 @@ function Home() {
       </section>
 
 
+
+      {/* ==========================================================
+    SOLAR BENEFITS
+========================================================== */}
+
+<section className="solar-benefits-section">
+
+  <div className="solar-benefits-inner">
+
+    <motion.div
+      className="benefits-intro"
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+    >
+
+      <span>THE SOLAR ADVANTAGE</span>
+
+      <h2>
+        Make Your Energy
+        <br />
+        <strong>Work Smarter</strong>
+      </h2>
+
+      <p>
+        Solar energy is more than installing panels on a roof.
+        It is a long-term approach to managing energy,
+        improving efficiency and moving towards cleaner
+        power generation.
+      </p>
+
+    </motion.div>
+
+
+    <div className="benefits-grid">
+
+      <motion.div
+        className="benefit-box"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+      >
+        <strong>01</strong>
+        <h3>Reduce Energy Dependence</h3>
+        <p>
+          Generate electricity from a renewable source and
+          reduce your dependence on conventional power.
+        </p>
+      </motion.div>
+
+
+      <motion.div
+        className="benefit-box"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+      >
+        <strong>02</strong>
+        <h3>Use Clean Energy</h3>
+        <p>
+          Solar power provides a renewable alternative that
+          supports a cleaner and more sustainable future.
+        </p>
+      </motion.div>
+
+
+      <motion.div
+        className="benefit-box"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+      >
+        <strong>03</strong>
+        <h3>Better Energy Planning</h3>
+        <p>
+          Understanding your energy consumption helps create
+          a solar system suited to your actual requirements.
+        </p>
+      </motion.div>
+
+
+      <motion.div
+        className="benefit-box"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
+      >
+        <strong>04</strong>
+        <h3>Long-Term Value</h3>
+        <p>
+          A professionally planned solar system can become
+          an important part of your long-term energy strategy.
+        </p>
+      </motion.div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+{/* ==========================================================
+    SOLAR CTA
+========================================================== */}
+
+<section className="solar-home-cta">
+
+  <motion.div
+    className="solar-home-cta-content"
+    initial={{ opacity: 0, y: 25 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+  >
+
+    <span>START YOUR SOLAR JOURNEY</span>
+
+    <h2>
+      Ready to Explore
+      <br />
+      <strong>Solar Energy?</strong>
+    </h2>
+
+    <p>
+      Talk to our team about your energy requirements and
+      discover a solar solution designed for your property.
+    </p>
+
+    <button
+      type="button"
+      onClick={() => navigate("/contact")}
+      className="solar-cta-button"
+    >
+      GET STARTED
+      <FiArrowRight size={16} />
+    </button>
+
+  </motion.div>
+
+</section>
+
+  {showLoginPopup && (
+        <Login
+          onClose={() => setShowLoginPopup(false)}
+        />
+      )}
       {/* ==========================================================
           CHATBOX
       ========================================================== */}
